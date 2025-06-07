@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:solar_icons/solar_icons.dart';
+
+class InputField extends StatefulWidget {
+  const InputField({
+    super.key,
+    this.controller,
+    this.hintText,
+    this.textInputType,
+    this.width,
+    this.inputFormatters,
+    this.validator,
+    this.obscureText = false,
+    this.readOnly = false,
+    this.onChanged,
+    this.labelText,
+    this.fillColor,
+    this.textInputAction,
+    this.prefixIcon,
+  });
+
+  final String? hintText;
+  final String? labelText;
+  final TextEditingController? controller;
+  final TextInputType? textInputType;
+  final bool obscureText;
+  final double? width;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool readOnly;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final Color? fillColor;
+  final TextInputAction? textInputAction;
+  final IconData? prefixIcon;
+
+  @override
+  State<InputField> createState() => _InputFieldState();
+}
+
+class _InputFieldState extends State<InputField> {
+  bool showHide = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: TextFormField(
+        controller: widget.controller,
+        onChanged: widget.onChanged,
+        obscureText: widget.obscureText ? showHide : widget.obscureText,
+        readOnly: widget.readOnly,
+        inputFormatters: widget.inputFormatters,
+        validator: widget.validator,
+        textAlignVertical: TextAlignVertical.center,
+        decoration: InputDecoration(
+          labelText: widget.labelText,
+          hintText: widget.hintText,
+          filled: true,
+          fillColor: widget.fillColor,
+          prefixIcon: widget.prefixIcon != null
+              ? Icon(widget.prefixIcon)
+              : null,
+          suffixIcon: widget.obscureText
+              ? IconButton(
+                  icon: Icon(
+                    showHide
+                        ? SolarIconsOutline.eyeClosed
+                        : SolarIconsOutline.eye,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      showHide = !showHide;
+                    });
+                  },
+                )
+              : null,
+        ),
+        keyboardType: widget.textInputType,
+        textInputAction: widget.textInputAction ?? TextInputAction.done,
+      ),
+    );
+  }
+}
