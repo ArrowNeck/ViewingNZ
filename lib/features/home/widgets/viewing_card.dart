@@ -5,11 +5,11 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
-import 'package:viewing_nz/core/widgets/cached_image.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
 import 'package:viewing_nz/core/widgets/property_tag.dart';
 import 'package:viewing_nz/features/home/widgets/listed_and_ref_id.dart';
 import 'package:viewing_nz/features/home/widgets/price_and_address.dart';
+import 'package:viewing_nz/features/home/widgets/viewing_poster.dart';
 
 class ViewingCard extends StatelessWidget {
   const ViewingCard({super.key});
@@ -24,15 +24,9 @@ class ViewingCard extends StatelessWidget {
           children: [
             Stack(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: AspectRatio(
-                    aspectRatio: 8 / 7,
-                    child: CachedImage(
-                      url:
-                          "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=400",
-                    ),
-                  ),
+                ViewingPoster(
+                  url:
+                      "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=400",
                 ),
                 Positioned(
                   top: 12,
@@ -100,7 +94,6 @@ class ViewingCard extends StatelessWidget {
               child: Row(
                 children: [
                   AmenityDisplay.withQty(icon: SolarIconsOutline.bed, qty: 4),
-
                   AmenityDisplay.withQty(icon: SolarIconsOutline.bath, qty: 4),
                   AmenityDisplay.withQty(
                     icon: SolarIconsOutline.garage,

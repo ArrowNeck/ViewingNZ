@@ -35,6 +35,7 @@ class AmenityDisplay extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(icon, color: AppColors.gray800, size: 24),
         const SizedBox(width: 4),
