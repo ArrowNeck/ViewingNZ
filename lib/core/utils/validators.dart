@@ -38,4 +38,12 @@ class Validators {
 
     return null;
   }
+
+  static String? yourMessage(String? message) {
+    if (message == null || message.trim().isEmpty) {
+      return "Your message is required";
+    }
+
+    return null;
+  }
 }

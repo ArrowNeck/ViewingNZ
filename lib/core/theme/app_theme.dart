@@ -32,9 +32,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          textStyle: const TextStyle(
-            fontFamily: TextStyles.fontFamily,
-            fontSize: 16.0,
+          textStyle: TextStyles.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -50,10 +48,9 @@ class AppTheme {
           minimumSize: const Size(64, 48),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
+            side: BorderSide(color: AppColors.gunmetal600),
           ),
-          textStyle: const TextStyle(
-            fontFamily: TextStyles.fontFamily,
-            fontSize: 16.0,
+          textStyle: TextStyles.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),

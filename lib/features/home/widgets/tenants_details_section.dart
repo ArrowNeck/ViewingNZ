@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -32,6 +33,7 @@ class TenantsDetailsSection extends StatelessWidget {
         ),
         _tenantsNotes(context, "Maximum Number: 2"),
         _tenantsNotes(context, "Suitable For: "),
+        const Gap(32),
       ],
     );
   }

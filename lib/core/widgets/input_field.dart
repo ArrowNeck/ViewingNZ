@@ -18,6 +18,7 @@ class InputField extends StatefulWidget {
     this.fillColor,
     this.textInputAction,
     this.prefixIcon,
+    this.maxLines,
   });
 
   final String? hintText;
@@ -33,6 +34,7 @@ class InputField extends StatefulWidget {
   final Color? fillColor;
   final TextInputAction? textInputAction;
   final IconData? prefixIcon;
+  final int? maxLines;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -53,11 +55,13 @@ class _InputFieldState extends State<InputField> {
         inputFormatters: widget.inputFormatters,
         validator: widget.validator,
         textAlignVertical: TextAlignVertical.center,
+        maxLines: widget.maxLines ?? 1,
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,
           filled: true,
           fillColor: widget.fillColor,
+          alignLabelWithHint: true,
           prefixIcon: widget.prefixIcon != null
               ? Icon(widget.prefixIcon)
               : null,

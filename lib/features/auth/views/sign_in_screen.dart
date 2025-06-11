@@ -56,15 +56,15 @@ class _SignInScreenState extends State<SignInScreen> {
 
                           // ---------- Bottom content ----------
                           InputField(
-                            hintText: "Enter email",
                             labelText: "Email",
+                            hintText: "Enter email",
                             textInputType: TextInputType.emailAddress,
                             validator: Validators.email,
                           ),
                           const Gap(16),
                           InputField(
-                            hintText: "Enter password",
                             labelText: "Password",
+                            hintText: "Enter password",
                             textInputType: TextInputType.visiblePassword,
                             obscureText: true,
                             validator: Validators.password,

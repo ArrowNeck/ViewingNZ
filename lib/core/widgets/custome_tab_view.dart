@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:viewing_nz/core/extensions/theme_extension.dart';
-import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/widgets/tab_bar_header.dart';
 
 class CustomTabView extends StatelessWidget {
   final List<String> tabs;
@@ -16,32 +15,8 @@ class CustomTabView extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-            child: Container(
-              height: 55,
-              decoration: BoxDecoration(
-                color: AppColors.gray50,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: TabBar(
-                isScrollable: true,
-                labelColor: AppColors.white,
-                labelStyle: context.bodyMedium.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
-                unselectedLabelColor: AppColors.gray800,
-                dividerColor: Colors.transparent,
-                dividerHeight: 0,
-                indicatorSize: TabBarIndicatorSize.tab,
-                tabAlignment: TabAlignment.start,
-                indicator: BoxDecoration(
-                  color: AppColors.primary,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                tabs: tabs.map((t) => Tab(text: t)).toList(),
-              ),
-            ),
+            child: TabBarHeader(tabs: tabs),
           ),
-
           Expanded(child: TabBarView(children: pages)),
         ],
       ),

@@ -57,22 +57,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           const Spacer(),
                           // -------- Bottom social buttons + terms --------
                           InputField(
-                            hintText: "Enter name",
                             labelText: "Name",
+                            hintText: "Enter name",
                             textInputType: TextInputType.name,
                             validator: Validators.name,
                           ),
                           const Gap(16),
                           InputField(
-                            hintText: "+64 275 555 58",
                             labelText: "Mobile Number",
+                            hintText: "+64 275 555 58",
                             textInputType: TextInputType.phone,
                             validator: Validators.mobileNumber,
                           ),
                           const Gap(16),
                           InputField(
-                            hintText: "Enter password",
                             labelText: "Password",
+                            hintText: "Enter password",
                             textInputType: TextInputType.visiblePassword,
                             obscureText: true,
                             validator: Validators.password,

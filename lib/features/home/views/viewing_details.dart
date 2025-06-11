@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/widgets/agent_card.dart';
 import 'package:viewing_nz/core/widgets/simple_appbar.dart';
 import 'package:viewing_nz/features/home/widgets/additional_features_section.dart';
+import 'package:viewing_nz/features/home/widgets/market_insights_section.dart';
+import 'package:viewing_nz/features/home/widgets/property_value_chart.dart';
+import 'package:viewing_nz/features/home/widgets/contact_agent_section.dart';
 import 'package:viewing_nz/features/home/widgets/features_section.dart';
 import 'package:viewing_nz/features/home/widgets/map_view_section.dart';
 import 'package:viewing_nz/features/home/widgets/on_this_page_section.dart';
@@ -95,6 +100,13 @@ class _ViewingDetailsState extends State<ViewingDetails> {
               FeaturesSection(key: featuresKey),
               AdditionalFeaturesSection(key: additionalFeaturesKey),
               TenantsDetailsSection(key: tenantsKey),
+
+              Divider(color: AppColors.gray300),
+              MarketInsightsSection(),
+              SizedBox(height: 40),
+              AgentCard(),
+              ContactAgentSection(),
+              SizedBox(height: 40),
             ],
           ),
         ),
