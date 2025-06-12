@@ -42,5 +42,9 @@ final router = GoRouter(
       path: Routes.viewingDetails,
       builder: (_, state) => const ViewingDetails(),
     ),
+    GoRoute(
+      path: Routes.requestViewing,
+      builder: (_, state) => const RequestViewingScreen(),
+    ),
   ],
 );

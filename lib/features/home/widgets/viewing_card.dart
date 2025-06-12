@@ -53,14 +53,12 @@ class ViewingCard extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
-                    flex: 4,
                     child: ListedAndRefId.withoutTag(
                       date: "12 Mar",
                       refId: 2345,
                     ),
                   ),
                   Expanded(
-                    flex: 3,
                     child: IntrinsicHeight(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,

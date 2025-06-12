@@ -32,7 +32,7 @@ class SalePriceCard extends StatelessWidget {
         color: AppColors.gray50,
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           CircleAvatar(
             radius: 20,
@@ -40,17 +40,24 @@ class SalePriceCard extends StatelessWidget {
             child: Icon(SolarIconsOutline.card, color: AppColors.white),
           ),
           const Gap(12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "\$ ${price}M",
-                style: context.titleMedium.copyWith(
-                  fontWeight: FontWeight.w600,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "\$ ${price}M",
+                  style: context.titleMedium.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Text(rangeText, style: context.bodySmall),
-            ],
+                Text(
+                  rangeText,
+                  style: context.bodySmall,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ],
+            ),
           ),
         ],
       ),

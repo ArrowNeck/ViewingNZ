@@ -31,7 +31,7 @@ class _ViewingsScreenState extends State<ViewingsScreen> {
             Expanded(
               child: ListView.builder(
                 itemCount: 4,
-                itemBuilder: (_, index) => RequestCard(),
+                itemBuilder: (_, index) => RequestCard(isPast: index % 2 == 0),
               ),
             ),
           ],

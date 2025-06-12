@@ -5,9 +5,12 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
+import 'package:viewing_nz/features/home/models/agent_model.dart';
 
 class AgentCard extends StatelessWidget {
-  const AgentCard({super.key});
+  const AgentCard({super.key, required this.agent});
+
+  final AgentModel agent;
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +22,14 @@ class AgentCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          CustomAvatar(
-            radius: 48,
-            url:
-                "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250",
-          ),
+          CustomAvatar(radius: 48, url: agent.profile),
           const Gap(12),
           Text(
-            "James Carter",
+            agent.name,
             style: context.bodyLarge.copyWith(fontWeight: FontWeight.w600),
           ),
           const Gap(2),
-          Text("Real Estate Sales Associate", style: context.bodyMedium),
+          Text(agent.position, style: context.bodyMedium),
           const Gap(12),
           IntrinsicHeight(
             child: Row(
@@ -38,8 +37,8 @@ class AgentCard extends StatelessWidget {
               children: [
                 IgnorePointer(
                   child: RatingBar.builder(
-                    initialRating: 3,
-                    minRating: 1,
+                    initialRating: agent.rating,
+                    minRating: 0,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
@@ -52,7 +51,7 @@ class AgentCard extends StatelessWidget {
                 ),
                 const Gap(8),
                 Text(
-                  "4.9",
+                  agent.rating.toString(),
                   style: context.bodyMedium.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -60,7 +59,7 @@ class AgentCard extends StatelessWidget {
                 VerticalDivider(color: AppColors.gray300, width: 24),
                 Text("Reviews : ", style: context.bodyMedium),
                 Text(
-                  "45",
+                  agent.reviews.toString(),
                   style: context.bodyMedium.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -77,7 +76,7 @@ class AgentCard extends StatelessWidget {
                 style: context.bodyMedium.copyWith(color: AppColors.gray800),
               ),
               Text(
-                "3",
+                agent.activeListings.toString(),
                 style: context.bodyMedium.copyWith(fontWeight: FontWeight.w600),
               ),
             ],

@@ -13,7 +13,9 @@ import 'package:viewing_nz/features/home/models/agent_model.dart';
 import 'package:viewing_nz/features/home/widgets/section_label.dart';
 
 class ContactAgentSection extends StatefulWidget {
-  const ContactAgentSection({super.key});
+  const ContactAgentSection({super.key, required this.agents});
+
+  final List<AgentModel> agents;
 
   @override
   State<ContactAgentSection> createState() => _ContactAgentSectionState();
@@ -36,11 +38,6 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
   );
 
   final ValueNotifier<int> selectedAgent = ValueNotifier(0);
-
-  final List<AgentModel> agents = [
-    AgentModel(name: "James Carter", position: "Real Estate Sales Associate"),
-    AgentModel(name: "Sophia Bennett", position: "Senior Property Consultant"),
-  ];
 
   @override
   void initState() {
@@ -69,7 +66,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
           child: Center(
             child: TabBarHeader(
               controller: controller,
-              tabs: agents.map((agent) => agent.name).toList(),
+              tabs: widget.agents.map((agent) => agent.name).toList(),
             ),
           ),
         ),
@@ -89,13 +86,16 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
                     child: Row(
                       children: [
                         Text(
-                          agents[index].name,
+                          widget.agents[index].name,
                           style: context.bodyLarge.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         VerticalDivider(color: AppColors.gray300, width: 24),
-                        Text(agents[index].position, style: context.bodyMedium),
+                        Text(
+                          widget.agents[index].position,
+                          style: context.bodyMedium,
+                        ),
                       ],
                     ),
                   ),
@@ -120,7 +120,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
                         child: ElevatedButton.icon(
                           onPressed: () {},
                           label: Text("Call"),
-                          icon: Icon(SolarIconsOutline.phoneRounded, size: 24),
+                          icon: Icon(SolarIconsOutline.phoneRounded),
                         ),
                       ),
                       const Gap(12),
@@ -128,7 +128,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
                         child: ElevatedButton.icon(
                           onPressed: () {},
                           label: Text("Email"),
-                          icon: Icon(SolarIconsOutline.letter, size: 24),
+                          icon: Icon(SolarIconsOutline.letter),
                         ),
                       ),
                       const Gap(12),
@@ -136,7 +136,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
                         child: ElevatedButton.icon(
                           onPressed: () {},
                           label: Text("Chat"),
-                          icon: Icon(SolarIconsOutline.chatRoundLine, size: 24),
+                          icon: Icon(SolarIconsOutline.chatRoundLine),
                         ),
                       ),
                     ],

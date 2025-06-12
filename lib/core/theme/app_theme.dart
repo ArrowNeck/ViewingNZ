@@ -27,10 +27,11 @@ class AppTheme {
           foregroundColor: AppColors.white,
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          minimumSize: const Size(64, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          minimumSize: const Size(30, 48),
+          iconSize: 20,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(12),
           ),
           textStyle: TextStyles.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w600,
@@ -44,10 +45,11 @@ class AppTheme {
           foregroundColor: AppColors.gunmetal600,
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          minimumSize: const Size(64, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          minimumSize: const Size(30, 48),
+          iconSize: 20,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(12),
             side: BorderSide(color: AppColors.gunmetal600),
           ),
           textStyle: TextStyles.textTheme.titleMedium?.copyWith(

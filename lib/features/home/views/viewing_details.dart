@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
-import 'package:viewing_nz/core/widgets/agent_card.dart';
 import 'package:viewing_nz/core/widgets/simple_appbar.dart';
+import 'package:viewing_nz/features/home/models/agent_model.dart';
 import 'package:viewing_nz/features/home/widgets/additional_features_section.dart';
+import 'package:viewing_nz/features/home/widgets/agents_details_section.dart';
 import 'package:viewing_nz/features/home/widgets/market_insights_section.dart';
-import 'package:viewing_nz/features/home/widgets/property_value_chart.dart';
 import 'package:viewing_nz/features/home/widgets/contact_agent_section.dart';
 import 'package:viewing_nz/features/home/widgets/features_section.dart';
 import 'package:viewing_nz/features/home/widgets/map_view_section.dart';
@@ -52,6 +52,25 @@ class _ViewingDetailsState extends State<ViewingDetails> {
     "Tenants Details",
     "Market Insights",
     "Contact the Agents",
+  ];
+
+  final List<AgentModel> agents = [
+    AgentModel(
+      name: "James Carter",
+      position: "Real Estate Sales Associate",
+      profile: "https://i.pravatar.cc/250?img=12",
+      rating: 4.7,
+      reviews: 45,
+      activeListings: 3,
+    ),
+    AgentModel(
+      name: "Sophia Bennett",
+      position: "Senior Property Consultant",
+      profile: "https://i.pravatar.cc/250?img=45",
+      rating: 4.9,
+      reviews: 50,
+      activeListings: 5,
+    ),
   ];
 
   @override
@@ -102,11 +121,10 @@ class _ViewingDetailsState extends State<ViewingDetails> {
               TenantsDetailsSection(key: tenantsKey),
 
               Divider(color: AppColors.gray300),
-              MarketInsightsSection(),
-              SizedBox(height: 40),
-              AgentCard(),
-              ContactAgentSection(),
-              SizedBox(height: 40),
+
+              MarketInsightsSection(key: marketingKey),
+              AgentsDetailsSection(agents: agents),
+              ContactAgentSection(agents: agents, key: agentKey),
             ],
           ),
         ),

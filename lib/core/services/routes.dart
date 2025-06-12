@@ -7,4 +7,5 @@ class Routes {
   static const viewings = '/viewings';
   static const viewingDetails = '/viewing-details';
   static const notifications = '/notifications';
+  static const requestViewing = '/request-a-viewing';
 }

@@ -7,7 +7,9 @@ import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/property_tag.dart';
 
 class RequestCard extends StatelessWidget {
-  const RequestCard({super.key});
+  const RequestCard({super.key, this.isPast = false});
+
+  final bool isPast;
 
   @override
   Widget build(BuildContext context) {
@@ -57,41 +59,29 @@ class RequestCard extends StatelessWidget {
             "Response Pending",
             valueColor: AppColors.info500,
           ),
-          // Action Buttons
-          Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child: Row(
+          const Gap(16),
+          if (isPast)
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(SolarIconsOutline.star),
+              label: const Text('Rate Your Agent'),
+            )
+          else
+            Row(
               children: [
-                // Chat Button
                 ElevatedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(SolarIconsOutline.chatRoundLine, size: 24),
+                  icon: const Icon(SolarIconsOutline.chatRoundLine),
                   label: const Text('Chat'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
                 ),
                 const Gap(12),
-
-                // Directions Button
                 OutlinedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(SolarIconsOutline.routing2, size: 24),
+                  icon: const Icon(SolarIconsOutline.routing2),
                   label: const Text('Directions'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: BorderSide(color: AppColors.gunmetal600),
-                    ),
-                  ),
                 ),
               ],
             ),
-          ),
         ],
       ),
     );

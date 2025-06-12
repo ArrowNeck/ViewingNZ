@@ -35,7 +35,7 @@ class OnThisPageSection extends StatelessWidget {
                 if (keyContext != null) {
                   Scrollable.ensureVisible(
                     keyContext,
-                    duration: const Duration(milliseconds: 400),
+                    duration: const Duration(milliseconds: 1000),
                     curve: Curves.easeInOut,
                   );
                 } else {
