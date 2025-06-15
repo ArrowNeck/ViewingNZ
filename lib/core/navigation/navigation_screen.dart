@@ -23,16 +23,20 @@ class NavigationScreen extends StatelessWidget {
         currentIndex: activeIndex,
         unselectedItemColor: AppColors.gray700,
         selectedItemColor: AppColors.primary,
-        selectedLabelStyle: context.titleSmall.copyWith(
+        selectedLabelStyle: context.bodySmall.copyWith(
           fontWeight: FontWeight.w600,
         ),
-        unselectedLabelStyle: context.titleSmall.copyWith(
-          fontWeight: FontWeight.w600,
+        unselectedLabelStyle: context.bodySmall.copyWith(
+          fontWeight: FontWeight.w500,
         ),
+
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         items: NavigationUtils.icons.mapIndexed((index, item) {
-          return BottomNavigationBarItem(icon: Icon(item.$1), label: item.$2);
+          return BottomNavigationBarItem(
+            icon: _buildBarItem(index, item.$1),
+            label: item.$2,
+          );
         }).toList(),
         onTap: (index) {
           switch (index) {
@@ -47,6 +51,18 @@ class NavigationScreen extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+
+  _buildBarItem(int index, IconData icon) {
+    if (index != 3) {
+      return Icon(icon);
+    }
+    return Stack(
+      children: [
+        Icon(icon),
+        Positioned(right: 0, top: 0, child: Badge.count(count: 2)),
+      ],
     );
   }
 }

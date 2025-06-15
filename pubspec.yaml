@@ -23,6 +23,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   fl_chart: ^1.0.0
   url_launcher: ^6.3.1
+  syncfusion_flutter_sliders: ^29.2.10
+  calendar_date_picker2: ^2.0.1
 
 dev_dependencies:
   flutter_test:

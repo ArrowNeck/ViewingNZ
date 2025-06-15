@@ -4,7 +4,9 @@ import 'package:gap/gap.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/property_tag.dart';
+import 'package:viewing_nz/core/widgets/rate_agent_popup.dart';
 
 class RequestCard extends StatelessWidget {
   const RequestCard({super.key, this.isPast = false});
@@ -62,7 +64,7 @@ class RequestCard extends StatelessWidget {
           const Gap(16),
           if (isPast)
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () => CoreUtils.heroDialog(RateAgentPopup()),
               icon: const Icon(SolarIconsOutline.star),
               label: const Text('Rate Your Agent'),
             )

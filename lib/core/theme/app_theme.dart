@@ -25,6 +25,8 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.white,
+          disabledBackgroundColor: AppColors.gray500,
+          disabledForegroundColor: AppColors.gray50,
           elevation: 0,
           shadowColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -97,9 +99,65 @@ class AppTheme {
         ),
       ),
 
-      splashColor: AppColors.alizarin200.withAlpha(76),
-      highlightColor: AppColors.alizarin50,
-      hoverColor: AppColors.alizarin100,
+      badgeTheme: BadgeThemeData(
+        backgroundColor: AppColors.badge,
+        textColor: AppColors.white,
+        textStyle: TextStyles.textTheme.bodySmall,
+      ),
+
+      sliderTheme: SliderThemeData(
+        rangeValueIndicatorShape: PaddleRangeSliderValueIndicatorShape(),
+        valueIndicatorColor: AppColors.gunmetal500,
+        valueIndicatorTextStyle: TextStyles.textTheme.titleSmall!.copyWith(
+          color: AppColors.white,
+          fontWeight: FontWeight.w600,
+        ),
+        showValueIndicator: ShowValueIndicator.always,
+        inactiveTrackColor: AppColors.gray400,
+        activeTrackColor: AppColors.gunmetal500,
+        activeTickMarkColor: AppColors.gunmetal500,
+        thumbColor: AppColors.gunmetal500,
+        overlayColor: AppColors.gunmetal500.withAlpha(32),
+      ),
+
+      datePickerTheme: DatePickerThemeData(
+        backgroundColor: AppColors.white,
+        todayForegroundColor: WidgetStateProperty.all(AppColors.primary),
+        todayBackgroundColor: WidgetStateProperty.all(AppColors.alizarin100),
+
+        dayForegroundColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.white;
+          } else if (states.contains(WidgetState.disabled)) {
+            return AppColors.gray500;
+          }
+          return AppColors.black;
+        }),
+        dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return AppColors.primary;
+          } else if (states.contains(WidgetState.hovered)) {
+            return AppColors.alizarin100;
+          }
+          return Colors.transparent;
+        }),
+        dayOverlayColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.pressed)) {
+            return AppColors.alizarin200;
+          }
+          return null;
+        }),
+        dayShape: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return CircleBorder();
+          }
+          return RoundedRectangleBorder(borderRadius: BorderRadius.circular(8));
+        }),
+      ),
+
+      splashColor: AppColors.gunmetal500.withAlpha(32),
+      highlightColor: AppColors.gunmetal100,
+      hoverColor: AppColors.gray300,
     );
   }
 

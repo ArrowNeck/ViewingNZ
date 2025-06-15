@@ -41,7 +41,7 @@ class InputField extends StatefulWidget {
 }
 
 class _InputFieldState extends State<InputField> {
-  bool showHide = true;
+  ValueNotifier<bool> showHide = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _InputFieldState extends State<InputField> {
       child: TextFormField(
         controller: widget.controller,
         onChanged: widget.onChanged,
-        obscureText: widget.obscureText ? showHide : widget.obscureText,
+        obscureText: widget.obscureText ? showHide.value : widget.obscureText,
         readOnly: widget.readOnly,
         inputFormatters: widget.inputFormatters,
         validator: widget.validator,
@@ -67,16 +67,17 @@ class _InputFieldState extends State<InputField> {
               : null,
           suffixIcon: widget.obscureText
               ? IconButton(
-                  icon: Icon(
-                    showHide
-                        ? SolarIconsOutline.eyeClosed
-                        : SolarIconsOutline.eye,
+                  icon: ValueListenableBuilder(
+                    valueListenable: showHide,
+                    builder: (context, isHide, child) {
+                      return Icon(
+                        isHide
+                            ? SolarIconsOutline.eyeClosed
+                            : SolarIconsOutline.eye,
+                      );
+                    },
                   ),
-                  onPressed: () {
-                    setState(() {
-                      showHide = !showHide;
-                    });
-                  },
+                  onPressed: () => showHide.value = !showHide.value,
                 )
               : null,
         ),

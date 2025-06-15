@@ -12,6 +12,7 @@ class ConfirmationPopup extends StatelessWidget {
   final String rightBtnText;
   final VoidCallback? onLeftTap;
   final VoidCallback onRightTap;
+  final bool avoidPopInleftButton;
 
   const ConfirmationPopup({
     super.key,
@@ -21,13 +22,14 @@ class ConfirmationPopup extends StatelessWidget {
     required this.message,
     required this.leftBtnText,
     required this.rightBtnText,
+    this.avoidPopInleftButton = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Center(
+    return Material(
+      color: Colors.transparent,
+      child: Center(
         child: Container(
           width: context.screenWidth * .9,
           padding: EdgeInsets.all(16),
@@ -64,7 +66,9 @@ class ConfirmationPopup extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () {
                         onLeftTap?.call();
-                        Navigator.pop(context);
+                        if (!avoidPopInleftButton) {
+                          Navigator.pop(context);
+                        }
                       },
                       child: Text(leftBtnText),
                     ),

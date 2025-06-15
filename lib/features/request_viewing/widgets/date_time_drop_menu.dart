@@ -12,7 +12,11 @@ class DateTimeDropMenu extends StatefulWidget {
   State<DateTimeDropMenu> createState() => _DateTimeDropMenuState();
 }
 
-class _DateTimeDropMenuState extends State<DateTimeDropMenu> {
+class _DateTimeDropMenuState extends State<DateTimeDropMenu>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
   bool isDropdownOpen = false;
   String? selectedDate = "22 Mar 25";
   String? selectedTime = "07:30 am - 08:00am";
@@ -30,14 +34,34 @@ class _DateTimeDropMenuState extends State<DateTimeDropMenu> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 350),
+      vsync: this,
+    );
+
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    );
+  }
+
+  @override
   void dispose() {
-    _removeOverlay();
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+    _animationController.dispose();
     super.dispose();
   }
 
   void _removeOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
+    if (_overlayEntry != null) {
+      _animationController.reverse().then((_) {
+        _overlayEntry?.remove();
+        _overlayEntry = null;
+      });
+    }
   }
 
   void _showDropdown() {
@@ -55,57 +79,61 @@ class _DateTimeDropMenuState extends State<DateTimeDropMenu> {
         width: size.width,
         child: Material(
           color: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-              color: AppColors.gray50,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withAlpha(40),
-                  blurRadius: 10,
-                  offset: Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ...dateTimeOptions.asMap().entries.map((entry) {
-                  Map<String, String> option = entry.value;
-                  return GestureDetector(
+          child: SizeTransition(
+            sizeFactor: _animation,
+            axisAlignment: -1.0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.gray50,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(40),
+                    blurRadius: 10,
+                    offset: Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ...dateTimeOptions.asMap().entries.map((entry) {
+                    Map<String, String> option = entry.value;
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedDate = option['date']!;
+                          selectedTime = option['time']!;
+                          isCustomInputSelect = false;
+                          isDropdownOpen = false;
+                        });
+                        _removeOverlay();
+                        widget.onChange(false);
+                      },
+                      child: DropItem.dateTime(
+                        date: option['date'],
+                        time: option['time'],
+                      ),
+                    );
+                  }),
+                  GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedDate = option['date']!;
-                        selectedTime = option['time']!;
-                        isCustomInputSelect = false;
+                        selectedDate = null;
+                        selectedTime = null;
+                        isCustomInputSelect = true;
                         isDropdownOpen = false;
                       });
                       _removeOverlay();
-                      widget.onChange(false);
+                      widget.onChange(true);
                     },
-                    child: DropItem.dateTime(
-                      date: option['date'],
-                      time: option['time'],
+                    child: DropItem.preferred(
+                      preferredText: preferredDateTimeText,
                     ),
-                  );
-                }),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedDate = null;
-                      selectedTime = null;
-                      isCustomInputSelect = true;
-                      isDropdownOpen = false;
-                    });
-                    _removeOverlay();
-                    widget.onChange(true);
-                  },
-                  child: DropItem.preferred(
-                    preferredText: preferredDateTimeText,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -113,6 +141,7 @@ class _DateTimeDropMenuState extends State<DateTimeDropMenu> {
     );
 
     Overlay.of(context).insert(_overlayEntry!);
+    _animationController.forward();
   }
 
   void _toggleDropdown() {

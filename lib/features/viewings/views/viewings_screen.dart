@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
-
 import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/features/viewings/widgets/request_card.dart';
 import 'package:viewing_nz/features/viewings/widgets/viewing_header.dart';

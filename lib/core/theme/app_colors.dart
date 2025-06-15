@@ -98,4 +98,5 @@ class AppColors {
   static const Color info = Color(0xFF06378C);
   static const Color error = Color(0xFFA90A08);
   static const Color rating = Color(0xFFE3B024);
+  static const Color badge = Color(0xFFE94340);
 }

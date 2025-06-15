@@ -50,6 +50,19 @@ abstract class CoreUtils {
     );
   }
 
+  static Future<DateTime?> datePicker({DateTime? selectedDate}) async {
+    final DateTime? picked = await showDatePicker(
+      context: rootNavigatorKey.currentContext!,
+      initialDate: selectedDate,
+      firstDate: DateTime(2025),
+      lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget? child) {
+        return child!;
+      },
+    );
+    return picked;
+  }
+
   // static void showToast({
   //   required ToastType type,
   //   required String message,

@@ -3,8 +3,10 @@ import 'package:gap/gap.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
+import 'package:viewing_nz/core/widgets/report_property_popup.dart';
 import 'package:viewing_nz/features/home/widgets/listed_and_ref_id.dart';
 import 'package:viewing_nz/features/home/widgets/price_and_address.dart';
 import 'package:viewing_nz/features/home/widgets/viewing_poster.dart';
@@ -83,11 +85,12 @@ class ViewingDetailsHeader extends StatelessWidget {
         const Gap(24),
         Row(
           children: [
-            IconButtons.icon(icon: SolarIconsOutline.star),
+            IconButtons.icon(onPressed: () {}, icon: SolarIconsOutline.star),
             const Gap(16),
-            IconButtons.icon(icon: SolarIconsOutline.share),
+            IconButtons.icon(onPressed: () {}, icon: SolarIconsOutline.share),
             const Gap(16),
             IconButtons.label(
+              onPressed: () => CoreUtils.heroDialog(ReportPropertyPopup()),
               icon: SolarIconsOutline.documentAdd,
               label: "Report",
             ),

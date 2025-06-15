@@ -7,6 +7,7 @@ import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/utils/validators.dart';
 import 'package:viewing_nz/core/widgets/confirmation_popup.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
+import 'package:viewing_nz/core/widgets/label_wrapper.dart';
 import 'package:viewing_nz/core/widgets/simple_appbar.dart';
 import 'package:viewing_nz/core/widgets/submit_button.dart';
 import 'package:viewing_nz/features/request_viewing/widgets/date_time_drop_menu.dart';
@@ -20,14 +21,12 @@ class RequestViewingScreen extends StatefulWidget {
 
 class _RequestViewingScreenState extends State<RequestViewingScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool isCustomInputSelect = false;
+  ValueNotifier<bool> isCustomInputSelect = ValueNotifier(false);
   String? selectedDate;
   String? selectedTime;
 
   void _changeCustomDataTimeInput(bool value) {
-    setState(() {
-      isCustomInputSelect = value;
-    });
+    isCustomInputSelect.value = value;
   }
 
   @override
@@ -45,9 +44,9 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                 child: Column(
                   children: [
                     const Gap(8),
-                    _labelWrapper(
-                      'Name',
-                      InputField(
+                    LabelWrapper(
+                      label: 'Name',
+                      child: InputField(
                         hintText: "Sahan Akash",
                         textInputType: TextInputType.name,
                         validator: Validators.name,
@@ -55,9 +54,9 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                     ),
 
                     const Gap(16),
-                    _labelWrapper(
-                      'Email',
-                      InputField(
+                    LabelWrapper(
+                      label: 'Email',
+                      child: InputField(
                         hintText: "sahan@gmail.com",
                         textInputType: TextInputType.emailAddress,
                         validator: Validators.email,
@@ -65,9 +64,9 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                     ),
 
                     const Gap(16),
-                    _labelWrapper(
-                      'Phone',
-                      InputField(
+                    LabelWrapper(
+                      label: 'Phone',
+                      child: InputField(
                         hintText: "+64 275 555 58",
                         textInputType: TextInputType.phone,
                         validator: Validators.mobileNumber,
@@ -75,41 +74,49 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                     ),
 
                     const Gap(16),
-                    _labelWrapper(
-                      'Available Timing',
-                      DateTimeDropMenu(onChange: _changeCustomDataTimeInput),
+                    LabelWrapper(
+                      label: 'Available Timing',
+                      child: DateTimeDropMenu(
+                        onChange: _changeCustomDataTimeInput,
+                      ),
                     ),
+                    ValueListenableBuilder(
+                      valueListenable: isCustomInputSelect,
+                      builder: (_, state, __) {
+                        return state
+                            ? Column(
+                                children: [
+                                  const Gap(16),
+                                  LabelWrapper(
+                                    label: 'Preffered Date',
+                                    child: _prefferedWidget(
+                                      () {},
+                                      selectedDate ?? "Select date",
+                                      SolarIconsOutline.calendar,
+                                    ),
+                                  ),
 
-                    if (isCustomInputSelect) ...[
-                      const Gap(16),
-                      _labelWrapper(
-                        'Preffered Date',
-                        _prefferedWidget(
-                          () {},
-                          selectedDate ?? "Select date",
-                          SolarIconsOutline.calendar,
-                        ),
-                      ),
-
-                      const Gap(16),
-                      _labelWrapper(
-                        'Preffered Time',
-                        _prefferedWidget(
-                          () {},
-                          selectedTime ?? "Select time",
-                          SolarIconsOutline.clockCircle,
-                        ),
-                      ),
-                    ],
-
+                                  const Gap(16),
+                                  LabelWrapper(
+                                    label: 'Preffered Time',
+                                    child: _prefferedWidget(
+                                      () {},
+                                      selectedTime ?? "Select time",
+                                      SolarIconsOutline.clockCircle,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : SizedBox.shrink();
+                      },
+                    ),
                     const Gap(16),
-                    _labelWrapper(
-                      'Your Message',
-                      InputField(
+                    LabelWrapper(
+                      label: 'Your Message',
+                      child: InputField(
                         hintText: "Enter your message here",
                         maxLines: 3,
                         textInputType: TextInputType.multiline,
-                        validator: Validators.yourMessage,
                       ),
                     ),
 
@@ -161,20 +168,6 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  _labelWrapper(String label, Widget child) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: context.titleSmall.copyWith(fontWeight: FontWeight.w600),
-        ),
-        const Gap(8),
-        child,
-      ],
     );
   }
 }

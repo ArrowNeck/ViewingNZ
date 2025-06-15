@@ -28,7 +28,10 @@ class _MapViewSectionState extends State<MapViewSection> {
                 topPadding: 0,
                 bottomPadding: 0,
               ),
-              IconButtons.icon(icon: SolarIconsOutline.routing2),
+              IconButtons.icon(
+                onPressed: () {},
+                icon: SolarIconsOutline.routing2,
+              ),
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/features/home/widgets/section_label.dart';
 
@@ -29,7 +30,7 @@ class OnThisPageSection extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              label: Text(titles[index]),
+              label: Text(titles[index], style: context.bodyMedium),
               onPressed: () {
                 final keyContext = sectionKeys[index].currentContext;
                 if (keyContext != null) {
