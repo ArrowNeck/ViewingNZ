@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/widgets/custom_avatar.dart';
 
 class ChatCard extends StatelessWidget {
   const ChatCard({super.key});
@@ -17,7 +18,10 @@ class ChatCard extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: const CircleAvatar(radius: 25),
+              child: const CustomAvatar(
+                radius: 25,
+                url: "https://i.pravatar.cc/250?img=12",
+              ),
             ),
             Expanded(
               child: Text(

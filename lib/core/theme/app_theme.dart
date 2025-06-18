@@ -155,6 +155,14 @@ class AppTheme {
         }),
       ),
 
+      expansionTileTheme: ExpansionTileThemeData(
+        backgroundColor: AppColors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        collapsedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+
       splashColor: AppColors.gunmetal500.withAlpha(32),
       highlightColor: AppColors.gunmetal100,
       hoverColor: AppColors.gray300,

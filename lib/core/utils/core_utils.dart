@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/services/router.dart';
+import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/hero_dialog_route.dart';
 
 final GlobalKey<ScaffoldMessengerState> rootScaffoldMessengerKey =
@@ -63,90 +66,65 @@ abstract class CoreUtils {
     return picked;
   }
 
-  // static void showToast({
-  //   required ToastType type,
-  //   required String message,
-  //   String? title,
-  //   SnackBarBehavior? behavior,
-  //   int? duration,
-  //   double? margin,
-  // }) {
-  //   SchedulerBinding.instance.addPostFrameCallback((_) {
-  //     final snackBar = SnackBar(
-  //       elevation: 0,
-  //       backgroundColor: Colors.transparent,
-  //       duration: Duration(seconds: duration ?? 3),
-  //       padding: EdgeInsets.zero,
-  //       margin: EdgeInsets.only(bottom: margin ?? 20, left: 15, right: 15),
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  //       content: Container(
-  //         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-  //         color: type.color,
-  //         child: Row(
-  //           children: [
-  //             Container(
-  //               height: 35,
-  //               width: 35,
-  //               alignment: Alignment.center,
-  //               decoration: const BoxDecoration(
-  //                 shape: BoxShape.circle,
-  //                 color: Color(0xFFFFFFFF),
-  //               ),
-  //               child: SvgPicture.asset(
-  //                 type.icon,
-  //                 height: 27.5,
-  //                 width: 27.5,
-  //               ),
-  //             ),
-  //             const SizedBox(
-  //               width: 15,
-  //             ),
-  //             Expanded(
-  //               child: Column(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text(
-  //                     title ?? type.title,
-  //                     style: const TextStyle(
-  //                         fontSize: 14,
-  //                         fontWeight: FontWeight.w700,
-  //                         color: Color(0xFFFFFFFF)),
-  //                   ),
-  //                   const SizedBox(
-  //                     height: 5,
-  //                   ),
-  //                   Text(
-  //                     message,
-  //                     style: const TextStyle(
-  //                         fontSize: 12,
-  //                         fontWeight: FontWeight.w500,
-  //                         color: Colors.white),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //             const SizedBox(
-  //               width: 15,
-  //             ),
-  //             GestureDetector(
-  //               onTap: () => rootScaffoldMessengerKey.currentState
-  //                   ?.removeCurrentSnackBar(),
-  //               child: const Icon(
-  //                 Icons.close_rounded,
-  //                 size: 25,
-  //                 color: Colors.white,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       behavior: behavior ?? SnackBarBehavior.floating,
-  //     );
+  static void toastSuccess(String message, {String title = "Success"}) {
+    CoreUtils._toast(
+      title: title,
+      message: message,
+      type: ToastificationType.success,
+      color: AppColors.success,
+    );
+  }
 
-  //     rootScaffoldMessengerKey.currentState!
-  //       ..removeCurrentSnackBar()
-  //       ..showSnackBar(snackBar);
-  //   });
-  // }
+  static void toastError(String message, {String title = "Error"}) {
+    CoreUtils._toast(
+      title: title,
+      message: message,
+      type: ToastificationType.error,
+      color: AppColors.error,
+    );
+  }
+
+  static void _toast({
+    required String title,
+    required String message,
+    required ToastificationType type,
+    required Color color,
+  }) {
+    toastification.show(
+      type: type,
+      style: ToastificationStyle.fillColored,
+      title: Text(
+        title,
+        style: rootNavigatorKey.currentContext!.bodyLarge.copyWith(
+          color: AppColors.white,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      description: Text(
+        message,
+        style: rootNavigatorKey.currentContext!.bodyMedium.copyWith(
+          color: AppColors.white,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      closeButton: ToastCloseButton(
+        showType: CloseButtonShowType.always,
+        buttonBuilder: (context, onClose) {
+          return GestureDetector(
+            onTap: onClose,
+            child: Icon(Icons.cancel_outlined, color: AppColors.white),
+          );
+        },
+      ),
+      closeOnClick: false,
+      dragToClose: true,
+      showIcon: false,
+      alignment: Alignment.bottomCenter,
+      primaryColor: color,
+      autoCloseDuration: const Duration(seconds: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      borderRadius: BorderRadius.circular(12),
+    );
+  }
 }

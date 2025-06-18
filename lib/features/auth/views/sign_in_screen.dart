@@ -35,7 +35,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // ---------- Top content ----------
                           Text(
@@ -43,7 +44,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             style: context.headlineMedium,
                             textAlign: TextAlign.center,
                           ),
-                          const Gap(12),
+                          const Gap(16),
                           Text(
                             'Store your favorite properties in one place and receive price change alerts.',
                             style: context.titleMedium.copyWith(
@@ -52,8 +53,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             textAlign: TextAlign.center,
                           ),
                           // ---------- Spacer pushes the bottom buttons ----------
-                          const Spacer(),
-
+                          const Gap(40),
                           // ---------- Bottom content ----------
                           InputField(
                             labelText: "Email",

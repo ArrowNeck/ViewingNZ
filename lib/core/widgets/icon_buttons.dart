@@ -8,26 +8,34 @@ class IconButtons extends StatelessWidget {
     super.key,
     required this.icon,
     required this.onPressed,
+    this.fillColor,
+    this.height,
   }) : label = null;
   const IconButtons.label({
     super.key,
     required this.icon,
     required this.label,
     required this.onPressed,
+    this.fillColor,
+    this.height,
   });
 
   final IconData icon;
   final String? label;
   final VoidCallback onPressed;
+  final Color? fillColor;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
+        height: height,
         padding: EdgeInsets.all(16),
         alignment: Alignment.center,
         decoration: BoxDecoration(
+          color: fillColor,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.gunmetal600),
         ),

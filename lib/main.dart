@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:toastification/toastification.dart';
 import 'package:viewing_nz/core/services/router.dart';
 import 'package:viewing_nz/core/theme/app_theme.dart';
 
@@ -14,11 +15,13 @@ class ViewingNZApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'ViewingNZ',
-      theme: AppTheme.lightTheme,
-      themeMode: ThemeMode.light,
-      routerConfig: router,
+    return ToastificationWrapper(
+      child: MaterialApp.router(
+        title: 'ViewingNZ',
+        theme: AppTheme.lightTheme,
+        themeMode: ThemeMode.light,
+        routerConfig: router,
+      ),
     );
   }
 }

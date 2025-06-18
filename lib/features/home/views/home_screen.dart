@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/widgets/custome_tab_view.dart';
-import 'package:viewing_nz/features/home/views/saved_properties.dart';
+import 'package:viewing_nz/features/home/views/saved_properties_screen.dart';
+import 'package:viewing_nz/features/profile/views/my_profile_screen.dart';
+import 'package:viewing_nz/features/saved_search/views/saved_search_screen.dart';
 import 'package:viewing_nz/features/viewings/views/viewings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,9 +21,9 @@ class _HomeScreenState extends State<HomeScreen> {
           tabs: ["Viewings", "Saved Properties", "Saved Search", "My Profile"],
           pages: [
             ViewingsScreen(),
-            SavedProperties(),
-            Container(color: Colors.transparent),
-            Container(color: Colors.transparent),
+            SavedPropertiesScreen(),
+            SavedSearchScreen(),
+            MyProfileScreen(),
           ],
         ),
       ),

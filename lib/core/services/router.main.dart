@@ -36,11 +36,11 @@ final router = GoRouter(
     ),
     GoRoute(
       path: Routes.singleChat,
-      builder: (_, state) => const SingleChatScreen(),
+      builder: (_, state) => const SingleChatScreen2(),
     ),
     GoRoute(
       path: Routes.viewingDetails,
-      builder: (_, state) => const ViewingDetails(),
+      builder: (_, state) => const ViewingDetailsScreen(),
     ),
     GoRoute(
       path: Routes.requestViewing,

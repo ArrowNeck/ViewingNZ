@@ -6,6 +6,7 @@ import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
+import 'package:viewing_nz/core/widgets/property_share_popup.dart';
 import 'package:viewing_nz/core/widgets/report_property_popup.dart';
 import 'package:viewing_nz/features/home/widgets/listed_and_ref_id.dart';
 import 'package:viewing_nz/features/home/widgets/price_and_address.dart';
@@ -19,8 +20,8 @@ class ViewingDetailsHeader extends StatelessWidget {
     return Column(
       children: [
         ViewingPoster(
-          url:
-              "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=400",
+          // url:
+          //     "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=400",
         ),
         const Gap(12),
         Row(
@@ -87,7 +88,10 @@ class ViewingDetailsHeader extends StatelessWidget {
           children: [
             IconButtons.icon(onPressed: () {}, icon: SolarIconsOutline.star),
             const Gap(16),
-            IconButtons.icon(onPressed: () {}, icon: SolarIconsOutline.share),
+            IconButtons.icon(
+              onPressed: () => CoreUtils.heroDialog(PropertySharePopup()),
+              icon: SolarIconsOutline.share,
+            ),
             const Gap(16),
             IconButtons.label(
               onPressed: () => CoreUtils.heroDialog(ReportPropertyPopup()),

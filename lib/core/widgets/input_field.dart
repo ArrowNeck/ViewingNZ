@@ -19,6 +19,7 @@ class InputField extends StatefulWidget {
     this.textInputAction,
     this.prefixIcon,
     this.maxLines,
+    this.enabled = true,
   });
 
   final String? hintText;
@@ -29,6 +30,7 @@ class InputField extends StatefulWidget {
   final double? width;
   final List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
+  final bool enabled;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final Color? fillColor;
@@ -56,6 +58,7 @@ class _InputFieldState extends State<InputField> {
         validator: widget.validator,
         textAlignVertical: TextAlignVertical.center,
         maxLines: widget.maxLines ?? 1,
+        enabled: widget.enabled,
         decoration: InputDecoration(
           labelText: widget.labelText,
           hintText: widget.hintText,

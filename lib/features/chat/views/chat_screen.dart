@@ -35,7 +35,7 @@ class _ChatScreenState extends State<ChatScreen> {
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.symmetric(vertical: 16),
-                  itemCount: 15,
+                  itemCount: 3,
                   itemBuilder: (context, index) {
                     return ChatCard();
                   },

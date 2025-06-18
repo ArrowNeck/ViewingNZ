@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class SubmitButton extends StatelessWidget {
   const SubmitButton({
     super.key,
-    this.onPressed,
     required this.text,
+    this.onPressed,
     this.width,
     this.height,
   });
@@ -19,7 +19,7 @@ class SubmitButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(width ?? double.infinity, height ?? 50),
+        minimumSize: Size(width ?? double.infinity, height ?? 40),
       ),
       child: Text(text),
     );

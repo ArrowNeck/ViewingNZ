@@ -1,7 +1,7 @@
 name: viewing_nz
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.1.0
+version: 1.0.0
 
 environment:
   sdk: ^3.8.0
@@ -25,6 +25,14 @@ dependencies:
   url_launcher: ^6.3.1
   syncfusion_flutter_sliders: ^29.2.10
   calendar_date_picker2: ^2.0.1
+  toastification: ^3.0.3
+  carousel_slider: ^5.1.1
+  photo_view: ^0.15.0
+  flutter_chat_ui: ^2.5.2
+  image_picker: ^1.1.2
+  file_picker: ^10.2.0
+  uuid: ^4.5.1
+  flutter_chat_core: ^2.6.1
 
 dev_dependencies:
   flutter_test:

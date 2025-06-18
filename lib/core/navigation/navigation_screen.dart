@@ -45,7 +45,7 @@ class NavigationScreen extends StatelessWidget {
             case 1:
               context.go(Routes.chats);
             case 2:
-              context.go(Routes.notifications);
+              context.go(Routes.home);
             case 3:
               context.go(Routes.notifications);
           }

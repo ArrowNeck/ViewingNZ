@@ -37,7 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // -------- Top content --------
                           Text(
@@ -54,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textAlign: TextAlign.center,
                           ),
                           // -------- Pushes below section to the bottom --------
-                          const Spacer(),
+                          const Gap(40),
                           // -------- Bottom social buttons + terms --------
                           InputField(
                             labelText: "Name",

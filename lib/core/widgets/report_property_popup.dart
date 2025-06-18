@@ -4,6 +4,7 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/animated_drop_menu.dart';
 import 'package:viewing_nz/core/widgets/confirmation_popup.dart';
 import 'package:viewing_nz/core/widgets/submit_button.dart';
@@ -46,7 +47,7 @@ class _ReportPropertyPopupState extends State<ReportPropertyPopup> {
   }
 
   void _confirmReport() {
-    // SHOW TOAST MESSAGE HERE
+    CoreUtils.toastSuccess("Property has been reported.");
   }
 
   @override

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/features/home/widgets/viewing_card.dart';
 
-class SavedProperties extends StatefulWidget {
-  const SavedProperties({super.key});
+class SavedPropertiesScreen extends StatefulWidget {
+  const SavedPropertiesScreen({super.key});
 
   @override
-  State<SavedProperties> createState() => _SavedPropertiesState();
+  State<SavedPropertiesScreen> createState() => _SavedPropertiesScreenState();
 }
 
-class _SavedPropertiesState extends State<SavedProperties> {
+class _SavedPropertiesScreenState extends State<SavedPropertiesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -17,14 +17,14 @@ import 'package:viewing_nz/features/home/widgets/rooms_details_section.dart';
 import 'package:viewing_nz/features/home/widgets/tenants_details_section.dart';
 import 'package:viewing_nz/features/home/widgets/viewing_details_header.dart';
 
-class ViewingDetails extends StatefulWidget {
-  const ViewingDetails({super.key});
+class ViewingDetailsScreen extends StatefulWidget {
+  const ViewingDetailsScreen({super.key});
 
   @override
-  State<ViewingDetails> createState() => _ViewingDetailsState();
+  State<ViewingDetailsScreen> createState() => _ViewingDetailsScreenState();
 }
 
-class _ViewingDetailsState extends State<ViewingDetails> {
+class _ViewingDetailsScreenState extends State<ViewingDetailsScreen> {
   late final ScrollController _scrollController;
   late final List<GlobalKey> _sectionKeys;
 

@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:readmore/readmore.dart';
+import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/features/home/widgets/listed_and_ref_id.dart';
 import 'package:viewing_nz/features/home/widgets/section_label.dart';
 
-class PropertyDetailsSection extends StatelessWidget {
+class PropertyDetailsSection extends StatefulWidget {
   const PropertyDetailsSection({super.key});
+
+  @override
+  State<PropertyDetailsSection> createState() => _PropertyDetailsSectionState();
+}
+
+class _PropertyDetailsSectionState extends State<PropertyDetailsSection> {
+  final ValueNotifier<bool> enableEdit = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    enableEdit.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +61,37 @@ Viverra ac ornare nunc in. Cursus tellus aliquam non lobortis quis faucibus enim
             color: AppColors.info500,
             fontWeight: FontWeight.w600,
           ),
+        ),
+        const Gap(24),
+        GestureDetector(
+          onTap: () {
+            enableEdit.value = !enableEdit.value;
+          },
+          child: Row(
+            children: [
+              Icon(SolarIconsOutline.documentAdd),
+              const Gap(8),
+              Text(
+                "Your Notes",
+                style: context.titleMedium.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const Gap(16),
+        ValueListenableBuilder(
+          valueListenable: enableEdit,
+          builder: (context, value, child) {
+            return InputField(
+              hintText:
+                  "Add personal notes for your reference. Only you can see them.",
+              maxLines: 3,
+              textInputAction: TextInputAction.newline,
+              enabled: !value,
+            );
+          },
         ),
       ],
     );
