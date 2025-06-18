@@ -17,7 +17,7 @@ class RequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
         color: AppColors.gray50,
         borderRadius: BorderRadius.circular(16),

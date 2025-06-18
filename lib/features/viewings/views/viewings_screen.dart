@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
-import 'package:viewing_nz/core/widgets/input_field.dart';
+import 'package:viewing_nz/core/widgets/app_search_bar.dart';
 import 'package:viewing_nz/features/viewings/widgets/request_card.dart';
 import 'package:viewing_nz/features/viewings/widgets/viewing_header.dart';
 
@@ -16,24 +15,21 @@ class _ViewingsScreenState extends State<ViewingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            ViewingHeader(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: InputField(
-                hintText: "Search here",
-                prefixIcon: SolarIconsOutline.magnifier,
-                textInputAction: TextInputAction.search,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            children: [
+              ViewingHeader(),
+              AppSearchBar(),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (_, index) =>
+                      RequestCard(isPast: index % 2 == 0),
+                ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (_, index) => RequestCard(isPast: index % 2 == 0),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
