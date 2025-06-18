@@ -18,33 +18,60 @@ final router = GoRouter(
       },
     ),
 
-    GoRoute(path: Routes.login, builder: (_, state) => const SignInScreen()),
-    GoRoute(path: Routes.register, builder: (_, state) => const SignUpScreen()),
+    GoRoute(
+      path: Routes.login,
+      pageBuilder: (context, state) =>
+          buildTransitionPage(key: state.pageKey, child: SignInScreen()),
+    ),
+    GoRoute(
+      path: Routes.register,
+      pageBuilder: (context, state) =>
+          buildTransitionPage(key: state.pageKey, child: SignUpScreen()),
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) {
-        return NavigationScreen(state: state, child: child);
-      },
+      pageBuilder: (context, state, child) => buildTransitionPage(
+        key: state.pageKey,
+        child: NavigationScreen(state: state, child: child),
+      ),
       routes: [
-        GoRoute(path: Routes.home, builder: (_, state) => const HomeScreen()),
-        GoRoute(path: Routes.chats, builder: (_, state) => const ChatScreen()),
+        GoRoute(
+          path: Routes.home,
+          pageBuilder: (context, state) =>
+              buildTransitionPage(key: state.pageKey, child: HomeScreen()),
+        ),
+        GoRoute(
+          path: Routes.chats,
+          pageBuilder: (context, state) =>
+              buildTransitionPage(key: state.pageKey, child: ChatScreen()),
+        ),
         GoRoute(
           path: Routes.notifications,
-          builder: (_, state) => const NotificationScreen(),
+          pageBuilder: (context, state) => buildTransitionPage(
+            key: state.pageKey,
+            child: NotificationScreen(),
+          ),
         ),
       ],
     ),
     GoRoute(
       path: Routes.singleChat,
-      builder: (_, state) => const SingleChatScreen2(),
+      pageBuilder: (context, state) =>
+          buildTransitionPage(key: state.pageKey, child: SingleChatScreen2()),
     ),
     GoRoute(
       path: Routes.viewingDetails,
-      builder: (_, state) => const ViewingDetailsScreen(),
+      pageBuilder: (context, state) => buildTransitionPage(
+        key: state.pageKey,
+        child: ViewingDetailsScreen(),
+      ),
     ),
     GoRoute(
       path: Routes.requestViewing,
-      builder: (_, state) => const RequestViewingScreen(),
+      pageBuilder: (context, state) => buildTransitionPage(
+        key: state.pageKey,
+        child: RequestViewingScreen(),
+      ),
     ),
   ],
 );
