@@ -1,14 +1,14 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:solar_icons/solar_icons.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/animated_drop_menu.dart';
 import 'package:viewing_nz/core/widgets/calendar_view.dart';
+import 'package:viewing_nz/core/widgets/custom_range_slider.dart';
 import 'package:viewing_nz/core/widgets/label_wrapper.dart';
 
 class RequestFilter extends StatefulWidget {
@@ -40,8 +40,8 @@ class _RequestFilterState extends State<RequestFilter>
   ValueNotifier<String> selectedType = ValueNotifier("Select property type");
   ValueNotifier<String?> selectedTimeOfDay = ValueNotifier(null);
 
-  final ValueNotifier<RangeValues> _currentRange = ValueNotifier(
-    RangeValues(8.0, 17.0),
+  final ValueNotifier<SfRangeValues> _currentRange = ValueNotifier(
+    SfRangeValues(6.0, 18.0),
   );
 
   late AnimationController _popupAnimationController;
@@ -144,7 +144,7 @@ class _RequestFilterState extends State<RequestFilter>
     toDate.value = null;
     selectedTimeOfDay.value = null;
     selectedType.value = "Select property type";
-    _currentRange.value = RangeValues(8.0, 17.0);
+    _currentRange.value = SfRangeValues(8.0, 17.0);
   }
 
   void _closePopup() async {
@@ -275,21 +275,20 @@ class _RequestFilterState extends State<RequestFilter>
         LabelWrapper(
           label: "Time",
           child: Padding(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: const EdgeInsets.only(top: 32.0),
             child: ValueListenableBuilder(
               valueListenable: _currentRange,
-              builder: (context, value, child) {
-                return RangeSlider(
-                  values: value,
-                  min: 7.0,
+              builder: (context, values, child) {
+                return CustomRangeSlider(
+                  values: values,
+                  min: 6.0,
                   max: 18.0,
-                  divisions: 132,
-                  labels: RangeLabels(
-                    _formatTime(value.start),
-                    _formatTime(value.end),
-                  ),
-                  onChanged: (RangeValues values) {
+                  stepSize: 1 / 12,
+                  onChanged: (SfRangeValues values) {
                     _currentRange.value = values;
+                  },
+                  formatValue: (actualValue, formattedText) {
+                    return _formatTime(actualValue);
                   },
                 );
               },
@@ -338,7 +337,6 @@ class _RequestFilterState extends State<RequestFilter>
                 items: listingTypes,
                 selected: selectedType.value,
                 onChanged: (type) {
-                  log(type);
                   selectedType.value = type;
                 },
               );
