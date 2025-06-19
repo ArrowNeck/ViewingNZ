@@ -23,6 +23,7 @@ class _SingleChatScreen2State extends State<SingleChatScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Chat(
           chatController: _chatController,

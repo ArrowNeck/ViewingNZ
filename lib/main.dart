@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:toastification/toastification.dart';
 import 'package:viewing_nz/core/services/router.dart';
 import 'package:viewing_nz/core/theme/app_theme.dart';
@@ -9,7 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(
-    DevicePreview(enabled: true, builder: (context) => const ViewingNZApp()),
+    DevicePreview(enabled: false, builder: (context) => const ViewingNZApp()),
   );
 }
 
@@ -19,14 +20,17 @@ class ViewingNZApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ToastificationWrapper(
-      child: MaterialApp.router(
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        title: 'ViewingNZ',
-        theme: AppTheme.lightTheme,
-        themeMode: ThemeMode.light,
-        routerConfig: router,
+      child: KeyboardDismisser(
+        gestures: [GestureType.onTap, GestureType.onPanUpdateDownDirection],
+        child: MaterialApp.router(
+          useInheritedMediaQuery: true,
+          locale: DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          title: 'ViewingNZ',
+          theme: AppTheme.lightTheme,
+          themeMode: ThemeMode.light,
+          routerConfig: router,
+        ),
       ),
     );
   }

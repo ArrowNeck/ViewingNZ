@@ -29,8 +29,8 @@ class AppTheme {
           disabledForegroundColor: AppColors.gray50,
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          minimumSize: const Size(30, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          minimumSize: const Size(24, 48),
           iconSize: 20,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -47,8 +47,8 @@ class AppTheme {
           foregroundColor: AppColors.gunmetal600,
           elevation: 0,
           shadowColor: Colors.transparent,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          minimumSize: const Size(30, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          minimumSize: const Size(24, 48),
           iconSize: 20,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),

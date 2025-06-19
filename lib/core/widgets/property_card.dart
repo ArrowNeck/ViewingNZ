@@ -21,6 +21,7 @@ class PropertyCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context.push(Routes.viewingDetails),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
@@ -70,6 +71,7 @@ class PropertyCard extends StatelessWidget {
                     child: IntrinsicHeight(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           CustomAvatar(
                             radius: 24,
@@ -80,9 +82,7 @@ class PropertyCard extends StatelessWidget {
                             radius: 24,
                             url: "https://picsum.photos/id/52/500/500",
                           ),
-                          const Spacer(),
-                          VerticalDivider(color: AppColors.gray300),
-                          const Spacer(),
+                          VerticalDivider(color: AppColors.gray300, width: 24),
                           Image.asset("assets/images/vatero.png"),
                         ],
                       ),

@@ -19,7 +19,7 @@ class ChatCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: const CustomAvatar(
-                radius: 25,
+                radius: 24,
                 url: "https://i.pravatar.cc/250?img=12",
               ),
             ),

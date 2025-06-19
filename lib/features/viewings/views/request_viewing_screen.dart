@@ -33,109 +33,106 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SimpleAppbar(title: "Requesting a Viewing"),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Form(
-              key: _formKey,
-              child: IntrinsicHeight(
-                child: Column(
-                  children: [
-                    const Gap(8),
-                    LabelWrapper(
-                      label: 'Name',
-                      child: InputField(
-                        hintText: "Sahan Akash",
-                        textInputType: TextInputType.name,
-                        validator: Validators.name,
-                      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Form(
+            key: _formKey,
+            child: IntrinsicHeight(
+              child: Column(
+                children: [
+                  const Gap(8),
+                  LabelWrapper(
+                    label: 'Name',
+                    child: InputField(
+                      hintText: "Sahan Akash",
+                      textInputType: TextInputType.name,
+                      validator: Validators.name,
                     ),
+                  ),
 
-                    const Gap(16),
-                    LabelWrapper(
-                      label: 'Email',
-                      child: InputField(
-                        hintText: "sahan@gmail.com",
-                        textInputType: TextInputType.emailAddress,
-                        validator: Validators.email,
-                      ),
+                  const Gap(16),
+                  LabelWrapper(
+                    label: 'Email',
+                    child: InputField(
+                      hintText: "sahan@gmail.com",
+                      textInputType: TextInputType.emailAddress,
+                      validator: Validators.email,
                     ),
+                  ),
 
-                    const Gap(16),
-                    LabelWrapper(
-                      label: 'Phone',
-                      child: InputField(
-                        hintText: "+64 275 555 58",
-                        textInputType: TextInputType.phone,
-                        validator: Validators.mobileNumber,
-                      ),
+                  const Gap(16),
+                  LabelWrapper(
+                    label: 'Phone',
+                    child: InputField(
+                      hintText: "+64 275 555 58",
+                      textInputType: TextInputType.phone,
+                      validator: Validators.mobileNumber,
                     ),
+                  ),
 
-                    const Gap(16),
-                    LabelWrapper(
-                      label: 'Available Timing',
-                      child: DateTimeDropMenu(
-                        onChange: _changeCustomDataTimeInput,
-                      ),
+                  const Gap(16),
+                  LabelWrapper(
+                    label: 'Available Timing',
+                    child: DateTimeDropMenu(
+                      onChange: _changeCustomDataTimeInput,
                     ),
-                    ValueListenableBuilder(
-                      valueListenable: isCustomInputSelect,
-                      builder: (_, state, __) {
-                        return state
-                            ? Column(
-                                children: [
-                                  const Gap(16),
-                                  LabelWrapper(
-                                    label: 'Preffered Date',
-                                    child: _prefferedWidget(
-                                      () {},
-                                      selectedDate ?? "Select date",
-                                      SolarIconsOutline.calendar,
-                                    ),
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: isCustomInputSelect,
+                    builder: (_, state, __) {
+                      return state
+                          ? Column(
+                              children: [
+                                const Gap(16),
+                                LabelWrapper(
+                                  label: 'Preffered Date',
+                                  child: _prefferedWidget(
+                                    () {},
+                                    selectedDate ?? "Select date",
+                                    SolarIconsOutline.calendar,
                                   ),
+                                ),
 
-                                  const Gap(16),
-                                  LabelWrapper(
-                                    label: 'Preffered Time',
-                                    child: _prefferedWidget(
-                                      () {},
-                                      selectedTime ?? "Select time",
-                                      SolarIconsOutline.clockCircle,
-                                    ),
+                                const Gap(16),
+                                LabelWrapper(
+                                  label: 'Preffered Time',
+                                  child: _prefferedWidget(
+                                    () {},
+                                    selectedTime ?? "Select time",
+                                    SolarIconsOutline.clockCircle,
                                   ),
-                                ],
-                              )
-                            : SizedBox.shrink();
-                      },
+                                ),
+                              ],
+                            )
+                          : SizedBox.shrink();
+                    },
+                  ),
+                  const Gap(16),
+                  LabelWrapper(
+                    label: 'Your Message',
+                    child: InputField(
+                      hintText: "Enter your message here",
+                      maxLines: 3,
+                      textInputType: TextInputType.multiline,
                     ),
-                    const Gap(16),
-                    LabelWrapper(
-                      label: 'Your Message',
-                      child: InputField(
-                        hintText: "Enter your message here",
-                        maxLines: 3,
-                        textInputType: TextInputType.multiline,
-                      ),
-                    ),
+                  ),
 
-                    const Gap(24),
-                    SubmitButton(
-                      onPressed: () => CoreUtils.heroDialog(
-                        ConfirmationPopup(
-                          title: "Confirm the Viewing",
-                          message: "Are you sure want to initiate the viewing?",
-                          leftBtnText: "No",
-                          rightBtnText: "Yes, Initiate",
-                          onRightTap: () {},
-                        ),
+                  const Gap(24),
+                  SubmitButton(
+                    onPressed: () => CoreUtils.heroDialog(
+                      ConfirmationPopup(
+                        title: "Confirm the Viewing",
+                        message: "Are you sure want to initiate the viewing?",
+                        leftBtnText: "No",
+                        rightBtnText: "Yes, Initiate",
+                        onRightTap: () {},
                       ),
-                      text: "Initiate Request",
                     ),
-                    const Gap(8),
-                  ],
-                ),
+                    text: "Initiate Request",
+                  ),
+                  const Gap(8),
+                ],
               ),
             ),
           ),

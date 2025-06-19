@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
@@ -75,12 +74,11 @@ class _SlidingSegmentedControlState extends State<SlidingSegmentedControl>
         ),
         indicatorSize: TabBarIndicatorSize.tab,
         tabAlignment: isScrollable ? TabAlignment.start : TabAlignment.fill,
-        // physics: BouncingScrollPhysics(),
         tabs: widget.segments.map((title) {
           return isScrollable
               ? Tab(
-                  child: SizedBox(
-                    width: context.screenWidth / 3.2,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
                     child: Center(child: Text(title)),
                   ),
                 )

@@ -73,10 +73,12 @@ class _ContactAgentSectionState extends State<ContactAgentSection> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         VerticalDivider(color: AppColors.gray300, width: 24),
-                        Text(
-                          widget.agents[index].position,
-                          style: context.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
+                        Flexible(
+                          child: Text(
+                            widget.agents[index].position,
+                            style: context.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

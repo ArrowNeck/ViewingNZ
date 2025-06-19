@@ -71,6 +71,7 @@ class _SavedSearchEditState extends State<SavedSearchEdit> {
             valueListenable: selectedFrequency,
             builder: (context, selected, child) {
               return ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: notificationFrequencies.length,
                 itemBuilder: (context, index) {

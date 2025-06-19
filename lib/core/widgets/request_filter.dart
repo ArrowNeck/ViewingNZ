@@ -306,7 +306,7 @@ class _RequestFilterState extends State<RequestFilter>
               children: List.generate(timeOfDay.length, (index) {
                 final time = timeOfDay[index];
                 return ActionChip(
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(6),
                   backgroundColor: time == value
                       ? AppColors.gunmetal600
                       : Colors.transparent,
@@ -375,7 +375,7 @@ class _RequestFilterState extends State<RequestFilter>
           onTap: () => {isFromDatePicker = isFrom, _showCustomDatePicker()},
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
             decoration: BoxDecoration(
               color: AppColors.gray50,
               borderRadius: BorderRadius.circular(8),
@@ -397,7 +397,7 @@ class _RequestFilterState extends State<RequestFilter>
                     );
                   },
                 ),
-                Icon(SolarIconsOutline.calendar),
+                Icon(SolarIconsOutline.calendar, size: 20),
               ],
             ),
           ),
