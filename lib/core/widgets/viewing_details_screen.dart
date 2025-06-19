@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/simple_appbar.dart';
-import 'package:viewing_nz/features/home/models/agent_model.dart';
-import 'package:viewing_nz/features/home/widgets/additional_features_section.dart';
-import 'package:viewing_nz/features/home/widgets/agents_details_section.dart';
-import 'package:viewing_nz/features/home/widgets/market_insights_section.dart';
-import 'package:viewing_nz/features/home/widgets/contact_agent_section.dart';
-import 'package:viewing_nz/features/home/widgets/features_section.dart';
-import 'package:viewing_nz/features/home/widgets/map_view_section.dart';
-import 'package:viewing_nz/features/home/widgets/on_this_page_section.dart';
-import 'package:viewing_nz/features/home/widgets/open_home_times_section.dart';
-import 'package:viewing_nz/features/home/widgets/price_updates_section.dart';
-import 'package:viewing_nz/features/home/widgets/property_details_section.dart';
-import 'package:viewing_nz/features/home/widgets/requesting_button.dart';
-import 'package:viewing_nz/features/home/widgets/rooms_details_section.dart';
-import 'package:viewing_nz/features/home/widgets/tenants_details_section.dart';
-import 'package:viewing_nz/features/home/widgets/viewing_details_header.dart';
+import 'package:viewing_nz/features/viewings/models/agent_model.dart';
+import 'package:viewing_nz/features/viewings/widgets/additional_features_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/agents_details_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/market_insights_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/contact_agent_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/features_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/map_view_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/on_this_page_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/open_home_times_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/price_updates_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/property_details_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/requesting_button.dart';
+import 'package:viewing_nz/features/viewings/widgets/rooms_details_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/tenants_details_section.dart';
+import 'package:viewing_nz/features/viewings/widgets/viewing_details_header.dart';
 
 class ViewingDetailsScreen extends StatefulWidget {
   const ViewingDetailsScreen({super.key});

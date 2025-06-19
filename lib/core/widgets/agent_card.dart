@@ -5,7 +5,7 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
-import 'package:viewing_nz/features/home/models/agent_model.dart';
+import 'package:viewing_nz/features/viewings/models/agent_model.dart';
 
 class AgentCard extends StatelessWidget {
   const AgentCard({super.key, required this.agent});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:viewing_nz/features/home/widgets/viewing_card.dart';
+import 'package:viewing_nz/core/widgets/property_card.dart';
 
 class SavedPropertiesScreen extends StatefulWidget {
   const SavedPropertiesScreen({super.key});
@@ -13,18 +13,15 @@ class _SavedPropertiesScreenState extends State<SavedPropertiesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (_, index) => ViewingCard(),
-                ),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemCount: 2,
+                itemBuilder: (_, index) => PropertyCard(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

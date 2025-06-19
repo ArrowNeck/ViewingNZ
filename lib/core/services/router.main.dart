@@ -46,6 +46,13 @@ final router = GoRouter(
               buildTransitionPage(key: state.pageKey, child: ChatScreen()),
         ),
         GoRoute(
+          path: Routes.viewings,
+          pageBuilder: (context, state) => buildTransitionPage(
+            key: state.pageKey,
+            child: ViewingMainScreen(),
+          ),
+        ),
+        GoRoute(
           path: Routes.notifications,
           pageBuilder: (context, state) => buildTransitionPage(
             key: state.pageKey,

@@ -106,7 +106,7 @@ class _AnimatedDropMenuState extends State<AnimatedDropMenu>
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: 0,
-                maxHeight: context.screenHeight * .4,
+                maxHeight: context.screenHeight * .25,
               ),
               child: SingleChildScrollView(
                 child: Column(

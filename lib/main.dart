@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:toastification/toastification.dart';
 import 'package:viewing_nz/core/services/router.dart';
 import 'package:viewing_nz/core/theme/app_theme.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(const ViewingNZApp());
+  runApp(
+    DevicePreview(enabled: true, builder: (context) => const ViewingNZApp()),
+  );
 }
 
 class ViewingNZApp extends StatelessWidget {
@@ -17,6 +20,9 @@ class ViewingNZApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ToastificationWrapper(
       child: MaterialApp.router(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         title: 'ViewingNZ',
         theme: AppTheme.lightTheme,
         themeMode: ThemeMode.light,

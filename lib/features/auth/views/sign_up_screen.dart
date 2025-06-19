@@ -86,26 +86,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             text: 'Create Account',
                           ),
                           const Gap(32),
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              text: "Already have an account? ",
-                              style: context.titleMedium.copyWith(
-                                color: AppColors.gunmetal600,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "Log In",
-                                  style: context.titleMedium.copyWith(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      context.go(Routes.login);
-                                    },
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "Already have an account? ",
+                                style: context.titleMedium.copyWith(
+                                  color: AppColors.gunmetal600,
                                 ),
-                              ],
+                                children: [
+                                  TextSpan(
+                                    text: "Log In",
+                                    style: context.titleMedium.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        context.go(Routes.login);
+                                      },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SocialDivider(),

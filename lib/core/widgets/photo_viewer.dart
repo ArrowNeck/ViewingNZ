@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:viewing_nz/core/extensions/theme_extension.dart';
+import 'package:viewing_nz/core/theme/app_colors.dart';
 
 class PhotoViewScreen extends StatefulWidget {
   final List<String> imageUrls;
@@ -42,24 +45,47 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
     });
   }
 
+  // double currentRotation = 0;
+  // final PhotoViewController _controller = PhotoViewController();
+
+  // void rotateImage() {
+  //   setState(() {
+  //     currentRotation += 0.5 * 3.1415926535; // rotate 90°
+  //   });
+  //   _controller.rotation = currentRotation;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.pureBlack,
       extendBodyBehindAppBar: true,
       appBar: _showAppBar
           ? AppBar(
-              backgroundColor: Colors.black.withAlpha(128),
+              backgroundColor: AppColors.pureBlack,
               elevation: 0,
               leading: IconButton(
-                icon: const Icon(Icons.close, color: Colors.white),
+                icon: const Icon(Icons.close, color: AppColors.white),
                 onPressed: () => Navigator.of(context).pop(),
               ),
+
               title: Text(
                 '${_currentIndex + 1} of ${widget.imageUrls.length}',
-                style: const TextStyle(color: Colors.white),
+                style: context.titleMedium.copyWith(
+                  color: AppColors.gray50,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               centerTitle: true,
+              actions: [
+                // IconButton(
+                //   icon: const Icon(
+                //     Icons.rotate_right_rounded,
+                //     color: AppColors.white,
+                //   ),
+                //   onPressed: rotateImage,
+                // ),
+              ],
             )
           : null,
       body: GestureDetector(
@@ -68,6 +94,7 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
           scrollPhysics: const BouncingScrollPhysics(),
           builder: (BuildContext context, int index) {
             return PhotoViewGalleryPageOptions(
+              // controller: _controller,
               imageProvider: NetworkImage(widget.imageUrls[index]),
               initialScale: PhotoViewComputedScale.contained,
               minScale: PhotoViewComputedScale.contained * 0.8,
@@ -77,20 +104,22 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
                   : null,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
-                  color: Colors.grey[900],
-                  child: const Center(
+                  color: AppColors.pureBlack,
+                  child: Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.error_outline,
-                          color: Colors.white,
+                          color: AppColors.white,
                           size: 48,
                         ),
                         SizedBox(height: 16),
                         Text(
                           'Failed to load image',
-                          style: TextStyle(color: Colors.white),
+                          style: context.bodyMedium.copyWith(
+                            color: AppColors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -101,12 +130,12 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
           },
           itemCount: widget.imageUrls.length,
           loadingBuilder: (context, event) => Container(
-            color: Colors.black,
+            color: AppColors.pureBlack,
             child: const Center(
-              child: CircularProgressIndicator(color: Colors.white),
+              child: CircularProgressIndicator(color: AppColors.white),
             ),
           ),
-          backgroundDecoration: const BoxDecoration(color: Colors.black),
+          backgroundDecoration: const BoxDecoration(color: AppColors.pureBlack),
           pageController: _pageController,
           onPageChanged: (int index) {
             setState(() {
@@ -115,74 +144,79 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
           },
         ),
       ),
-      bottomNavigationBar: _showAppBar && widget.imageUrls.length > 1
-          ? Container(
-              color: Colors.black.withAlpha(128),
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Previous button
-                  IconButton(
-                    onPressed: _currentIndex > 0
-                        ? () {
-                            _pageController.previousPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        : null,
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      color: _currentIndex > 0 ? Colors.white : Colors.grey,
+      bottomNavigationBar: Container(
+        color: AppColors.pureBlack,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: SafeArea(
+          top: false,
+          child: _showAppBar && widget.imageUrls.length > 1
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Previous button
+                    IconButton(
+                      onPressed: _currentIndex > 0
+                          ? () {
+                              _pageController.previousPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          : null,
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: _currentIndex > 0
+                            ? AppColors.white
+                            : AppColors.gray800,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 20),
-                  // Dot indicators
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          widget.imageUrls.length,
-                          (index) => Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: index == _currentIndex
-                                  ? Colors.white
-                                  : Colors.white.withAlpha(100),
+                    const Gap(16),
+                    // Dot indicators
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: List.generate(
+                            widget.imageUrls.length,
+                            (index) => Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 4),
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: index == _currentIndex
+                                    ? AppColors.white
+                                    : AppColors.gray800,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 20),
-                  // Next button
-                  IconButton(
-                    onPressed: _currentIndex < widget.imageUrls.length - 1
-                        ? () {
-                            _pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        : null,
-                    icon: Icon(
-                      Icons.arrow_forward_ios,
-                      color: _currentIndex < widget.imageUrls.length - 1
-                          ? Colors.white
-                          : Colors.grey,
+                    const Gap(16),
+                    // Next button
+                    IconButton(
+                      onPressed: _currentIndex < widget.imageUrls.length - 1
+                          ? () {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          : null,
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        color: _currentIndex < widget.imageUrls.length - 1
+                            ? AppColors.white
+                            : AppColors.gray800,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          : null,
+                  ],
+                )
+              : SizedBox(),
+        ),
+      ),
     );
   }
 }

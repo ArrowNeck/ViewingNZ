@@ -17,10 +17,10 @@ class NavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeIndex = NavigationUtils.activeIndex(state);
     return Scaffold(
-      appBar: MainAppbar(),
+      appBar: MainAppbar(title: activeIndex.$2),
       body: child,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: activeIndex,
+        currentIndex: activeIndex.$1,
         unselectedItemColor: AppColors.gray700,
         selectedItemColor: AppColors.primary,
         selectedLabelStyle: context.bodySmall.copyWith(
@@ -45,7 +45,7 @@ class NavigationScreen extends StatelessWidget {
             case 1:
               context.go(Routes.chats);
             case 2:
-              context.go(Routes.home);
+              context.go(Routes.viewings);
             case 3:
               context.go(Routes.notifications);
           }

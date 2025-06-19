@@ -48,7 +48,7 @@ class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: double.maxFinite,
       child: TextFormField(
         controller: widget.controller,
         onChanged: widget.onChanged,

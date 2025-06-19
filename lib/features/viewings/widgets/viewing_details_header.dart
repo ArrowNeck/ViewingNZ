@@ -8,9 +8,9 @@ import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
 import 'package:viewing_nz/core/widgets/property_share_popup.dart';
 import 'package:viewing_nz/core/widgets/report_property_popup.dart';
-import 'package:viewing_nz/features/home/widgets/listed_and_ref_id.dart';
-import 'package:viewing_nz/features/home/widgets/price_and_address.dart';
-import 'package:viewing_nz/features/home/widgets/viewing_poster.dart';
+import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
+import 'package:viewing_nz/features/viewings/widgets/price_and_address.dart';
+import 'package:viewing_nz/features/viewings/widgets/viewing_poster.dart';
 
 class ViewingDetailsHeader extends StatelessWidget {
   const ViewingDetailsHeader({super.key});

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:viewing_nz/core/widgets/custome_tab_view.dart';
-import 'package:viewing_nz/features/home/views/saved_properties_screen.dart';
-import 'package:viewing_nz/features/profile/views/my_profile_screen.dart';
-import 'package:viewing_nz/features/saved_search/views/saved_search_screen.dart';
-import 'package:viewing_nz/features/viewings/views/viewings_screen.dart';
+import 'package:viewing_nz/core/widgets/property_card.dart';
+import 'package:viewing_nz/features/home/widgets/home_basic_filter.dart';
+import 'package:viewing_nz/features/home/widgets/home_property_filter_label.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,14 +15,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomTabView(
-          tabs: ["Viewings", "Saved Properties", "Saved Search", "My Profile"],
-          pages: [
-            ViewingsScreen(),
-            SavedPropertiesScreen(),
-            SavedSearchScreen(),
-            MyProfileScreen(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ListView(
+            children: [
+              HomeBasicFilter(),
+              HomePropertyFilterLabel(),
+              ...List<Widget>.generate(4, (int index) => PropertyCard()),
+            ],
+          ),
         ),
       ),
     );

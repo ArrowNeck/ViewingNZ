@@ -31,7 +31,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             children: [
               ProfileHeader(),

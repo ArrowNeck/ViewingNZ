@@ -163,6 +163,27 @@ class AppTheme {
         ),
       ),
 
+      checkboxTheme: CheckboxThemeData(
+        checkColor: WidgetStatePropertyAll(AppColors.primary),
+        fillColor: WidgetStatePropertyAll(Colors.transparent),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+        side: WidgetStateBorderSide.resolveWith((states) {
+          return const BorderSide(color: AppColors.gunmetal500);
+        }),
+        visualDensity: VisualDensity.compact,
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          textStyle: TextStyles.textTheme.bodyMedium,
+          foregroundColor: AppColors.black,
+        ),
+      ),
+
       splashColor: AppColors.gunmetal500.withAlpha(32),
       highlightColor: AppColors.gunmetal100,
       hoverColor: AppColors.gray300,

@@ -12,13 +12,13 @@ abstract class NavigationUtils {
     (SolarIconsOutline.menuDots, "More"),
   ];
 
-  static int activeIndex(GoRouterState state) {
+  static (int, String) activeIndex(GoRouterState state) {
     return switch (state.fullPath) {
-      Routes.home => 0,
-      Routes.chats => 1,
-      Routes.viewings => 2,
-      Routes.notifications => 3,
-      _ => 0,
+      Routes.home => (0, "Home"),
+      Routes.chats => (1, "Chats"),
+      Routes.viewings => (2, "Dashboard"),
+      Routes.notifications => (3, "Notifications"),
+      _ => (0, "Home"),
     };
   }
 }

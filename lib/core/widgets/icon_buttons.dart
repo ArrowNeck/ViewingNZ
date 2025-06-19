@@ -10,6 +10,7 @@ class IconButtons extends StatelessWidget {
     required this.onPressed,
     this.fillColor,
     this.height,
+    this.size,
   }) : label = null;
   const IconButtons.label({
     super.key,
@@ -18,6 +19,7 @@ class IconButtons extends StatelessWidget {
     required this.onPressed,
     this.fillColor,
     this.height,
+    this.size,
   });
 
   final IconData icon;
@@ -25,6 +27,7 @@ class IconButtons extends StatelessWidget {
   final VoidCallback onPressed;
   final Color? fillColor;
   final double? height;
+  final double? size;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class IconButtons extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         height: height,
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(size ?? 16),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: fillColor,

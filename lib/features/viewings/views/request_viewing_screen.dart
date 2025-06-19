@@ -10,7 +10,7 @@ import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/core/widgets/label_wrapper.dart';
 import 'package:viewing_nz/core/widgets/simple_appbar.dart';
 import 'package:viewing_nz/core/widgets/submit_button.dart';
-import 'package:viewing_nz/features/request_viewing/widgets/date_time_drop_menu.dart';
+import 'package:viewing_nz/features/viewings/widgets/date_time_drop_menu.dart';
 
 class RequestViewingScreen extends StatefulWidget {
   const RequestViewingScreen({super.key});

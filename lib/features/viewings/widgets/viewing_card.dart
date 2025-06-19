@@ -8,8 +8,8 @@ import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/property_tag.dart';
 import 'package:viewing_nz/core/widgets/rate_agent_popup.dart';
 
-class RequestCard extends StatelessWidget {
-  const RequestCard({super.key, this.isPast = false});
+class ViewingCard extends StatelessWidget {
+  const ViewingCard({super.key, this.isPast = false});
 
   final bool isPast;
 
@@ -97,22 +97,25 @@ class RequestCard extends StatelessWidget {
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: context.bodyMedium.copyWith(fontWeight: FontWeight.w500),
-          ),
-          Gap(4),
-          Text(
-            value,
-            style: context.bodyMedium.copyWith(
-              color: valueColor ?? AppColors.black,
-              fontWeight: FontWeight.w600,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: context.bodyMedium.copyWith(fontWeight: FontWeight.w500),
             ),
-          ),
-        ],
+            Gap(4),
+            Text(
+              value,
+              style: context.bodyMedium.copyWith(
+                color: valueColor ?? AppColors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

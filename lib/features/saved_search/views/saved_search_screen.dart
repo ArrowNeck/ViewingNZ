@@ -15,20 +15,17 @@ class _SavedSearchScreenState extends State<SavedSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            children: [
-              SavedSearchHeader(),
-              AppSearchBar(),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (_, index) => SavedSearchMain(),
-                ),
+        child: Column(
+          children: [
+            SavedSearchHeader(),
+            AppSearchBar(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 2,
+                itemBuilder: (_, index) => SavedSearchMain(),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

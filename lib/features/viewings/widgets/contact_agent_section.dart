@@ -8,9 +8,9 @@ import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/validators.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/core/widgets/submit_button.dart';
-import 'package:viewing_nz/core/widgets/tab_bar_header.dart';
-import 'package:viewing_nz/features/home/models/agent_model.dart';
-import 'package:viewing_nz/features/home/widgets/section_label.dart';
+import 'package:viewing_nz/core/widgets/sliding_segmented_control.dart';
+import 'package:viewing_nz/features/viewings/models/agent_model.dart';
+import 'package:viewing_nz/features/viewings/widgets/section_label.dart';
 
 class ContactAgentSection extends StatefulWidget {
   const ContactAgentSection({super.key, required this.agents});
@@ -21,10 +21,9 @@ class ContactAgentSection extends StatefulWidget {
   State<ContactAgentSection> createState() => _ContactAgentSectionState();
 }
 
-class _ContactAgentSectionState extends State<ContactAgentSection>
-    with TickerProviderStateMixin {
-  late TabController controller;
-
+class _ContactAgentSectionState extends State<ContactAgentSection> {
+  final ValueNotifier<String?> selectedEnquiry = ValueNotifier<String?>(null);
+  final ValueNotifier<int> selectedAgent = ValueNotifier(0);
   final List<String> enquiryOptions = [
     'The price range',
     'Property Documentation',
@@ -33,25 +32,10 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
     'A Call Back',
   ];
 
-  final ValueNotifier<String?> selectedEnquiry = ValueNotifier<String?>(
-    'The price range',
-  );
-
-  final ValueNotifier<int> selectedAgent = ValueNotifier(0);
-
-  @override
-  void initState() {
-    controller = TabController(length: 2, vsync: this);
-    controller.addListener(() {
-      selectedAgent.value = controller.index;
-    });
-    super.initState();
-  }
-
   @override
   void dispose() {
-    controller.removeListener(() {});
-    controller.dispose();
+    selectedAgent.dispose();
+    selectedEnquiry.dispose();
     super.dispose();
   }
 
@@ -61,14 +45,9 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionLabel(title: "Contact the Agents"),
-        DefaultTabController(
-          length: 2,
-          child: Center(
-            child: TabBarHeader(
-              controller: controller,
-              tabs: widget.agents.map((agent) => agent.name).toList(),
-            ),
-          ),
+        SlidingSegmentedControl(
+          segments: widget.agents.map((agent) => agent.name).toList(),
+          onChanged: (value) => selectedAgent.value = value,
         ),
         const Gap(24),
         ValueListenableBuilder(
@@ -82,6 +61,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
               ),
               child: Column(
                 children: [
+                  const Gap(4),
                   IntrinsicHeight(
                     child: Row(
                       children: [
@@ -90,16 +70,17 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
                           style: context.bodyLarge.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         VerticalDivider(color: AppColors.gray300, width: 24),
                         Text(
                           widget.agents[index].position,
                           style: context.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
-                  const Gap(4),
                   Row(
                     children: ["facebook", "twitter", "instagram", "linkedin"]
                         .map(
@@ -170,7 +151,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection>
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "I would Like to  Enquire About",
+                      "I would Like to Enquire About",
                       style: context.titleSmall.copyWith(
                         fontWeight: FontWeight.w600,
                       ),

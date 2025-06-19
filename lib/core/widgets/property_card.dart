@@ -8,11 +8,11 @@ import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/cached_image.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
 import 'package:viewing_nz/core/widgets/property_tag.dart';
-import 'package:viewing_nz/features/home/widgets/listed_and_ref_id.dart';
-import 'package:viewing_nz/features/home/widgets/price_and_address.dart';
+import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
+import 'package:viewing_nz/features/viewings/widgets/price_and_address.dart';
 
-class ViewingCard extends StatelessWidget {
-  const ViewingCard({super.key});
+class PropertyCard extends StatelessWidget {
+  const PropertyCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +59,14 @@ class ViewingCard extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
+                    flex: 3,
                     child: ListedAndRefId.withoutTag(
                       date: "12 Mar",
                       refId: 2345,
                     ),
                   ),
                   Expanded(
+                    flex: 4,
                     child: IntrinsicHeight(
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,23 +97,29 @@ class ViewingCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Row(
-                children: [
-                  AmenityDisplay.withQty(icon: SolarIconsOutline.bed, qty: 4),
-                  AmenityDisplay.withQty(icon: SolarIconsOutline.bath, qty: 4),
-                  AmenityDisplay.withQty(
-                    icon: SolarIconsOutline.garage,
-                    qty: 2,
-                  ),
-                  AmenityDisplay.withLabel(
-                    icon: SolarIconsOutline.rulerAngular,
-                    label: "182m",
-                  ),
-                  AmenityDisplay.withLabel(
-                    icon: SolarIconsOutline.cropMinimalistic,
-                    label: "552m",
-                  ),
-                ],
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  children: [
+                    AmenityDisplay.withQty(icon: SolarIconsOutline.bed, qty: 4),
+                    AmenityDisplay.withQty(
+                      icon: SolarIconsOutline.bath,
+                      qty: 4,
+                    ),
+                    AmenityDisplay.withQty(
+                      icon: SolarIconsOutline.garage,
+                      qty: 2,
+                    ),
+                    AmenityDisplay.withLabel(
+                      icon: SolarIconsOutline.rulerAngular,
+                      label: "182m",
+                    ),
+                    AmenityDisplay.withLabel(
+                      icon: SolarIconsOutline.cropMinimalistic,
+                      label: "552m",
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

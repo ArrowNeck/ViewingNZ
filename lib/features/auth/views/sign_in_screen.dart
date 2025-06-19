@@ -89,26 +89,29 @@ class _SignInScreenState extends State<SignInScreen> {
                             text: 'Log In',
                           ),
                           const Gap(32),
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              text: "Don't have an account? ",
-                              style: context.titleMedium.copyWith(
-                                color: AppColors.gunmetal600,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "Create an account",
-                                  style: context.titleMedium.copyWith(
-                                    color: AppColors.primary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      context.go(Routes.register);
-                                    },
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: "Don't have an account? ",
+                                style: context.titleMedium.copyWith(
+                                  color: AppColors.gunmetal600,
                                 ),
-                              ],
+                                children: [
+                                  TextSpan(
+                                    text: "Create an account",
+                                    style: context.titleMedium.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        context.go(Routes.register);
+                                      },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           SocialDivider(),

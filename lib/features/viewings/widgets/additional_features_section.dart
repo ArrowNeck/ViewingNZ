@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
-import 'package:viewing_nz/features/home/widgets/section_label.dart';
+import 'package:viewing_nz/features/viewings/widgets/section_label.dart';
 
 class AdditionalFeaturesSection extends StatelessWidget {
   const AdditionalFeaturesSection({super.key});
