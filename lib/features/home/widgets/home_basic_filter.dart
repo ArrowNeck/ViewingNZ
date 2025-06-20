@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
+import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
@@ -65,7 +67,7 @@ class _HomeBasicFilterState extends State<HomeBasicFilter> {
                 IconButtons.icon(
                   icon: SolarIconsOutline.filter,
                   size: 12,
-                  onPressed: () {},
+                  onPressed: () => context.push(Routes.advancedFilter),
                 ),
               ],
             ),

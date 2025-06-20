@@ -9,6 +9,10 @@ class SectionLabel extends StatelessWidget {
     this.bottomPadding,
   });
 
+  const SectionLabel.filter({super.key, required this.title})
+    : bottomPadding = 16,
+      topPadding = 0;
+
   final String title;
   final double? topPadding;
   final double? bottomPadding;
@@ -24,7 +28,7 @@ class SectionLabel extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           title,
-          style: context.headlineSmall,
+          style: context.titleLarge.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.left,
         ),
       ),

@@ -8,4 +8,5 @@ class Routes {
   static const viewingDetails = '/viewing-details';
   static const notifications = '/notifications';
   static const requestViewing = '/request-a-viewing';
+  static const advancedFilter = '/advanced-filter';
 }

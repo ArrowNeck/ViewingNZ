@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
-import 'package:viewing_nz/features/viewings/widgets/section_label.dart';
+import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class MapViewSection extends StatefulWidget {
   const MapViewSection({super.key});

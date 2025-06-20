@@ -80,5 +80,10 @@ final router = GoRouter(
         child: RequestViewingScreen(),
       ),
     ),
+    GoRoute(
+      path: Routes.advancedFilter,
+      pageBuilder: (context, state) =>
+          buildTransitionPage(key: state.pageKey, child: HomeAdvancedFilter()),
+    ),
   ],
 );

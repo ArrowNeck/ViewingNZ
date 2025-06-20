@@ -10,7 +10,7 @@ import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/core/widgets/submit_button.dart';
 import 'package:viewing_nz/core/widgets/sliding_segmented_control.dart';
 import 'package:viewing_nz/features/viewings/models/agent_model.dart';
-import 'package:viewing_nz/features/viewings/widgets/section_label.dart';
+import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class ContactAgentSection extends StatefulWidget {
   const ContactAgentSection({super.key, required this.agents});

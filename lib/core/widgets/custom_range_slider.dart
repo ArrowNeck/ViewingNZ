@@ -26,6 +26,8 @@ class CustomRangeSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfRangeSliderTheme(
       data: SfRangeSliderThemeData(
+        activeTrackHeight: 8,
+        inactiveTrackHeight: 8,
         activeTrackColor: AppColors.gunmetal500,
         inactiveTrackColor: AppColors.gray400,
         thumbColor: AppColors.gunmetal500,

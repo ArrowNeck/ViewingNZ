@@ -5,7 +5,7 @@ import 'package:solar_icons/solar_icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/features/viewings/models/price_update.dart';
-import 'package:viewing_nz/features/viewings/widgets/section_label.dart';
+import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class PriceUpdatesSection extends StatelessWidget {
   const PriceUpdatesSection({super.key});

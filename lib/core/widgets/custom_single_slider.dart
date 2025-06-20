@@ -15,17 +15,19 @@ class CustomSingleSlider extends StatelessWidget {
     required this.formatValue,
   });
 
-  final double value;
-  final double min;
-  final double max;
+  final int value;
+  final int min;
+  final int max;
   final double stepSize;
-  final ValueChanged<double> onChanged;
-  final String Function(double, String) formatValue;
+  final ValueChanged<int> onChanged;
+  final String Function(int, String) formatValue;
 
   @override
   Widget build(BuildContext context) {
-    return SfRangeSliderTheme(
-      data: SfRangeSliderThemeData(
+    return SfSliderTheme(
+      data: SfSliderThemeData(
+        activeTrackHeight: 8,
+        inactiveTrackHeight: 8,
         activeTrackColor: AppColors.gunmetal500,
         inactiveTrackColor: AppColors.gray400,
         thumbColor: AppColors.gunmetal500,
@@ -46,9 +48,9 @@ class CustomSingleSlider extends StatelessWidget {
         enableTooltip: true,
         shouldAlwaysShowTooltip: true,
         tooltipShape: SfPaddleTooltipShape(),
-        onChanged: (value) => onChanged(double.parse(value)),
+        onChanged: (value) => onChanged(value.round()),
         tooltipTextFormatterCallback: (actualValue, formattedText) =>
-            formatValue(double.parse(actualValue.toString()), formattedText),
+            formatValue(actualValue.round(), formattedText),
       ),
     );
   }

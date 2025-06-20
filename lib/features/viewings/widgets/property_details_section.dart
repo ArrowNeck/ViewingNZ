@@ -6,7 +6,7 @@ import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
-import 'package:viewing_nz/features/viewings/widgets/section_label.dart';
+import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class PropertyDetailsSection extends StatefulWidget {
   const PropertyDetailsSection({super.key});

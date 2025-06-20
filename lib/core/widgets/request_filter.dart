@@ -3,12 +3,14 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:solar_icons/solar_icons.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:viewing_nz/core/extensions/formatting_extension.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/animated_drop_menu.dart';
 import 'package:viewing_nz/core/widgets/calendar_view.dart';
 import 'package:viewing_nz/core/widgets/custom_range_slider.dart';
+import 'package:viewing_nz/core/widgets/custom_wrapper_builder.dart';
 import 'package:viewing_nz/core/widgets/label_wrapper.dart';
 
 class RequestFilter extends StatefulWidget {
@@ -37,7 +39,7 @@ class _RequestFilterState extends State<RequestFilter>
   ValueNotifier<DateTime?> fromDate = ValueNotifier(null);
   ValueNotifier<DateTime?> toDate = ValueNotifier(null);
 
-  ValueNotifier<String> selectedType = ValueNotifier("Select property type");
+  ValueNotifier<String?> selectedType = ValueNotifier(null);
   ValueNotifier<String?> selectedTimeOfDay = ValueNotifier(null);
 
   final ValueNotifier<SfRangeValues> _currentRange = ValueNotifier(
@@ -111,22 +113,6 @@ class _RequestFilterState extends State<RequestFilter>
     super.dispose();
   }
 
-  String _formatTime(double value) {
-    final time = TimeOfDay(
-      hour: value.toInt(),
-      minute: ((value % 1) * 60).round(),
-    );
-    final now = DateTime.now();
-    final dateTime = DateTime(
-      now.year,
-      now.month,
-      now.day,
-      time.hour,
-      time.minute,
-    );
-    return DateFormat.jm().format(dateTime);
-  }
-
   void _showCustomDatePicker() async {
     await _popupAnimationController.reverse();
     _showDatePicker.value = true;
@@ -144,7 +130,7 @@ class _RequestFilterState extends State<RequestFilter>
     toDate.value = null;
     selectedTimeOfDay.value = null;
     selectedType.value = "Select property type";
-    _currentRange.value = SfRangeValues(8.0, 17.0);
+    _currentRange.value = SfRangeValues(8.0, 18.0);
   }
 
   void _closePopup() async {
@@ -288,45 +274,15 @@ class _RequestFilterState extends State<RequestFilter>
                     _currentRange.value = values;
                   },
                   formatValue: (actualValue, formattedText) {
-                    return _formatTime(actualValue);
+                    return actualValue.toFormattedTime();
                   },
                 );
               },
             ),
           ),
         ),
-        const Gap(8),
-        ValueListenableBuilder(
-          valueListenable: selectedTimeOfDay,
-          builder: (context, value, child) {
-            return Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: List.generate(timeOfDay.length, (index) {
-                final time = timeOfDay[index];
-                return ActionChip(
-                  padding: EdgeInsets.all(6),
-                  backgroundColor: time == value
-                      ? AppColors.gunmetal600
-                      : Colors.transparent,
-                  side: BorderSide(color: AppColors.gunmetal600),
-                  shape: StadiumBorder(),
-                  label: Text(
-                    time,
-                    style: context.bodyMedium.copyWith(
-                      color: time == value
-                          ? AppColors.white
-                          : AppColors.gunmetal600,
-                    ),
-                  ),
-                  onPressed: () {
-                    selectedTimeOfDay.value = time;
-                  },
-                );
-              }),
-            );
-          },
-        ),
+
+        CustomWrapperBuilder(notifier: selectedTimeOfDay, items: timeOfDay),
         const Gap(16),
         LabelWrapper(
           label: "Listing Type",
@@ -335,7 +291,7 @@ class _RequestFilterState extends State<RequestFilter>
             builder: (context, type, child) {
               return AnimatedDropMenu(
                 items: listingTypes,
-                selected: selectedType.value,
+                selected: selectedType.value ?? "Select property type",
                 onChanged: (type) {
                   selectedType.value = type;
                 },
