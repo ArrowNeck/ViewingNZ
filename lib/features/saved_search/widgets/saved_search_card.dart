@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
@@ -37,7 +37,7 @@ class SavedSearchCard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onEditPressed,
-                icon: Icon(SolarIconsOutline.pen2),
+                icon: SvgIcon(SolarIcons.pen2),
                 visualDensity: VisualDensity.compact,
               ),
               const Gap(8),
@@ -55,7 +55,7 @@ class SavedSearchCard extends StatelessWidget {
                     ),
                   );
                 },
-                icon: Icon(SolarIconsOutline.trashBinTrash),
+                icon: SvgIcon(SolarIcons.trashBinTrash),
                 visualDensity: VisualDensity.compact,
               ),
             ],

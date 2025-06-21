@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
 class AmenityDisplay extends StatelessWidget {
-  final IconData icon;
+  final SvgIconData icon;
   final String? label;
   final int? qty;
 
@@ -37,7 +38,7 @@ class AmenityDisplay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, color: AppColors.gray800, size: 24),
+        SvgIcon(icon, color: AppColors.gray800, size: 24),
         const SizedBox(width: 4),
         if (qty != null) Text('$qty', style: style),
         if (label != null) ...[

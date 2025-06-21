@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:viewing_nz/core/extensions/formatting_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
@@ -24,11 +24,15 @@ class HomeAdvancedFilter extends StatefulWidget {
 }
 
 class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
-  final List<String> segments = ["Buy", "Rent", "Flatmate"];
-  final List<String> timeOfDay = ["Morning", "Afternoon", "Evening"];
-  final List<String> whenList = ["Today", "Next Few Days", "Weekend"];
-  final List<String> propertyCategories = ["Residential", "Rural", "New Built"];
-  final List<String> propertyTypes = [
+  final List<String> _segments = ["Buy", "Rent", "Flatmate"];
+  final List<String> _timeOfDay = ["Morning", "Afternoon", "Evening"];
+  final List<String> _whenList = ["Today", "Next Few Days", "Weekend"];
+  final List<String> _propertyCategories = [
+    "Residential",
+    "Rural",
+    "New Built",
+  ];
+  final List<String> _propertyTypes = [
     "House",
     "Apartment",
     "Unit",
@@ -42,7 +46,7 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
     "Car Park",
     "Boat Shed",
   ];
-  final List<String> outdoorFeatures = [
+  final List<String> _outdoorFeatures = [
     'Garden/Yard',
     'Swimming Pool',
     'Garage',
@@ -54,7 +58,7 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
     'Tennis Court',
     'Smart Home Features',
   ];
-  final List<String> indoorFeatures = [
+  final List<String> _indoorFeatures = [
     'Ensuite',
     'Study',
     'Bathtub',
@@ -64,19 +68,19 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
     'Broadband Internet',
     'Dishwasher',
   ];
-  final List<String> climateControlFeatures = [
+  final List<String> _climateControlFeatures = [
     'Air Conditioning',
     'Heating',
     'Solar Panels',
     'Fireplace',
   ];
-  final List<String> accessibilityFeatures = [
+  final List<String> _accessibilityFeatures = [
     'Single Storey',
     'Elevator',
     'Wide Doorways',
     'Wheelchair Ramp',
   ];
-
+  final ValueNotifier<bool> _searchBy = ValueNotifier(false);
   final ValueNotifier<SfRangeValues> _timeRange = ValueNotifier(
     SfRangeValues(6.0, 18.0),
   );
@@ -90,23 +94,37 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
     SfRangeValues(2, 4),
   );
   final ValueNotifier<int> _schoolZone = ValueNotifier(8);
-  final ValueNotifier<String?> selectedTimeOfDay = ValueNotifier(null);
-  final ValueNotifier<String?> selectedWhen = ValueNotifier(null);
-  final ValueNotifier<String?> selectedPropertyCategory = ValueNotifier(null);
-  final ValueNotifier<String?> selectedPropertyType = ValueNotifier(null);
-  final ValueNotifier<String?> selectedOutdoorFeature = ValueNotifier(null);
-  final ValueNotifier<String?> selectedIndoorFeature = ValueNotifier(null);
-  final ValueNotifier<String?> selectedClimateControlFeature = ValueNotifier(
-    null,
+  final ValueNotifier<List<String?>> _selectedTimeOfDay = ValueNotifier([]);
+  final ValueNotifier<List<String?>> _selectedWhen = ValueNotifier([]);
+  final ValueNotifier<List<String?>> _selectedPropertyCategory = ValueNotifier(
+    [],
   );
-  final ValueNotifier<String?> selectedAccessibilityFeature = ValueNotifier(
-    null,
+  final ValueNotifier<List<String?>> _selectedPropertyType = ValueNotifier([]);
+  final ValueNotifier<List<String?>> _selectedOutdoorFeature = ValueNotifier(
+    [],
   );
+  final ValueNotifier<List<String?>> _selectedIndoorFeature = ValueNotifier([]);
+  final ValueNotifier<List<String?>> _selectedClimateControlFeature =
+      ValueNotifier([]);
+  final ValueNotifier<List<String?>> _selectedAccessibilityFeature =
+      ValueNotifier([]);
 
   @override
   void dispose() {
+    _searchBy.dispose();
     _timeRange.dispose();
-    selectedTimeOfDay.dispose();
+    _priceRange.dispose();
+    _bedrooms.dispose();
+    _bathrooms.dispose();
+    _schoolZone.dispose();
+    _selectedTimeOfDay.dispose();
+    _selectedWhen.dispose();
+    _selectedPropertyCategory.dispose();
+    _selectedPropertyType.dispose();
+    _selectedOutdoorFeature.dispose();
+    _selectedIndoorFeature.dispose();
+    _selectedClimateControlFeature.dispose();
+    _selectedAccessibilityFeature.dispose();
     super.dispose();
   }
 
@@ -124,7 +142,7 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
         actions: [
           IconButton(
             onPressed: () => context.pop(),
-            icon: Icon(SolarIconsOutline.closeCircle),
+            icon: SvgIcon(SolarIcons.closeCircle),
           ),
         ],
       ),
@@ -134,7 +152,7 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SlidingSegmentedControl(segments: segments),
+              SlidingSegmentedControl(segments: _segments),
               const Gap(32),
 
               SectionLabel.filter(title: "Location"),
@@ -142,7 +160,19 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
               const Gap(12),
               Row(
                 children: [
-                  Checkbox(value: true, onChanged: (value) {}),
+                  GestureDetector(
+                    onTap: () => _searchBy.value = !_searchBy.value,
+                    child: ValueListenableBuilder(
+                      valueListenable: _searchBy,
+                      builder: (context, value, child) {
+                        return SvgIcon(
+                          value ? SolarIcons.checkSquare : SolarIcons.stop,
+                          color: value ? AppColors.primary : null,
+                        );
+                      },
+                    ),
+                  ),
+                  const Gap(8),
                   RichText(
                     text: TextSpan(
                       text: "Search by ",
@@ -162,14 +192,14 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
 
               FilterDivider(),
               SectionLabel.filter(title: "When"),
-              CustomWrapperBuilder(notifier: selectedWhen, items: whenList),
+              CustomWrapperBuilder(notifier: _selectedWhen, items: _whenList),
               ActionChip(
                 padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
                 backgroundColor: Colors.transparent,
                 side: BorderSide(color: AppColors.gunmetal600),
                 shape: StadiumBorder(),
-                avatar: Icon(
-                  SolarIconsOutline.calendar,
+                avatar: SvgIcon(
+                  SolarIcons.calendar,
                   color: AppColors.gunmetal500,
                   size: 16,
                 ),
@@ -200,22 +230,22 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
                 },
               ),
               CustomWrapperBuilder(
-                notifier: selectedTimeOfDay,
-                items: timeOfDay,
+                notifier: _selectedTimeOfDay,
+                items: _timeOfDay,
               ),
 
               FilterDivider(),
               SectionLabel.filter(title: "Property Category"),
               CustomWrapperBuilder(
-                notifier: selectedPropertyCategory,
-                items: propertyCategories,
+                notifier: _selectedPropertyCategory,
+                items: _propertyCategories,
               ),
 
               FilterDivider(),
               SectionLabel.filter(title: "Property Types"),
               CustomWrapperBuilder(
-                notifier: selectedPropertyType,
-                items: propertyTypes,
+                notifier: _selectedPropertyType,
+                items: _propertyTypes,
               ),
 
               FilterDivider(),
@@ -317,49 +347,58 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
               FilterDivider(),
               SectionLabel.filter(title: "Outdoor Features"),
               CustomWrapperBuilder(
-                notifier: selectedOutdoorFeature,
-                items: outdoorFeatures,
+                notifier: _selectedOutdoorFeature,
+                items: _outdoorFeatures,
               ),
 
               FilterDivider(),
               SectionLabel.filter(title: "Indoor Features"),
               CustomWrapperBuilder(
-                notifier: selectedIndoorFeature,
-                items: indoorFeatures,
+                notifier: _selectedIndoorFeature,
+                items: _indoorFeatures,
               ),
 
               FilterDivider(),
               SectionLabel.filter(title: "Climate Control & Energy"),
               CustomWrapperBuilder(
-                notifier: selectedClimateControlFeature,
-                items: climateControlFeatures,
+                notifier: _selectedClimateControlFeature,
+                items: _climateControlFeatures,
               ),
 
               FilterDivider(),
               SectionLabel.filter(title: "Accessibility Features"),
               CustomWrapperBuilder(
-                notifier: selectedAccessibilityFeature,
-                items: accessibilityFeatures,
+                notifier: _selectedAccessibilityFeature,
+                items: _accessibilityFeatures,
               ),
-
               const Gap(16),
-              Row(
-                children: [
-                  IconButtons.icon(
-                    size: 12,
-                    icon: SolarIconsOutline.starFallMinimalistic,
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButtons.icon(
+                  size: 12,
+                  icon: SolarIcons.stars2,
+                  // borderColor: AppColors.white,
+                  // iconColor: AppColors.white,
+                  onPressed: () {},
+                ),
+                const Gap(8),
+                Expanded(
+                  child: SubmitButton(
+                    text: "Search 2,000+ Properties",
                     onPressed: () {},
                   ),
-                  const Gap(8),
-                  Expanded(
-                    child: SubmitButton(
-                      text: "Search 2,000+ Properties",
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

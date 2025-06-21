@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:readmore/readmore.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
@@ -69,7 +69,7 @@ Viverra ac ornare nunc in. Cursus tellus aliquam non lobortis quis faucibus enim
           },
           child: Row(
             children: [
-              Icon(SolarIconsOutline.documentAdd),
+              SvgIcon(SolarIcons.documentAdd),
               const Gap(8),
               Text(
                 "Your Notes",

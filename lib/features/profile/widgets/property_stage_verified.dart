@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
@@ -28,8 +28,8 @@ class PropertyStageVerified extends StatelessWidget {
                 CircleAvatar(
                   radius: 20,
                   backgroundColor: AppColors.success,
-                  child: Icon(
-                    SolarIconsOutline.checkCircle,
+                  child: SvgIcon(
+                    SolarIcons.checkCircle,
                     color: AppColors.white,
                   ),
                 ),
@@ -54,7 +54,7 @@ class PropertyStageVerified extends StatelessWidget {
             child: IconButton(
               onPressed: onEditPressed,
               visualDensity: VisualDensity.compact,
-              icon: Icon(SolarIconsOutline.pen2),
+              icon: SvgIcon(SolarIcons.pen2),
             ),
           ),
         ],

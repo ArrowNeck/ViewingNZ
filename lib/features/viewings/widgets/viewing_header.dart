@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
@@ -29,8 +29,8 @@ class ViewingHeader extends StatelessWidget {
                   PopupMenuItem<String>(
                     child: ListTile(
                       visualDensity: VisualDensity.compact,
-                      leading: Icon(
-                        SolarIconsOutline.gallery,
+                      leading: SvgIcon(
+                        SolarIcons.gallery,
                         color: AppColors.white,
                       ),
                       title: Text(
@@ -50,10 +50,7 @@ class ViewingHeader extends StatelessWidget {
                   PopupMenuItem<String>(
                     child: ListTile(
                       visualDensity: VisualDensity.compact,
-                      leading: Icon(
-                        SolarIconsOutline.user,
-                        color: AppColors.white,
-                      ),
+                      leading: SvgIcon(SolarIcons.user, color: AppColors.white),
                       title: Text(
                         "Past Viewings",
                         style: context.bodyLarge.copyWith(
@@ -75,8 +72,8 @@ class ViewingHeader extends StatelessWidget {
                     CircleAvatar(
                       radius: 12,
                       backgroundColor: AppColors.primary,
-                      child: Icon(
-                        SolarIconsOutline.altArrowDown,
+                      child: SvgIcon(
+                        SolarIcons.altArrowDown,
                         color: AppColors.white,
                         size: 20,
                       ),
@@ -91,7 +88,7 @@ class ViewingHeader extends StatelessWidget {
               child: GestureDetector(
                 onTap: () =>
                     CoreUtils.heroDialog(RequestFilter(onFindResults: () {})),
-                child: Icon(SolarIconsOutline.filter, size: 24),
+                child: SvgIcon(SolarIcons.filter, size: 24),
               ),
             ),
           ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
@@ -19,12 +19,12 @@ class AdditionalFeaturesSection extends StatelessWidget {
           runAlignment: WrapAlignment.spaceBetween,
           children: [
             AmenityDisplay.withQtyLabel(
-              icon: SolarIconsOutline.swimming,
+              icon: SolarIcons.swimming,
               qty: 1,
               label: "Swimming Pool",
             ),
             AmenityDisplay.withLabel(
-              icon: SolarIconsOutline.wifiRouterMinimalistic,
+              icon: SolarIcons.wifiRouterMinimalistic,
               label: "Wi-Fi Available",
             ),
           ],

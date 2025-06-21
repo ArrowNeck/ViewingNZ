@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
@@ -28,10 +28,7 @@ class _MapViewSectionState extends State<MapViewSection> {
                 topPadding: 0,
                 bottomPadding: 0,
               ),
-              IconButtons.icon(
-                onPressed: () {},
-                icon: SolarIconsOutline.routing2,
-              ),
+              IconButtons.icon(onPressed: () {}, icon: SolarIcons.routing2),
             ],
           ),
         ),

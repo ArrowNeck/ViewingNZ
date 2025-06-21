@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
@@ -22,7 +22,7 @@ class EmailVerified extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: AppColors.success,
-            child: Icon(SolarIconsOutline.checkCircle, color: AppColors.white),
+            child: SvgIcon(SolarIcons.checkCircle, color: AppColors.white),
           ),
           const Gap(16),
           Text(

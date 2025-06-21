@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -82,10 +83,8 @@ class _AnimatedDropMenuState extends State<AnimatedDropMenu>
                 ValueListenableBuilder(
                   valueListenable: isDropdownOpen,
                   builder: (context, value, child) {
-                    return Icon(
-                      value
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
+                    return SvgIcon(
+                      value ? SolarIcons.altArrowUp : SolarIcons.altArrowDown,
                     );
                   },
                 ),

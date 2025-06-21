@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
@@ -11,8 +11,21 @@ import 'package:viewing_nz/core/widgets/property_tag.dart';
 import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
 import 'package:viewing_nz/features/viewings/widgets/price_and_address.dart';
 
-class PropertyCard extends StatelessWidget {
+class PropertyCard extends StatefulWidget {
   const PropertyCard({super.key});
+
+  @override
+  State<PropertyCard> createState() => _PropertyCardState();
+}
+
+class _PropertyCardState extends State<PropertyCard> {
+  final ValueNotifier<bool> _isFav = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _isFav.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +56,22 @@ class PropertyCard extends StatelessWidget {
                 Positioned(
                   top: 12,
                   right: 12,
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: AppColors.pureBlack.withAlpha(50),
-                    child: Icon(
-                      SolarIconsOutline.starFallMinimalistic2,
-                      color: AppColors.white,
-                      size: 30,
+                  child: GestureDetector(
+                    onTap: () => _isFav.value = !_isFav.value,
+                    child: ValueListenableBuilder(
+                      valueListenable: _isFav,
+                      builder: (context, fav, child) {
+                        return CircleAvatar(
+                          radius: 20,
+                          backgroundColor: fav
+                              ? AppColors.primary
+                              : AppColors.pureBlack.withAlpha(50),
+                          child: SvgIcon(
+                            SolarIcons.star,
+                            color: AppColors.white,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -101,21 +123,15 @@ class PropertyCard extends StatelessWidget {
                 fit: BoxFit.scaleDown,
                 child: Row(
                   children: [
-                    AmenityDisplay.withQty(icon: SolarIconsOutline.bed, qty: 4),
-                    AmenityDisplay.withQty(
-                      icon: SolarIconsOutline.bath,
-                      qty: 4,
-                    ),
-                    AmenityDisplay.withQty(
-                      icon: SolarIconsOutline.garage,
-                      qty: 2,
-                    ),
+                    AmenityDisplay.withQty(icon: SolarIcons.bed, qty: 4),
+                    AmenityDisplay.withQty(icon: SolarIcons.bath, qty: 4),
+                    AmenityDisplay.withQty(icon: SolarIcons.car, qty: 2),
                     AmenityDisplay.withLabel(
-                      icon: SolarIconsOutline.rulerAngular,
+                      icon: SolarIcons.rulerAngular,
                       label: "182m",
                     ),
                     AmenityDisplay.withLabel(
-                      icon: SolarIconsOutline.cropMinimalistic,
+                      icon: SolarIcons.cropMinimalistic,
                       label: "552m",
                     ),
                   ],

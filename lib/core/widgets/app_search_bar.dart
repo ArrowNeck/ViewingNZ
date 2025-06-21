@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
 
 class AppSearchBar extends StatelessWidget {
@@ -11,7 +11,7 @@ class AppSearchBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: InputField(
         hintText: "Search here",
-        prefixIcon: SolarIconsOutline.magnifier,
+        prefixIcon: SolarIcons.magnifer,
         textInputAction: TextInputAction.search,
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
@@ -19,11 +19,11 @@ class FeaturesSection extends StatelessWidget {
           runAlignment: WrapAlignment.spaceBetween,
           children: [
             AmenityDisplay.withLabel(
-              icon: SolarIconsOutline.armchair,
+              icon: SolarIcons.armchair,
               label: "Fully Furnished",
             ),
             AmenityDisplay.withLabel(
-              icon: SolarIconsOutline.washingMachine,
+              icon: SolarIcons.washingMachine,
               label: "White Ware",
             ),
           ],

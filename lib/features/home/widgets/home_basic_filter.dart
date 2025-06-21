@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -18,6 +18,14 @@ class HomeBasicFilter extends StatefulWidget {
 
 class _HomeBasicFilterState extends State<HomeBasicFilter> {
   final List<String> segments = ["Buy", "Rent", "Flatmate"];
+  final ValueNotifier<bool> _searchBy = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _searchBy.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,14 +66,14 @@ class _HomeBasicFilterState extends State<HomeBasicFilter> {
                     ),
                     child: InputField(
                       hintText: "Enter city, suburb, or address...",
-                      prefixIcon: SolarIconsOutline.magnifier,
+                      prefixIcon: SolarIcons.magnifer,
                       textInputAction: TextInputAction.search,
                     ),
                   ),
                 ),
                 const Gap(16),
                 IconButtons.icon(
-                  icon: SolarIconsOutline.filter,
+                  icon: SolarIcons.filter,
                   size: 12,
                   onPressed: () => context.push(Routes.advancedFilter),
                 ),
@@ -75,7 +83,19 @@ class _HomeBasicFilterState extends State<HomeBasicFilter> {
           const Gap(8),
           Row(
             children: [
-              Checkbox(value: true, onChanged: (value) {}),
+              GestureDetector(
+                onTap: () => _searchBy.value = !_searchBy.value,
+                child: ValueListenableBuilder(
+                  valueListenable: _searchBy,
+                  builder: (context, value, child) {
+                    return SvgIcon(
+                      value ? SolarIcons.checkSquare : SolarIcons.stop,
+                      color: value ? AppColors.primary : null,
+                    );
+                  },
+                ),
+              ),
+              const Gap(8),
               RichText(
                 text: TextSpan(
                   text: "Search by ",
@@ -100,7 +120,7 @@ class _HomeBasicFilterState extends State<HomeBasicFilter> {
                 "When",
                 style: context.bodyMedium.copyWith(fontWeight: FontWeight.w600),
               ),
-              Icon(SolarIconsOutline.altArrowDown),
+              SvgIcon(SolarIcons.altArrowDown),
             ],
           ),
           const Gap(16),
@@ -111,7 +131,7 @@ class _HomeBasicFilterState extends State<HomeBasicFilter> {
                 "Time",
                 style: context.bodyMedium.copyWith(fontWeight: FontWeight.w600),
               ),
-              Icon(SolarIconsOutline.altArrowDown),
+              SvgIcon(SolarIcons.altArrowDown),
             ],
           ),
         ],

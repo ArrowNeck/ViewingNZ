@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/navigation/navigation_utils.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/main_appbar.dart';
@@ -34,7 +35,7 @@ class NavigationScreen extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         items: NavigationUtils.icons.mapIndexed((index, item) {
           return BottomNavigationBarItem(
-            icon: _buildBarItem(index, item.$1),
+            icon: _buildBarItem(index, activeIndex.$1, item.$1),
             label: item.$2,
           );
         }).toList(),
@@ -54,13 +55,14 @@ class NavigationScreen extends StatelessWidget {
     );
   }
 
-  _buildBarItem(int index, IconData icon) {
+  _buildBarItem(int index, int currentIndex, SvgIconData icon) {
+    final color = index == currentIndex ? AppColors.primary : AppColors.gray700;
     if (index != 3) {
-      return Icon(icon);
+      return SvgIcon(icon, color: color);
     }
     return Stack(
       children: [
-        Icon(icon),
+        SvgIcon(icon, color: color),
         Positioned(right: 0, top: 0, child: Badge.count(count: 2)),
       ],
     );

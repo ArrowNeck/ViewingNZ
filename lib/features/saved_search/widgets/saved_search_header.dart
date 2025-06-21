@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 
 class SavedSearchHeader extends StatelessWidget {
@@ -21,7 +21,7 @@ class SavedSearchHeader extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0),
             child: GestureDetector(
               onTap: () {},
-              child: Icon(SolarIconsOutline.filter, size: 24),
+              child: SvgIcon(SolarIcons.filter, size: 24),
             ),
           ),
         ],

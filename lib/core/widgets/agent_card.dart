@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
@@ -38,14 +38,10 @@ class AgentCard extends StatelessWidget {
                 IgnorePointer(
                   child: RatingBar.builder(
                     initialRating: agent.rating,
-                    minRating: 0,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
                     itemSize: 18,
                     itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
                     itemBuilder: (context, _) =>
-                        Icon(Icons.star, color: AppColors.rating),
+                        SvgIcon(SolarIcons.starFill, color: AppColors.rating),
                     onRatingUpdate: (rating) {},
                   ),
                 ),
@@ -89,8 +85,8 @@ class AgentCard extends StatelessWidget {
                 style: context.bodyMedium.copyWith(color: AppColors.info500),
               ),
               const Gap(8),
-              Icon(
-                SolarIconsOutline.squareTopDown,
+              SvgIcon(
+                SolarIcons.squareTopDown,
                 color: AppColors.info500,
                 size: 15,
               ),
@@ -106,7 +102,7 @@ class AgentCard extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   label: Text("Call"),
-                  icon: Icon(SolarIconsOutline.phoneRounded, size: 24),
+                  icon: SvgIcon.white(SolarIcons.phoneRounded, size: 24),
                 ),
               ),
               const Gap(12),
@@ -114,7 +110,7 @@ class AgentCard extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   label: Text("Email"),
-                  icon: Icon(SolarIconsOutline.letter, size: 24),
+                  icon: SvgIcon.white(SolarIcons.letter, size: 24),
                 ),
               ),
             ],
@@ -123,7 +119,7 @@ class AgentCard extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {},
             label: Text("Chat"),
-            icon: Icon(SolarIconsOutline.chatRoundLine, size: 24),
+            icon: SvgIcon.white(SolarIcons.chatRoundLine, size: 24),
             style: ButtonStyle(
               minimumSize: WidgetStatePropertyAll(Size(double.maxFinite, 48)),
             ),

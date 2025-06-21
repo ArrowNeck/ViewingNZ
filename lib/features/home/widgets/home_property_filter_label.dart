@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
@@ -88,7 +88,7 @@ class _HomePropertyFilterLabelState extends State<HomePropertyFilterLabel> {
                             ),
                           ),
                           const Gap(4),
-                          const Icon(SolarIconsOutline.altArrowDown, size: 20),
+                          const SvgIcon(SolarIcons.altArrowDown, size: 20),
                         ],
                       ),
                       itemBuilder: (BuildContext context) {

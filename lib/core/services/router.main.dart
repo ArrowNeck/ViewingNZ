@@ -70,7 +70,7 @@ final router = GoRouter(
       path: Routes.viewingDetails,
       pageBuilder: (context, state) => buildTransitionPage(
         key: state.pageKey,
-        child: ViewingDetailsScreen(),
+        child: PropertyDetailsScreen(),
       ),
     ),
     GoRoute(

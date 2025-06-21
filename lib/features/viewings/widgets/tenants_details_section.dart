@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
@@ -22,11 +22,11 @@ class TenantsDetailsSection extends StatelessWidget {
           runAlignment: WrapAlignment.spaceBetween,
           children: [
             AmenityDisplay.withLabel(
-              icon: SolarIconsOutline.cat,
+              icon: SolarIcons.petsAllowed,
               label: "Pets Allowed",
             ),
             AmenityDisplay.withLabel(
-              icon: SolarIconsOutline.fire,
+              icon: SolarIcons.smokingOutline,
               label: "Smoking Allowed",
             ),
           ],

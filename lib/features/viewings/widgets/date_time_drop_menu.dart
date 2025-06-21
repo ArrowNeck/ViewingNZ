@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
@@ -186,10 +187,8 @@ class _DateTimeDropMenuState extends State<DateTimeDropMenu>
                     ),
             ),
             const Gap(8),
-            Icon(
-              isDropdownOpen
-                  ? Icons.keyboard_arrow_up
-                  : Icons.keyboard_arrow_down,
+            SvgIcon(
+              isDropdownOpen ? SolarIcons.altArrowUp : SolarIcons.altArrowDown,
               color: AppColors.black,
             ),
           ],

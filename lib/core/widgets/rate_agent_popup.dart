@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -108,7 +108,7 @@ class _ReportPropertyPopupState extends State<RateAgentPopup> {
             alignment: Alignment.topRight,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
-              child: Icon(SolarIconsOutline.closeCircle),
+              child: SvgIcon(SolarIcons.closeCircle),
             ),
           ),
           const Gap(2),
@@ -159,15 +159,11 @@ class _ReportPropertyPopupState extends State<RateAgentPopup> {
           LabelWrapper(
             label: "Rate Here",
             child: RatingBar.builder(
-              initialRating: 0,
-              minRating: 0,
-              direction: Axis.horizontal,
               allowHalfRating: true,
-              itemCount: 5,
-              itemSize: 20,
+              itemSize: 24,
               itemPadding: EdgeInsets.only(right: 8),
               itemBuilder: (context, _) =>
-                  Icon(SolarIconsOutline.star, color: AppColors.rating),
+                  SvgIcon(SolarIcons.starFill, color: AppColors.rating),
               onRatingUpdate: (rate) {
                 rating = rate;
               },

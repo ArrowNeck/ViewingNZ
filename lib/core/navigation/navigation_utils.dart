@@ -1,15 +1,15 @@
 import 'package:go_router/go_router.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 
 import 'package:viewing_nz/core/services/routes.dart';
 
 abstract class NavigationUtils {
   static final icons = [
-    (SolarIconsOutline.homeAngle, "Home"),
-    (SolarIconsOutline.chatRoundLine, "Chats"),
-    (SolarIconsOutline.notebook, "Viewings"),
-    (SolarIconsOutline.bell, "Notifications"),
-    (SolarIconsOutline.menuDots, "More"),
+    (SolarIcons.homeAngle, "Home"),
+    (SolarIcons.chatRoundLine, "Chats"),
+    (SolarIcons.notebook, "Viewings"),
+    (SolarIcons.bell, "Notifications"),
+    (SolarIcons.menuDots, "More"),
   ];
 
   static (int, String) activeIndex(GoRouterState state) {

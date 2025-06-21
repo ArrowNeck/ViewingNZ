@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 
 class CachedImage extends StatelessWidget {
   const CachedImage({super.key, required this.url, this.indicatorSize = 30});
@@ -23,7 +23,7 @@ class CachedImage extends StatelessWidget {
       //   child: CircularProgressIndicator(value: downloadProgress.progress),
       // ),
       errorWidget: (context, url, error) =>
-          Center(child: Icon(SolarIconsOutline.infoCircle)),
+          Center(child: SvgIcon(SolarIcons.infoCircle)),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
@@ -12,27 +12,33 @@ import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
 import 'package:viewing_nz/features/viewings/widgets/price_and_address.dart';
 import 'package:viewing_nz/features/viewings/widgets/viewing_poster.dart';
 
-class ViewingDetailsHeader extends StatelessWidget {
+class ViewingDetailsHeader extends StatefulWidget {
   const ViewingDetailsHeader({super.key});
+
+  @override
+  State<ViewingDetailsHeader> createState() => _ViewingDetailsHeaderState();
+}
+
+class _ViewingDetailsHeaderState extends State<ViewingDetailsHeader> {
+  final ValueNotifier<bool> _isFav = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _isFav.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ViewingPoster(
-          // url:
-          //     "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=400",
-        ),
+        ViewingPoster(),
         const Gap(12),
         Row(
           children: [
             ElevatedButton.icon(
               onPressed: () {},
-              icon: Icon(
-                SolarIconsOutline.gallery,
-                color: AppColors.gray700,
-                size: 24,
-              ),
+              icon: SvgIcon(SolarIcons.gallery, color: AppColors.gray700),
               label: Text(
                 "10+",
                 style: context.bodyLarge.copyWith(color: AppColors.gray700),
@@ -48,7 +54,7 @@ class ViewingDetailsHeader extends StatelessWidget {
             CircleAvatar(
               radius: 24,
               backgroundColor: AppColors.gray100,
-              child: Icon(SolarIconsOutline.play, color: AppColors.gray700),
+              child: SvgIcon(SolarIcons.play, color: AppColors.gray700),
             ),
           ],
         ),
@@ -64,20 +70,17 @@ class ViewingDetailsHeader extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Row(
             children: [
-              AmenityDisplay.withLabel(
-                icon: SolarIconsOutline.home1,
-                label: "House",
-              ),
-              AmenityDisplay.withQty(icon: SolarIconsOutline.bed, qty: 4),
+              AmenityDisplay.withLabel(icon: SolarIcons.home, label: "House"),
+              AmenityDisplay.withQty(icon: SolarIcons.sleeping, qty: 4),
 
-              AmenityDisplay.withQty(icon: SolarIconsOutline.bath, qty: 4),
-              AmenityDisplay.withQty(icon: SolarIconsOutline.garage, qty: 2),
+              AmenityDisplay.withQty(icon: SolarIcons.bath, qty: 4),
+              AmenityDisplay.withQty(icon: SolarIcons.car, qty: 2),
               AmenityDisplay.withLabel(
-                icon: SolarIconsOutline.rulerAngular,
+                icon: SolarIcons.rulerAngular,
                 label: "182m",
               ),
               AmenityDisplay.withLabel(
-                icon: SolarIconsOutline.cropMinimalistic,
+                icon: SolarIcons.cropMinimalistic,
                 label: "552m",
               ),
             ],
@@ -86,16 +89,25 @@ class ViewingDetailsHeader extends StatelessWidget {
         const Gap(24),
         Row(
           children: [
-            IconButtons.icon(onPressed: () {}, icon: SolarIconsOutline.star),
+            ValueListenableBuilder(
+              valueListenable: _isFav,
+              builder: (context, fav, child) {
+                return IconButtons.icon(
+                  onPressed: () => _isFav.value = !_isFav.value,
+                  icon: fav ? SolarIcons.starFill : SolarIcons.star,
+                  iconColor: fav ? AppColors.primary : null,
+                );
+              },
+            ),
             const Gap(16),
             IconButtons.icon(
               onPressed: () => CoreUtils.heroDialog(PropertySharePopup()),
-              icon: SolarIconsOutline.share,
+              icon: SolarIcons.share,
             ),
             const Gap(16),
             IconButtons.label(
               onPressed: () => CoreUtils.heroDialog(ReportPropertyPopup()),
-              icon: SolarIconsOutline.documentAdd,
+              icon: SolarIcons.documentAdd,
               label: "Report",
             ),
           ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
@@ -90,7 +90,7 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                                   child: _prefferedWidget(
                                     () {},
                                     selectedDate ?? "Select date",
-                                    SolarIconsOutline.calendar,
+                                    SolarIcons.calendar,
                                   ),
                                 ),
 
@@ -100,7 +100,7 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                                   child: _prefferedWidget(
                                     () {},
                                     selectedTime ?? "Select time",
-                                    SolarIconsOutline.clockCircle,
+                                    SolarIcons.clockCircle,
                                   ),
                                 ),
                               ],
@@ -141,7 +141,7 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
     );
   }
 
-  _prefferedWidget(VoidCallback onTap, String value, IconData icon) {
+  _prefferedWidget(VoidCallback onTap, String value, SvgIconData icon) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -161,7 +161,7 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
               ),
             ),
             const Gap(8),
-            Icon(icon),
+            SvgIcon(icon),
           ],
         ),
       ),

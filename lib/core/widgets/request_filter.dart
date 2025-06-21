@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:viewing_nz/core/extensions/formatting_extension.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
@@ -40,7 +40,7 @@ class _RequestFilterState extends State<RequestFilter>
   ValueNotifier<DateTime?> toDate = ValueNotifier(null);
 
   ValueNotifier<String?> selectedType = ValueNotifier(null);
-  ValueNotifier<String?> selectedTimeOfDay = ValueNotifier(null);
+  ValueNotifier<List<String?>> selectedTimeOfDay = ValueNotifier([]);
 
   final ValueNotifier<SfRangeValues> _currentRange = ValueNotifier(
     SfRangeValues(6.0, 18.0),
@@ -128,7 +128,7 @@ class _RequestFilterState extends State<RequestFilter>
   void _resetAll() {
     fromDate.value = null;
     toDate.value = null;
-    selectedTimeOfDay.value = null;
+    selectedTimeOfDay.value = [];
     selectedType.value = "Select property type";
     _currentRange.value = SfRangeValues(8.0, 18.0);
   }
@@ -240,7 +240,7 @@ class _RequestFilterState extends State<RequestFilter>
           alignment: Alignment.topRight,
           child: GestureDetector(
             onTap: _closePopup,
-            child: Icon(SolarIconsOutline.closeCircle),
+            child: SvgIcon(SolarIcons.closeCircle),
           ),
         ),
         const Gap(2),
@@ -351,7 +351,7 @@ class _RequestFilterState extends State<RequestFilter>
                     );
                   },
                 ),
-                Icon(SolarIconsOutline.calendar, size: 20),
+                SvgIcon(SolarIcons.calendar, size: 20),
               ],
             ),
           ),

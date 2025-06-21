@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:toastification/toastification.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
@@ -112,7 +113,7 @@ abstract class CoreUtils {
         buttonBuilder: (context, onClose) {
           return GestureDetector(
             onTap: onClose,
-            child: Icon(Icons.cancel_outlined, color: AppColors.white),
+            child: SvgIcon(SolarIcons.closeCircle, color: AppColors.white),
           );
         },
       ),

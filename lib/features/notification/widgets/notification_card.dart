@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
@@ -23,10 +23,7 @@ class NotificationCard extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: AppColors.gunmetal600,
                     radius: 20,
-                    child: Icon(
-                      SolarIconsOutline.notebook,
-                      color: AppColors.white,
-                    ),
+                    child: SvgIcon(SolarIcons.notebook, color: AppColors.white),
                   ),
                 ),
 
@@ -54,7 +51,7 @@ class NotificationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     CircleAvatar(backgroundColor: AppColors.badge, radius: 5),
-                    Icon(SolarIconsOutline.menuDots),
+                    SvgIcon(SolarIcons.menuDots),
                   ],
                 ),
               ],

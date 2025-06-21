@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -103,7 +103,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection> {
                         child: ElevatedButton.icon(
                           onPressed: () {},
                           label: Text("Call"),
-                          icon: Icon(SolarIconsOutline.phoneRounded),
+                          icon: SvgIcon.white(SolarIcons.phoneRounded),
                         ),
                       ),
                       const Gap(12),
@@ -111,7 +111,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection> {
                         child: ElevatedButton.icon(
                           onPressed: () {},
                           label: Text("Email"),
-                          icon: Icon(SolarIconsOutline.letter),
+                          icon: SvgIcon.white(SolarIcons.letter),
                         ),
                       ),
                       const Gap(12),
@@ -119,7 +119,7 @@ class _ContactAgentSectionState extends State<ContactAgentSection> {
                         child: ElevatedButton.icon(
                           onPressed: () {},
                           label: Text("Chat"),
-                          icon: Icon(SolarIconsOutline.chatRoundLine),
+                          icon: SvgIcon.white(SolarIcons.chatRoundLine),
                         ),
                       ),
                     ],
@@ -170,10 +170,10 @@ class _ContactAgentSectionState extends State<ContactAgentSection> {
                           final isSelected = value == option;
                           return ListTile(
                             onTap: () => selectedEnquiry.value = option,
-                            leading: Icon(
+                            leading: SvgIcon(
                               isSelected
-                                  ? SolarIconsOutline.checkSquare
-                                  : SolarIconsOutline.closeSquare,
+                                  ? SolarIcons.checkSquare
+                                  : SolarIcons.stop,
                               color: isSelected
                                   ? AppColors.primary
                                   : AppColors.black,

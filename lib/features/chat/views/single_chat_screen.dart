@@ -5,6 +5,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 
 class SingleChatScreen extends StatefulWidget {
   const SingleChatScreen({super.key});
@@ -149,7 +150,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
             ),
             const SizedBox(height: 20),
             ListTile(
-              leading: const Icon(Icons.copy),
+              leading: const SvgIcon(SolarIcons.copy),
               title: const Text('Copy'),
               onTap: () {
                 Navigator.pop(context);
@@ -158,7 +159,10 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
             ),
             if (message.senderId == _currentUserId)
               ListTile(
-                leading: const Icon(Icons.delete, color: Colors.red),
+                leading: const SvgIcon(
+                  SolarIcons.trashBinMinimalistic2,
+                  color: Colors.red,
+                ),
                 title: const Text(
                   'Delete',
                   style: TextStyle(color: Colors.red),
@@ -169,7 +173,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                 },
               ),
             ListTile(
-              leading: const Icon(Icons.reply),
+              leading: const SvgIcon(SolarIcons.reply),
               title: const Text('Reply'),
               onTap: () {
                 Navigator.pop(context);
@@ -211,19 +215,19 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildAttachmentOption(
-                  icon: Icons.photo,
+                  icon: SolarIcons.cameraAdd,
                   label: 'Photo',
                   color: Colors.blue,
                   onTap: _handleImageSelection,
                 ),
                 _buildAttachmentOption(
-                  icon: Icons.insert_drive_file,
+                  icon: SolarIcons.cloudPlus,
                   label: 'Document',
                   color: Colors.orange,
                   onTap: _handleFileSelection,
                 ),
                 _buildAttachmentOption(
-                  icon: Icons.location_on,
+                  icon: SolarIcons.mapPoint,
                   label: 'Location',
                   color: Colors.green,
                   onTap: _handleLocationShare,
@@ -238,7 +242,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
   }
 
   Widget _buildAttachmentOption({
-    required IconData icon,
+    required SvgIconData icon,
     required String label,
     required Color color,
     required VoidCallback onTap,
@@ -253,7 +257,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
         ),
         child: Column(
           children: [
-            Icon(icon, size: 28, color: color),
+            SvgIcon(icon, size: 28, color: color),
             const SizedBox(height: 8),
             Text(
               label,
@@ -296,12 +300,12 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildImageSourceOption(
-                  icon: Icons.camera_alt,
+                  icon: SolarIcons.camera,
                   label: 'Camera',
                   onTap: () => _pickImage(ImageSource.camera),
                 ),
                 _buildImageSourceOption(
-                  icon: Icons.photo_library,
+                  icon: SolarIcons.album,
                   label: 'Gallery',
                   onTap: () => _pickImage(ImageSource.gallery),
                 ),
@@ -315,7 +319,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
   }
 
   Widget _buildImageSourceOption({
-    required IconData icon,
+    required SvgIconData icon,
     required String label,
     required VoidCallback onTap,
   }) {
@@ -329,7 +333,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
         ),
         child: Column(
           children: [
-            Icon(icon, size: 32, color: Colors.blue),
+            SvgIcon(icon, size: 32, color: Colors.blue),
             const SizedBox(height: 8),
             Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
           ],
@@ -410,7 +414,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
         backgroundColor: Colors.white,
         elevation: 1,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const SvgIcon(SolarIcons.altArrowLeft, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
         title: Column(
@@ -432,13 +436,13 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.call, color: Colors.green),
+            icon: SvgIcon(SolarIcons.callChat, color: Colors.green),
             onPressed: () {
               // Implement call functionality
             },
           ),
           IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black),
+            icon: const SvgIcon(SolarIcons.menuDots, color: Colors.black),
             onPressed: () {
               _showMoreOptions();
             },
@@ -500,7 +504,11 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                 color: Colors.black,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.add, color: Colors.white, size: 20),
+              child: const SvgIcon(
+                SolarIcons.addCircle,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -543,7 +551,11 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                   textController.clear();
                 }
               },
-              icon: const Icon(Icons.send, color: Colors.white, size: 20),
+              icon: const SvgIcon(
+                SolarIcons.sendSquare,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
         ],
@@ -572,7 +584,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
             ),
             const SizedBox(height: 20),
             ListTile(
-              leading: const Icon(Icons.clear_all),
+              leading: const SvgIcon(SolarIcons.clipboardRemove),
               title: const Text('Clear Chat'),
               onTap: () {
                 Navigator.pop(context);
@@ -580,7 +592,10 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.block, color: Colors.red),
+              leading: const SvgIcon(
+                SolarIcons.userBlockRounded,
+                color: Colors.red,
+              ),
               title: const Text(
                 'Block Contact',
                 style: TextStyle(color: Colors.red),
@@ -591,7 +606,10 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.report, color: Colors.orange),
+              leading: const SvgIcon(
+                SolarIcons.notebook1,
+                color: Colors.orange,
+              ),
               title: const Text(
                 'Report',
                 style: TextStyle(color: Colors.orange),
@@ -626,18 +644,18 @@ class FullScreenImageView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.close, color: Colors.white),
+          icon: const SvgIcon(SolarIcons.closeCircle, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.share, color: Colors.white),
+            icon: const SvgIcon(SolarIcons.share, color: Colors.white),
             onPressed: () {
               // Implement share
             },
           ),
           IconButton(
-            icon: const Icon(Icons.download, color: Colors.white),
+            icon: const SvgIcon(SolarIcons.download, color: Colors.white),
             onPressed: () {
               // Implement download
             },

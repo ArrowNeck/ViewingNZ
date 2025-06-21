@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/features/viewings/models/price_update.dart';
@@ -48,7 +48,7 @@ class PriceUpdatesSection extends StatelessWidget {
           CircleAvatar(
             backgroundColor: AppColors.primary,
             radius: 24,
-            child: Icon(SolarIconsOutline.garage, color: AppColors.white),
+            child: SvgIcon(SolarIcons.garage, color: AppColors.white),
           ),
           const Gap(16),
           Column(

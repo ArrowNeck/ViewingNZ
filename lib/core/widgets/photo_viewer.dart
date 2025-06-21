@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
@@ -65,7 +66,10 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
               backgroundColor: AppColors.pureBlack,
               elevation: 0,
               leading: IconButton(
-                icon: const Icon(Icons.close, color: AppColors.white),
+                icon: const SvgIcon(
+                  SolarIcons.closeCircle,
+                  color: AppColors.white,
+                ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
 
@@ -79,8 +83,8 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
               centerTitle: true,
               actions: [
                 // IconButton(
-                //   icon: const Icon(
-                //     Icons.rotate_right_rounded,
+                //   icon: const SvgIcon(
+                //     SolarIcons.altArrowLeft,
                 //     color: AppColors.white,
                 //   ),
                 //   onPressed: rotateImage,
@@ -109,8 +113,8 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.error_outline,
+                        SvgIcon(
+                          SolarIcons.infoCircle,
                           color: AppColors.white,
                           size: 48,
                         ),
@@ -163,8 +167,8 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
                               );
                             }
                           : null,
-                      icon: Icon(
-                        Icons.arrow_back_ios,
+                      icon: SvgIcon(
+                        SolarIcons.altArrowLeft,
                         color: _currentIndex > 0
                             ? AppColors.white
                             : AppColors.gray800,
@@ -205,8 +209,8 @@ class _PhotoViewScreenState extends State<PhotoViewScreen> {
                               );
                             }
                           : null,
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
+                      icon: SvgIcon(
+                        SolarIcons.altArrowRight,
                         color: _currentIndex < widget.imageUrls.length - 1
                             ? AppColors.white
                             : AppColors.gray800,

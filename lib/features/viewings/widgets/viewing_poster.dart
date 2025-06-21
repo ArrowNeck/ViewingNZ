@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/cached_image.dart';
 import 'package:viewing_nz/core/widgets/photo_viewer.dart';
@@ -85,7 +85,7 @@ class _ViewingPosterState extends State<ViewingPoster> {
               child: AnimatedOpacity(
                 opacity: (_showArrows && _currentIndex > 0) ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 200),
-                child: _buildSliderIcon(Icons.arrow_back_ios_new, () {
+                child: _buildSliderIcon(SolarIcons.altArrowLeft, () {
                   if (_showArrows && _currentIndex > 0) {
                     _controller.previousPage(
                       duration: const Duration(milliseconds: 400),
@@ -106,7 +106,7 @@ class _ViewingPosterState extends State<ViewingPoster> {
                     ? 1.0
                     : 0.0,
                 duration: const Duration(milliseconds: 200),
-                child: _buildSliderIcon(Icons.arrow_forward_ios, () {
+                child: _buildSliderIcon(SolarIcons.altArrowRight, () {
                   if (_showArrows &&
                       _currentIndex < samplePropertyImages.length - 1) {
                     _controller.nextPage(
@@ -124,7 +124,7 @@ class _ViewingPosterState extends State<ViewingPoster> {
                 opacity: (_showArrows) ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 200),
                 child: _buildSliderIcon(
-                  SolarIconsOutline.squareTopDown,
+                  SolarIcons.squareTopDown,
                   _openPhotoView,
                 ),
               ),
@@ -135,11 +135,11 @@ class _ViewingPosterState extends State<ViewingPoster> {
     );
   }
 
-  Container _buildSliderIcon(IconData icon, VoidCallback onPressed) {
+  Container _buildSliderIcon(SvgIconData icon, VoidCallback onPressed) {
     return Container(
       decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.white),
       child: IconButton(
-        icon: Icon(icon, color: AppColors.gunmetal600),
+        icon: SvgIcon(icon, color: AppColors.gunmetal600),
         visualDensity: VisualDensity.compact,
         onPressed: onPressed,
       ),

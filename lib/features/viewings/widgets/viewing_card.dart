@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
@@ -33,7 +33,7 @@ class ViewingCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: Row(
               children: [
-                Icon(SolarIconsOutline.home1),
+                SvgIcon(SolarIcons.home),
                 const Gap(8),
                 Text(
                   "House",
@@ -65,7 +65,7 @@ class ViewingCard extends StatelessWidget {
           if (isPast)
             ElevatedButton.icon(
               onPressed: () => CoreUtils.heroDialog(RateAgentPopup()),
-              icon: const Icon(SolarIconsOutline.star),
+              icon: const SvgIcon.white(SolarIcons.star),
               label: const Text('Rate Your Agent'),
             )
           else
@@ -73,13 +73,16 @@ class ViewingCard extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(SolarIconsOutline.chatRoundLine),
+                  icon: const SvgIcon.white(SolarIcons.chatRoundLine),
                   label: const Text('Chat'),
                 ),
                 const Gap(12),
                 OutlinedButton.icon(
                   onPressed: () {},
-                  icon: const Icon(SolarIconsOutline.routing2),
+                  icon: const SvgIcon(
+                    SolarIcons.routing2,
+                    color: AppColors.gunmetal600,
+                  ),
                   label: const Text('Directions'),
                 ),
               ],
@@ -99,6 +102,7 @@ class ViewingCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: FittedBox(
         fit: BoxFit.scaleDown,
+        alignment: Alignment.centerLeft,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

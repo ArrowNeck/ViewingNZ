@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -37,7 +37,7 @@ class SalePriceCard extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: color,
-            child: Icon(SolarIconsOutline.card, color: AppColors.white),
+            child: SvgIcon.white(SolarIcons.banknote),
           ),
           const Gap(12),
           Expanded(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
+import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 
 class EmptyView extends StatelessWidget {
@@ -11,7 +12,7 @@ class EmptyView extends StatelessWidget {
     required this.description,
   });
 
-  final IconData icon;
+  final SvgIconData icon;
   final String title;
   final String description;
 
@@ -24,7 +25,7 @@ class EmptyView extends StatelessWidget {
           CircleAvatar(
             backgroundColor: AppColors.gunmetal600,
             radius: 24,
-            child: Icon(icon, color: AppColors.white),
+            child: SvgIcon(icon, color: AppColors.white),
           ),
           const Gap(16),
           Text(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:solar_icons/solar_icons.dart';
+import 'package:viewing_nz/core/res/icons.dart';
+import 'package:viewing_nz/core/theme/app_colors.dart';
 
 class InputField extends StatefulWidget {
   const InputField({
@@ -35,7 +36,7 @@ class InputField extends StatefulWidget {
   final void Function(String)? onChanged;
   final Color? fillColor;
   final TextInputAction? textInputAction;
-  final IconData? prefixIcon;
+  final SvgIconData? prefixIcon;
   final int? maxLines;
 
   @override
@@ -66,17 +67,21 @@ class _InputFieldState extends State<InputField> {
           fillColor: widget.fillColor,
           alignLabelWithHint: true,
           prefixIcon: widget.prefixIcon != null
-              ? Icon(widget.prefixIcon)
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(12.0, 12.0, 8.0, 12.0),
+                  child: SvgIcon(
+                    widget.prefixIcon!,
+                    color: AppColors.gunmetal500,
+                  ),
+                )
               : null,
           suffixIcon: widget.obscureText
               ? IconButton(
                   icon: ValueListenableBuilder(
                     valueListenable: showHide,
                     builder: (context, isHide, child) {
-                      return Icon(
-                        isHide
-                            ? SolarIconsOutline.eyeClosed
-                            : SolarIconsOutline.eye,
+                      return SvgIcon(
+                        isHide ? SolarIcons.eyeClosed : SolarIcons.eye,
                       );
                     },
                   ),
