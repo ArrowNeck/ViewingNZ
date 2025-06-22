@@ -1,7 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:photo_view/photo_view.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
@@ -665,13 +663,14 @@ class FullScreenImageView extends StatelessWidget {
       body: Center(
         child: Hero(
           tag: heroTag,
-          child: PhotoView(
-            imageProvider: FileImage(File(imageUrl)),
-            minScale: PhotoViewComputedScale.contained,
-            maxScale: PhotoViewComputedScale.covered * 2.0,
-            initialScale: PhotoViewComputedScale.contained,
-            heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
-          ),
+          child: SizedBox(),
+          // child: PhotoView(
+          //   imageProvider: FileImage(File(imageUrl)),
+          //   minScale: PhotoViewComputedScale.contained,
+          //   maxScale: PhotoViewComputedScale.covered * 2.0,
+          //   initialScale: PhotoViewComputedScale.contained,
+          //   heroAttributes: PhotoViewHeroAttributes(tag: heroTag),
+          // ),
         ),
       ),
     );

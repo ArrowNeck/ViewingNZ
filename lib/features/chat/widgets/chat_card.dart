@@ -10,41 +10,30 @@ class ChatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: GestureDetector(
-        onTap: () => context.push(Routes.singleChat),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: const CustomAvatar(
-                radius: 24,
-                url: "https://i.pravatar.cc/250?img=12",
-              ),
-            ),
-            Expanded(
-              child: Text(
-                "James Carter",
-                style: context.titleMedium.copyWith(
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  "23 Mar",
-                  style: context.titleMedium.copyWith(color: AppColors.black),
-                ),
-                Badge.count(count: 2),
-              ],
-            ),
-          ],
+    return ListTile(
+      onTap: () => context.push(Routes.singleChat),
+      contentPadding: EdgeInsets.zero,
+      leading: const CustomAvatar(
+        radius: 24,
+        url: "https://i.pravatar.cc/250?img=12",
+      ),
+      title: Text(
+        "James Carter",
+        style: context.titleMedium.copyWith(
+          color: AppColors.black,
+          fontWeight: FontWeight.w600,
         ),
+      ),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            "23 Mar",
+            style: context.titleMedium.copyWith(color: AppColors.black),
+          ),
+          Badge.count(count: 2),
+        ],
       ),
     );
   }

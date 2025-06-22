@@ -1,34 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
-
-final amenityDisplayGroup = AutoSizeGroup();
+import 'package:viewing_nz/core/utils/global_keys.dart';
 
 class AmenityDisplay extends StatelessWidget {
   final SvgIconData icon;
   final String? label;
   final int? qty;
 
-  const AmenityDisplay.withQty({
-    super.key,
-    required this.icon,
-    required this.qty,
-  }) : label = null;
-
-  const AmenityDisplay.withLabel({
-    super.key,
-    required this.icon,
-    required this.label,
-  }) : qty = null;
-
-  const AmenityDisplay.withQtyLabel({
-    super.key,
-    required this.icon,
-    required this.qty,
-    required this.label,
-  });
+  const AmenityDisplay({super.key, required this.icon, this.qty, this.label})
+    : assert(
+        qty != null || label != null,
+        'Either qty, label, or both must be provided.',
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +25,19 @@ class AmenityDisplay extends StatelessWidget {
     );
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SvgIcon(icon, color: AppColors.gray800, size: 22),
-        const SizedBox(width: 6),
-        if (qty != null) Text('$qty', style: style),
+        SvgIcon(icon, color: AppColors.gray800),
+        if (qty != null) ...[const Gap(6), Text('$qty', style: style)],
         if (label != null) ...[
-          const SizedBox(width: 6),
+          const Gap(6),
           AutoSizeText(
-            label!,
+            "$label",
             style: style,
             minFontSize: 10,
-            group: amenityDisplayGroup,
+            group: GlobalKeys.amenityDisplayGroup,
           ),
         ],
-        const SizedBox(width: 16),
       ],
     );
   }

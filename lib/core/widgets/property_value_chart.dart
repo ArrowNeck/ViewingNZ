@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/features/viewings/models/property_chart_model.dart';
-import 'package:viewing_nz/features/viewings/widgets/market_insights_label.dart';
+import 'package:viewing_nz/core/widgets/market_insights_label.dart';
 
 class PropertyValueChart extends StatefulWidget {
   const PropertyValueChart({super.key});

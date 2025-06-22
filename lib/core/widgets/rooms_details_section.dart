@@ -15,38 +15,22 @@ class RoomsDetailsSection extends StatelessWidget {
         SectionLabel(title: "Rent Property Rooms Details"),
         AmenityWrapView(
           amenities: [
-            AmenityDisplay.withQtyLabel(
+            AmenityDisplay(
               icon: SolarIcons.sleeping,
               qty: 2,
               label: "Bedrooms",
             ),
-            AmenityDisplay.withQtyLabel(
-              icon: SolarIcons.bath,
-              qty: 2,
-              label: "Bathrooms",
-            ),
-            AmenityDisplay.withQtyLabel(
-              icon: SolarIcons.shower,
-              qty: 2,
-              label: "Ensuites",
-            ),
+            AmenityDisplay(icon: SolarIcons.bath, qty: 2, label: "Bathrooms"),
+            AmenityDisplay(icon: SolarIcons.shower, qty: 2, label: "Ensuites"),
 
-            AmenityDisplay.withQtyLabel(
+            AmenityDisplay(
               icon: SolarIcons.toilet,
               qty: 1,
               label: "Separate Toilet",
             ),
 
-            AmenityDisplay.withQtyLabel(
-              icon: SolarIcons.sofa,
-              qty: 1,
-              label: "Living Area",
-            ),
-            AmenityDisplay.withQtyLabel(
-              icon: SolarIcons.laptop,
-              qty: 1,
-              label: "Study",
-            ),
+            AmenityDisplay(icon: SolarIcons.sofa, qty: 1, label: "Living Area"),
+            AmenityDisplay(icon: SolarIcons.laptop, qty: 1, label: "Study"),
           ],
         ),
       ],

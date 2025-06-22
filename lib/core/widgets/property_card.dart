@@ -8,8 +8,8 @@ import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/cached_image.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
 import 'package:viewing_nz/core/widgets/property_tag.dart';
-import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
-import 'package:viewing_nz/features/viewings/widgets/price_and_address.dart';
+import 'package:viewing_nz/core/widgets/listed_and_ref_id.dart';
+import 'package:viewing_nz/core/widgets/price_and_address.dart';
 
 class PropertyCard extends StatefulWidget {
   const PropertyCard({super.key});
@@ -119,22 +119,31 @@ class _PropertyCardState extends State<PropertyCard> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Row(
-                  children: [
-                    AmenityDisplay.withQty(icon: SolarIcons.bed, qty: 4),
-                    AmenityDisplay.withQty(icon: SolarIcons.bath, qty: 4),
-                    AmenityDisplay.withQty(icon: SolarIcons.car, qty: 2),
-                    AmenityDisplay.withLabel(
-                      icon: SolarIcons.rulerAngular,
-                      label: "182m",
-                    ),
-                    AmenityDisplay.withLabel(
-                      icon: SolarIcons.cropMinimalistic,
-                      label: "552m",
-                    ),
-                  ],
+              child: SizedBox(
+                width: double.maxFinite,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      AmenityDisplay(icon: SolarIcons.bed, qty: 4),
+                      const Gap(12),
+                      AmenityDisplay(icon: SolarIcons.bath, qty: 4),
+                      const Gap(12),
+                      AmenityDisplay(icon: SolarIcons.car, qty: 2),
+                      const Gap(12),
+                      AmenityDisplay(
+                        icon: SolarIcons.rulerAngular,
+                        label: "182m",
+                      ),
+                      const Gap(12),
+                      AmenityDisplay(
+                        icon: SolarIcons.cropMinimalistic,
+                        label: "552m",
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

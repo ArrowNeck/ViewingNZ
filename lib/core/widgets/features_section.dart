@@ -4,26 +4,21 @@ import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/amenity_wrap_view.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
-class AdditionalFeaturesSection extends StatelessWidget {
-  const AdditionalFeaturesSection({super.key});
+class FeaturesSection extends StatelessWidget {
+  const FeaturesSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
-        SectionLabel(title: "Rent Property Additional Features"),
+        SectionLabel(title: "Rent Property Features"),
         AmenityWrapView(
           amenities: [
-            AmenityDisplay.withQtyLabel(
-              icon: SolarIcons.swimming,
-              qty: 1,
-              label: "Swimming Pool",
-            ),
-            AmenityDisplay.withLabel(
-              icon: SolarIcons.wifiRouterMinimalistic,
-              label: "Wi-Fi Available",
+            AmenityDisplay(icon: SolarIcons.armchair, label: "Fully Furnished"),
+            AmenityDisplay(
+              icon: SolarIcons.washingMachine,
+              label: "White Ware",
             ),
           ],
         ),

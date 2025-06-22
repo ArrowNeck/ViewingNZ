@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:viewing_nz/features/viewings/widgets/market_insights_label.dart';
-import 'package:viewing_nz/features/viewings/widgets/sale_price_card.dart';
+import 'package:viewing_nz/core/widgets/market_insights_label.dart';
+import 'package:viewing_nz/core/widgets/sale_price_card.dart';
 
 class CapitalValue extends StatelessWidget {
   const CapitalValue({super.key});

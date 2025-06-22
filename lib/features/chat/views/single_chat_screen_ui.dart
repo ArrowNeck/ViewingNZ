@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
 
@@ -15,6 +16,37 @@ class SingleChatScreenUi extends StatefulWidget {
 }
 
 class _SingleChatScreenUiState extends State<SingleChatScreenUi> {
+  final TextEditingController _inputController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+  final List<ChatMessage> _messages = [
+    ChatMessage(
+      text: "Lorem ipsum dolor sit amet consectetur. Erat nulla luctus.",
+      isSender: false,
+    ),
+    ChatMessage(
+      text: "Lorem ipsum dolor sit amet consectetur. Erat nulla luctus.",
+      isSender: true,
+      seen: true,
+    ),
+    ChatMessage(
+      text: "Lorem ipsum dolor sit amet consectetur. Erat nulla luctus.",
+      isSender: false,
+    ),
+    ChatMessage(
+      text:
+          "Hello James Carter\nI,m Sahan Akash. I would like to inquire about the price range of this property 32B Dart Place, Fernhill, Queenstown.\n\nLorem ipsum dolor sit amet consectetur. Risus aliquet sed rhoncus non in felis amet nisl cras. Fames amet natoque sapien eu ante cursus.",
+      isSender: true,
+      delivered: true,
+    ),
+  ];
+
+  @override
+  void dispose() {
+    _inputController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,48 +104,14 @@ class _SingleChatScreenUiState extends State<SingleChatScreenUi> {
         child: Column(
           children: [
             Expanded(
-              child: ListView(
+              child: ListView.builder(
+                controller: _scrollController,
                 padding: EdgeInsets.symmetric(vertical: 16),
-                children: [
-                  BubbleNormal(
-                    color: AppColors.gray50,
-                    bubbleRadius: 12,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    isSender: false,
-                    text:
-                        "Lorem ipsum dolor sit amet consectetur. Erat nulla luctus.",
-                    textStyle: context.bodyMedium,
-                  ),
-                  BubbleNormal(
-                    color: AppColors.alizarin50,
-                    bubbleRadius: 12,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    margin: EdgeInsets.all(8),
-                    isSender: true,
-                    seen: true,
-                    text:
-                        "Lorem ipsum dolor sit amet consectetur. Erat nulla luctus.",
-                  ),
-                  BubbleNormal(
-                    color: AppColors.gray50,
-                    bubbleRadius: 12,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    isSender: false,
-                    text:
-                        "Lorem ipsum dolor sit amet consectetur. Erat nulla luctus.",
-                    textStyle: context.bodyMedium,
-                  ),
-                  BubbleNormal(
-                    color: AppColors.alizarin50,
-                    bubbleRadius: 12,
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    margin: EdgeInsets.all(8),
-                    isSender: true,
-                    delivered: true,
-                    text:
-                        "Hello James Carter\nI,m Sahan Akash. I would like to inquire about the price range of this property 32B Dart Place, Fernhill, Queenstown.\n\nLorem ipsum dolor sit amet consectetur. Risus aliquet sed rhoncus non in felis amet nisl cras. Fames amet natoque sapien eu ante cursus.",
-                  ),
-                ],
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  final message = _messages[index];
+                  return _buildBubble(message);
+                },
               ),
             ),
             Padding(
@@ -127,17 +125,44 @@ class _SingleChatScreenUiState extends State<SingleChatScreenUi> {
                       child: SvgIcon.white(SolarIcons.addCircle),
                     ),
                     const Gap(12),
-                    Expanded(child: InputField(hintText: "Type here")),
-                    const Gap(12),
-                    Container(
-                      width: 48,
-                      // height: 40,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(12),
+                    Expanded(
+                      child: InputField(
+                        hintText: "Type here",
+                        controller: _inputController,
                       ),
-                      child: SvgIcon.white(SolarIcons.plain),
+                    ),
+                    const Gap(12),
+                    GestureDetector(
+                      onTap: () {
+                        if (_inputController.text.isNotEmpty) {
+                          setState(() {
+                            _messages.add(
+                              ChatMessage(
+                                text: _inputController.text,
+                                isSender: true,
+                              ),
+                            );
+                            _inputController.clear();
+                          });
+                          CoreUtils.postFrameCall(() {
+                            _scrollController.animateTo(
+                              _scrollController.position.maxScrollExtent,
+                              duration: Duration(milliseconds: 300),
+                              curve: Curves.easeOut,
+                            );
+                          });
+                        }
+                      },
+                      child: Container(
+                        width: 48,
+                        // height: 40,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: SvgIcon.white(SolarIcons.plain),
+                      ),
                     ),
                   ],
                 ),
@@ -146,35 +171,34 @@ class _SingleChatScreenUiState extends State<SingleChatScreenUi> {
           ],
         ),
       ),
-      // bottomNavigationBar: SafeArea(
-      //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      //     child: IntrinsicHeight(
-      //       child: Row(
-      //         children: [
-      //           CircleAvatar(
-      //             backgroundColor: AppColors.gunmetal600,
-      //             // radius: 20,
-      //             child: SvgIcon.white(SolarIcons.addCircle),
-      //           ),
-      //           const Gap(12),
-      //           Expanded(child: InputField(hintText: "Type here")),
-      //           const Gap(12),
-      //           Container(
-      //             width: 48,
-      //             // height: 40,
-      //             alignment: Alignment.center,
-      //             decoration: BoxDecoration(
-      //               color: AppColors.primary,
-      //               borderRadius: BorderRadius.circular(12),
-      //             ),
-      //             child: SvgIcon.white(SolarIcons.plain),
-      //           ),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
+
+  BubbleNormal _buildBubble(ChatMessage message) {
+    return BubbleNormal(
+      color: message.isSender ? AppColors.alizarin50 : AppColors.gray50,
+      bubbleRadius: 12,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.all(8),
+      textStyle: context.bodyMedium,
+      isSender: message.isSender,
+      delivered: message.delivered,
+      seen: message.seen,
+      text: message.text,
+    );
+  }
+}
+
+class ChatMessage {
+  final String text;
+  final bool isSender;
+  final bool delivered;
+  final bool seen;
+
+  ChatMessage({
+    required this.text,
+    required this.isSender,
+    this.delivered = false,
+    this.seen = false,
+  });
 }

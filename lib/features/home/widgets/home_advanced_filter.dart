@@ -392,7 +392,9 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
                 Expanded(
                   child: SubmitButton(
                     text: "Search 2,000+ Properties",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pop();
+                    },
                   ),
                 ),
               ],

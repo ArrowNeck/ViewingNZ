@@ -18,11 +18,8 @@ class TenantsDetailsSection extends StatelessWidget {
         SectionLabel(title: "Rent Property Tenants Details"),
         AmenityWrapView(
           amenities: [
-            AmenityDisplay.withLabel(
-              icon: SolarIcons.petsAllowed,
-              label: "Pets Allowed",
-            ),
-            AmenityDisplay.withLabel(
+            AmenityDisplay(icon: SolarIcons.petsAllowed, label: "Pets Allowed"),
+            AmenityDisplay(
               icon: SolarIcons.smokingOutline,
               label: "Smoking Allowed",
             ),

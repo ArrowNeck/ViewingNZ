@@ -8,18 +8,18 @@ import 'package:viewing_nz/core/widgets/amenity_display.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
 import 'package:viewing_nz/core/widgets/property_share_popup.dart';
 import 'package:viewing_nz/core/widgets/report_property_popup.dart';
-import 'package:viewing_nz/features/viewings/widgets/listed_and_ref_id.dart';
-import 'package:viewing_nz/features/viewings/widgets/price_and_address.dart';
-import 'package:viewing_nz/features/viewings/widgets/viewing_poster.dart';
+import 'package:viewing_nz/core/widgets/listed_and_ref_id.dart';
+import 'package:viewing_nz/core/widgets/price_and_address.dart';
+import 'package:viewing_nz/core/widgets/property_poster.dart';
 
-class ViewingDetailsHeader extends StatefulWidget {
-  const ViewingDetailsHeader({super.key});
+class PropertyDetailsHeader extends StatefulWidget {
+  const PropertyDetailsHeader({super.key});
 
   @override
-  State<ViewingDetailsHeader> createState() => _ViewingDetailsHeaderState();
+  State<PropertyDetailsHeader> createState() => _ViewingDetailsHeaderState();
 }
 
-class _ViewingDetailsHeaderState extends State<ViewingDetailsHeader> {
+class _ViewingDetailsHeaderState extends State<PropertyDetailsHeader> {
   final ValueNotifier<bool> _isFav = ValueNotifier(false);
 
   @override
@@ -32,7 +32,7 @@ class _ViewingDetailsHeaderState extends State<ViewingDetailsHeader> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ViewingPoster(),
+        PropertyPoster(),
         const Gap(12),
         Row(
           children: [
@@ -66,24 +66,30 @@ class _ViewingDetailsHeaderState extends State<ViewingDetailsHeader> {
           address: "32B Dart Place, Fernhill, Queenstown",
         ),
         const Gap(16),
-        FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Row(
-            children: [
-              AmenityDisplay.withLabel(icon: SolarIcons.home, label: "House"),
-              AmenityDisplay.withQty(icon: SolarIcons.sleeping, qty: 4),
-
-              AmenityDisplay.withQty(icon: SolarIcons.bath, qty: 4),
-              AmenityDisplay.withQty(icon: SolarIcons.car, qty: 2),
-              AmenityDisplay.withLabel(
-                icon: SolarIcons.rulerAngular,
-                label: "182m",
-              ),
-              AmenityDisplay.withLabel(
-                icon: SolarIcons.cropMinimalistic,
-                label: "552m",
-              ),
-            ],
+        SizedBox(
+          width: double.maxFinite,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                AmenityDisplay(icon: SolarIcons.home, label: "House"),
+                const Gap(12),
+                AmenityDisplay(icon: SolarIcons.sleeping, qty: 4),
+                const Gap(12),
+                AmenityDisplay(icon: SolarIcons.bath, qty: 4),
+                const Gap(12),
+                AmenityDisplay(icon: SolarIcons.car, qty: 2),
+                const Gap(12),
+                AmenityDisplay(icon: SolarIcons.rulerAngular, label: "182m"),
+                const Gap(12),
+                AmenityDisplay(
+                  icon: SolarIcons.cropMinimalistic,
+                  label: "552m",
+                ),
+              ],
+            ),
           ),
         ),
         const Gap(24),

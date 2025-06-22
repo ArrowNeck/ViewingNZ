@@ -15,7 +15,7 @@ class CustomAvatar extends StatelessWidget {
       backgroundColor: AppColors.alizarin50,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius),
-        child: CachedImage(url: url, indicatorSize: radius * .75),
+        child: CachedImage(url: url),
       ),
     );
   }

@@ -27,7 +27,6 @@ dependencies:
   calendar_date_picker2: ^2.0.1
   toastification: ^3.0.3
   carousel_slider: ^5.1.1
-  photo_view: ^0.15.0
   flutter_chat_ui: ^2.5.2
   image_picker: ^1.1.2
   file_picker: ^10.2.0
@@ -38,6 +37,7 @@ dependencies:
   syncfusion_flutter_core: ^29.2.11
   flutter_chat_types: ^3.6.2
   auto_size_text: ^3.0.0
+  scrollable_positioned_list: ^0.3.8
 
 dev_dependencies:
   flutter_test:

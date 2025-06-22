@@ -1,8 +1,6 @@
 part of 'router.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
-final _shellNavigatorKey = GlobalKey<NavigatorState>();
-final _nestedShellNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
   debugLogDiagnostics: true,
@@ -37,70 +35,112 @@ final router = GoRouter(
           buildTransitionPage(key: state.pageKey, child: const SignUpScreen()),
     ),
 
-    // Main Bottom Bar Shell Route
-    ShellRoute(
-      navigatorKey: _shellNavigatorKey,
-      pageBuilder: (context, state, child) => buildTransitionPage(
-        key: state.pageKey,
-        child: NavigationScreen(state: state, child: child),
-      ),
-      routes: [
-        GoRoute(
-          path: Routes.home,
-          pageBuilder: (context, state) => buildTransitionPage(
-            key: state.pageKey,
-            child: const HomeScreen(),
-          ),
-        ),
-        GoRoute(
-          path: Routes.chats,
-          pageBuilder: (context, state) => buildTransitionPage(
-            key: state.pageKey,
-            child: const ChatScreen(),
-          ),
-        ),
-        GoRoute(
-          path: Routes.notifications,
-          pageBuilder: (context, state) => buildTransitionPage(
-            key: state.pageKey,
-            child: const NotificationScreen(),
-          ),
-        ),
-
-        // Nested Shell Route for Viewings section
-        ShellRoute(
-          navigatorKey: _nestedShellNavigatorKey,
-          pageBuilder: (context, state, child) => buildTransitionPage(
-            key: state.pageKey,
-            child: ViewingMainScreen(state: state, child: child),
-          ),
+    // Main Shell Route for Bottom Navigation (StatefulShellRoute)
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return NavigationScreen(navigationShell: navigationShell);
+      },
+      branches: [
+        // Branch 0: Home
+        StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.viewings,
+              path: Routes.home,
               pageBuilder: (context, state) => buildTransitionPage(
                 key: state.pageKey,
-                child: const ViewingsScreen(),
+                child: const HomeScreen(),
               ),
             ),
+          ],
+        ),
+
+        // Branch 1: Chats
+        StatefulShellBranch(
+          routes: [
             GoRoute(
-              path: Routes.savedProperties,
+              path: Routes.chats,
               pageBuilder: (context, state) => buildTransitionPage(
                 key: state.pageKey,
-                child: const SavedPropertiesScreen(),
+                child: const ChatScreen(),
               ),
             ),
-            GoRoute(
-              path: Routes.savedSearch,
-              pageBuilder: (context, state) => buildTransitionPage(
-                key: state.pageKey,
-                child: const SavedSearchScreen(),
-              ),
+          ],
+        ),
+
+        // Branch 2: Viewing Section (Nested StatefulShellRoute)
+        StatefulShellBranch(
+          routes: [
+            StatefulShellRoute.indexedStack(
+              builder: (context, state, nestedNavigationShell) {
+                return ViewingMainScreen(
+                  navigationShell: nestedNavigationShell,
+                );
+              },
+              branches: [
+                // Nested Branch 0: Viewings
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: Routes.viewings,
+                      pageBuilder: (context, state) => buildTransitionPage(
+                        key: state.pageKey,
+                        child: const ViewingsScreen(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Nested Branch 1: Saved Properties
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: Routes.savedProperties,
+                      pageBuilder: (context, state) => buildTransitionPage(
+                        key: state.pageKey,
+                        child: const SavedPropertiesScreen(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Nested Branch 2: Saved Search
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: Routes.savedSearch,
+                      pageBuilder: (context, state) => buildTransitionPage(
+                        key: state.pageKey,
+                        child: const SavedSearchScreen(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Nested Branch 3: Profile
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: Routes.profile,
+                      pageBuilder: (context, state) => buildTransitionPage(
+                        key: state.pageKey,
+                        child: const MyProfileScreen(),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
+          ],
+        ),
+
+        // Branch 3: Notifications
+        StatefulShellBranch(
+          routes: [
             GoRoute(
-              path: Routes.profile,
+              path: Routes.notifications,
               pageBuilder: (context, state) => buildTransitionPage(
                 key: state.pageKey,
-                child: const MyProfileScreen(),
+                child: const NotificationScreen(),
               ),
             ),
           ],
@@ -140,6 +180,47 @@ final router = GoRouter(
         key: state.pageKey,
         child: const HomeAdvancedFilter(),
       ),
+    ),
+
+    // Image view routes (outside shell navigation)
+    GoRoute(
+      path: Routes.imageListViewPath, // '/image-view/list/:refId'
+      parentNavigatorKey: rootNavigatorKey,
+      pageBuilder: (context, state) {
+        final refId = int.tryParse(state.pathParameters['refId'] ?? '') ?? 0;
+        final index =
+            int.tryParse(state.uri.queryParameters['index'] ?? '0') ?? 0;
+        final encodedImages = state.uri.queryParameters['images'] ?? '[]';
+        final images = List<String>.from(
+          jsonDecode(Uri.decodeComponent(encodedImages)),
+        );
+
+        return buildTransitionPage(
+          key: state.pageKey,
+          child: ImageListView(
+            refId: refId,
+            initialIndex: index,
+            images: images,
+          ),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: Routes.imageFullScreenPath, // '/image-view/full-screen/:index'
+      parentNavigatorKey: rootNavigatorKey,
+      pageBuilder: (context, state) {
+        final index = int.tryParse(state.pathParameters['index'] ?? '0') ?? 0;
+        final encodedImages = state.uri.queryParameters['images'] ?? '[]';
+        final images = List<String>.from(
+          jsonDecode(Uri.decodeComponent(encodedImages)),
+        );
+
+        return buildTransitionPage(
+          key: state.pageKey,
+          child: FullScreenImageView(currentIndex: index, images: images),
+        );
+      },
     ),
   ],
 );

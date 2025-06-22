@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Routes {
   // Auth routes
   static const login = '/login';
@@ -20,21 +22,18 @@ class Routes {
   static const requestViewing = '/request-a-viewing';
   static const advancedFilter = '/advanced-filter';
 
-  // Route groups for easier management
-  static const List<String> authRoutes = [login, register];
-  static const List<String> shellRoutes = [
-    home,
-    chats,
-    notifications,
-    viewings,
-    savedProperties,
-    savedSearch,
-    profile,
-  ];
-  static const List<String> standaloneRoutes = [
-    singleChat,
-    viewingDetails,
-    requestViewing,
-    advancedFilter,
-  ];
+  // Image toute paths (without hardcoded query values)
+  static const imageListViewPath = '/image-view/list/:refId';
+  static const imageFullScreenPath = '/image-view/full-screen/:index';
+
+  // Static methods for complex routes
+  static String imageListView(int refId, int index, List<String> images) {
+    final encodedImages = Uri.encodeComponent(jsonEncode(images));
+    return '/image-view/list/$refId?index=$index&images=$encodedImages';
+  }
+
+  static String imageFullScreen(int index, List<String> images) {
+    final encodedImages = Uri.encodeComponent(jsonEncode(images));
+    return '/image-view/full-screen/$index?images=$encodedImages';
+  }
 }

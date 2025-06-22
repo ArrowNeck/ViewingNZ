@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/widgets/sliding_segmented_control.dart';
 
 class ViewingMainScreen extends StatefulWidget {
-  const ViewingMainScreen({
-    super.key,
-    required this.state,
-    required this.child,
-  });
+  const ViewingMainScreen({super.key, required this.navigationShell});
 
-  final GoRouterState state;
-  final Widget child;
+  final StatefulNavigationShell navigationShell;
 
   @override
   State<ViewingMainScreen> createState() => _ViewingMainScreenState();
 }
 
 class _ViewingMainScreenState extends State<ViewingMainScreen>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
+
   final List<String> segments = [
     "Viewings",
     "Saved Properties",
@@ -33,16 +28,16 @@ class _ViewingMainScreenState extends State<ViewingMainScreen>
     _tabController = TabController(
       length: segments.length,
       vsync: this,
-      initialIndex: activeIndex(widget.state),
+      initialIndex: widget.navigationShell.currentIndex,
     );
   }
 
   @override
   void didUpdateWidget(covariant ViewingMainScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final currentIndex = activeIndex(widget.state);
+    final currentIndex = widget.navigationShell.currentIndex;
     if (_tabController.index != currentIndex) {
-      _tabController.index = currentIndex;
+      _tabController.animateTo(currentIndex);
     }
   }
 
@@ -53,48 +48,21 @@ class _ViewingMainScreenState extends State<ViewingMainScreen>
   }
 
   @override
-  bool get wantKeepAlive => true;
-
-  int activeIndex(GoRouterState state) {
-    return switch (state.fullPath) {
-      Routes.viewings => 0,
-      Routes.savedProperties => 1,
-      Routes.savedSearch => 2,
-      Routes.profile => 3,
-      _ => 0,
-    };
-  }
-
-  void onChanged(int index) {
-    switch (index) {
-      case 0:
-        context.go(Routes.viewings);
-      case 1:
-        context.go(Routes.savedProperties);
-      case 2:
-        context.go(Routes.savedSearch);
-      case 3:
-        context.go(Routes.profile);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             SlidingSegmentedControl(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               tabController: _tabController,
               segments: segments,
-              onChanged: onChanged,
+              onChanged: widget.navigationShell.goBranch,
             ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: widget.child,
+                child: widget.navigationShell,
               ),
             ),
           ],

@@ -1,29 +1,48 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/res/icons.dart';
+import 'package:viewing_nz/core/theme/app_colors.dart';
 
 class CachedImage extends StatelessWidget {
-  const CachedImage({super.key, required this.url, this.indicatorSize = 30});
-
   final String url;
-  final double indicatorSize;
+  final BoxFit? fit;
+
+  const CachedImage({super.key, required this.url, this.fit = BoxFit.cover});
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url,
-      fit: BoxFit.cover,
-      placeholder: (context, url) => Center(
-        child: SizedBox.square(
-          dimension: indicatorSize,
-          child: CircularProgressIndicator(),
+      fit: fit,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          // color: AppColors.gray100,
+          image: DecorationImage(image: imageProvider, fit: fit),
         ),
       ),
-      // progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-      //   child: CircularProgressIndicator(value: downloadProgress.progress),
-      // ),
-      errorWidget: (context, url, error) =>
-          Center(child: SvgIcon(SolarIcons.infoCircle)),
+      memCacheWidth: 1200,
+      memCacheHeight: 1200,
+      cacheKey: url,
+      fadeInDuration: Duration(milliseconds: 50),
+      fadeOutDuration: Duration(milliseconds: 50),
+      maxWidthDiskCache: 1500,
+      maxHeightDiskCache: 1500,
+      placeholder: (context, url) => Container(
+        color: AppColors.gray100,
+        child: Center(
+          child: CircularProgressIndicator(color: AppColors.primary),
+        ),
+      ),
+      errorWidget: (context, url, error) => Container(
+        color: AppColors.gray100,
+        child: Center(
+          child: SvgIcon(
+            SolarIcons.infoCircle,
+            color: AppColors.primary,
+            size: 48,
+          ),
+        ),
+      ),
     );
   }
 }
