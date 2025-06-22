@@ -1,35 +1,102 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/widgets/sliding_segmented_control.dart';
-import 'package:viewing_nz/features/viewings/views/saved_properties_screen.dart';
-import 'package:viewing_nz/features/profile/views/my_profile_screen.dart';
-import 'package:viewing_nz/features/saved_search/views/saved_search_screen.dart';
-import 'package:viewing_nz/features/viewings/views/viewings_screen.dart';
 
 class ViewingMainScreen extends StatefulWidget {
-  const ViewingMainScreen({super.key});
+  const ViewingMainScreen({
+    super.key,
+    required this.state,
+    required this.child,
+  });
+
+  final GoRouterState state;
+  final Widget child;
 
   @override
   State<ViewingMainScreen> createState() => _ViewingMainScreenState();
 }
 
-class _ViewingMainScreenState extends State<ViewingMainScreen> {
+class _ViewingMainScreenState extends State<ViewingMainScreen>
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  late TabController _tabController;
+  final List<String> segments = [
+    "Viewings",
+    "Saved Properties",
+    "Saved Search",
+    "My Profile",
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: segments.length,
+      vsync: this,
+      initialIndex: activeIndex(widget.state),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant ViewingMainScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final currentIndex = activeIndex(widget.state);
+    if (_tabController.index != currentIndex) {
+      _tabController.index = currentIndex;
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
+  int activeIndex(GoRouterState state) {
+    return switch (state.fullPath) {
+      Routes.viewings => 0,
+      Routes.savedProperties => 1,
+      Routes.savedSearch => 2,
+      Routes.profile => 3,
+      _ => 0,
+    };
+  }
+
+  void onChanged(int index) {
+    switch (index) {
+      case 0:
+        context.go(Routes.viewings);
+      case 1:
+        context.go(Routes.savedProperties);
+      case 2:
+        context.go(Routes.savedSearch);
+      case 3:
+        context.go(Routes.profile);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: SafeArea(
-        child: SlidingSegmentedControl(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          segments: [
-            "Viewings",
-            "Saved Properties",
-            "Saved Search",
-            "My Profile",
-          ],
+        child: Column(
           children: [
-            ViewingsScreen(),
-            SavedPropertiesScreen(),
-            SavedSearchScreen(),
-            MyProfileScreen(),
+            SlidingSegmentedControl(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              tabController: _tabController,
+              segments: segments,
+              onChanged: onChanged,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: widget.child,
+              ),
+            ),
           ],
         ),
       ),

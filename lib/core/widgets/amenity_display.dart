@@ -1,7 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+
+final amenityDisplayGroup = AutoSizeGroup();
 
 class AmenityDisplay extends StatelessWidget {
   final SvgIconData icon;
@@ -29,21 +32,26 @@ class AmenityDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = context.bodyLarge.copyWith(
+    final style = context.titleSmall.copyWith(
       color: AppColors.gray800,
       fontWeight: FontWeight.w600,
     );
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SvgIcon(icon, color: AppColors.gray800, size: 24),
-        const SizedBox(width: 4),
+        SvgIcon(icon, color: AppColors.gray800, size: 22),
+        const SizedBox(width: 6),
         if (qty != null) Text('$qty', style: style),
         if (label != null) ...[
-          const SizedBox(width: 4),
-          Text(label!, style: style),
+          const SizedBox(width: 6),
+          AutoSizeText(
+            label!,
+            style: style,
+            minFontSize: 10,
+            group: amenityDisplayGroup,
+          ),
         ],
         const SizedBox(width: 16),
       ],

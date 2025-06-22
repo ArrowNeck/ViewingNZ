@@ -1,11 +1,12 @@
 import 'dart:io';
+import 'dart:developer';
 
 void main() async {
   const String basePath = 'assets/icons/solar_icons/';
   final iconsDir = Directory(basePath);
 
   if (!iconsDir.existsSync()) {
-    print('Directory not found: $basePath');
+    log('Directory not found: $basePath');
     return;
   }
 
@@ -33,7 +34,7 @@ void main() async {
 
   final outputFile = File('lib/core/res/solar_icons.dart');
   await outputFile.writeAsString(buffer.toString());
-  print('Successfully generated: lib/core/res/solar_icons.dart');
+  log('Successfully generated: lib/core/res/solar_icons.dart');
 }
 
 String _toCamelCase(String input) {

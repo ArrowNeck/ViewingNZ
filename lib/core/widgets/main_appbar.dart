@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/utils/global_keys.dart';
 import 'package:viewing_nz/core/widgets/custom_avatar.dart';
 
 class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,7 +21,13 @@ class MainAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       automaticallyImplyLeading: false,
       actions: [
-        CustomAvatar(radius: 20, url: "https://i.pravatar.cc/250?img=12"),
+        GestureDetector(
+          onTap: () => GlobalKeys.sidePanelKey.currentState?.openDrawer(),
+          child: CustomAvatar(
+            radius: 20,
+            url: "https://i.pravatar.cc/250?img=12",
+          ),
+        ),
       ],
     );
   }

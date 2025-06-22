@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
+import 'package:viewing_nz/core/widgets/amenity_wrap_view.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class ParkingDetailsSection extends StatelessWidget {
@@ -12,12 +13,8 @@ class ParkingDetailsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionLabel(title: "Rent Property Parking Details"),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          crossAxisAlignment: WrapCrossAlignment.start,
-          runAlignment: WrapAlignment.spaceBetween,
-          children: [
+        AmenityWrapView(
+          amenities: [
             AmenityDisplay.withQtyLabel(
               icon: SolarIcons.car,
               qty: 1,

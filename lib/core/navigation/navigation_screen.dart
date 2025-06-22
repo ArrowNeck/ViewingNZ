@@ -6,7 +6,9 @@ import 'package:viewing_nz/core/navigation/navigation_utils.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
+import 'package:viewing_nz/core/utils/global_keys.dart';
 import 'package:viewing_nz/core/widgets/main_appbar.dart';
+import 'package:viewing_nz/core/widgets/side_panel.dart';
 
 class NavigationScreen extends StatelessWidget {
   const NavigationScreen({super.key, required this.state, required this.child});
@@ -18,7 +20,9 @@ class NavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeIndex = NavigationUtils.activeIndex(state);
     return Scaffold(
+      key: GlobalKeys.sidePanelKey,
       appBar: MainAppbar(title: activeIndex.$2),
+      drawer: SidePanel(),
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: activeIndex.$1,
@@ -49,6 +53,8 @@ class NavigationScreen extends StatelessWidget {
               context.go(Routes.viewings);
             case 3:
               context.go(Routes.notifications);
+            case 4:
+              GlobalKeys.sidePanelKey.currentState?.openDrawer();
           }
         },
       ),

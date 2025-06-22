@@ -4,6 +4,7 @@ extension ThemeExtensions on BuildContext {
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
   bool get isLightMode => Theme.of(this).brightness == Brightness.light;
   Brightness get brightness => Theme.of(this).colorScheme.brightness;
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
   Color get primary => Theme.of(this).colorScheme.primary;
   Color get onPrimary => Theme.of(this).colorScheme.onPrimary;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
+import 'package:viewing_nz/core/widgets/amenity_wrap_view.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class FeaturesSection extends StatelessWidget {
@@ -12,12 +13,8 @@ class FeaturesSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionLabel(title: "Rent Property Features"),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          crossAxisAlignment: WrapCrossAlignment.start,
-          runAlignment: WrapAlignment.spaceBetween,
-          children: [
+        AmenityWrapView(
+          amenities: [
             AmenityDisplay.withLabel(
               icon: SolarIcons.armchair,
               label: "Fully Furnished",

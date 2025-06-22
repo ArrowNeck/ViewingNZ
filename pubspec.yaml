@@ -36,6 +36,8 @@ dependencies:
   device_preview: ^1.2.0
   keyboard_dismisser: ^3.0.0
   syncfusion_flutter_core: ^29.2.11
+  flutter_chat_types: ^3.6.2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -378,7 +378,7 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+          padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
           child: IntrinsicHeight(
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -386,8 +386,6 @@ class _HomeAdvancedFilterState extends State<HomeAdvancedFilter> {
                 IconButtons.icon(
                   size: 12,
                   icon: SolarIcons.stars2,
-                  // borderColor: AppColors.white,
-                  // iconColor: AppColors.white,
                   onPressed: () {},
                 ),
                 const Gap(8),

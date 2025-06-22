@@ -12,4 +12,6 @@ extension MediaQueryValues on BuildContext {
       MediaQuery.of(this).padding.top -
       MediaQuery.of(this).padding.bottom -
       kToolbarHeight);
+  double get safeBottomHeight =>
+      (MediaQuery.of(this).size.height - MediaQuery.of(this).padding.bottom);
 }

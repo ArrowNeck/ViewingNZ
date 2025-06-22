@@ -4,6 +4,7 @@ import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/amenity_display.dart';
+import 'package:viewing_nz/core/widgets/amenity_wrap_view.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
 class TenantsDetailsSection extends StatelessWidget {
@@ -15,12 +16,8 @@ class TenantsDetailsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionLabel(title: "Rent Property Tenants Details"),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          crossAxisAlignment: WrapCrossAlignment.start,
-          runAlignment: WrapAlignment.spaceBetween,
-          children: [
+        AmenityWrapView(
+          amenities: [
             AmenityDisplay.withLabel(
               icon: SolarIcons.petsAllowed,
               label: "Pets Allowed",
@@ -43,7 +40,7 @@ class TenantsDetailsSection extends StatelessWidget {
       padding: const EdgeInsets.only(top: 12.0),
       child: Text(
         note,
-        style: context.bodyLarge.copyWith(
+        style: context.titleSmall.copyWith(
           color: AppColors.gray800,
           fontWeight: FontWeight.w600,
         ),

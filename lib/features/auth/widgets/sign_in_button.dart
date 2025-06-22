@@ -24,7 +24,7 @@ class SignInButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
-          minimumSize: const Size(double.infinity, 55),
+          minimumSize: const Size(double.infinity, 52),
 
           side: BorderSide(color: AppColors.gunmetal600),
           backgroundColor: AppColors.white,

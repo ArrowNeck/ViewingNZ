@@ -16,7 +16,10 @@ abstract class NavigationUtils {
     return switch (state.fullPath) {
       Routes.home => (0, "Home"),
       Routes.chats => (1, "Chats"),
-      Routes.viewings => (2, "Dashboard"),
+      Routes.viewings ||
+      Routes.savedProperties ||
+      Routes.savedSearch ||
+      Routes.profile => (2, "Dashboard"),
       Routes.notifications => (3, "Notifications"),
       _ => (0, "Home"),
     };

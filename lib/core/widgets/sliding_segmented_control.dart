@@ -6,16 +6,16 @@ class SlidingSegmentedControl extends StatefulWidget {
   const SlidingSegmentedControl({
     super.key,
     required this.segments,
+    this.tabController,
     this.onChanged,
     this.initialIndex = 0,
     this.padding,
-    this.children,
   });
 
   final List<String> segments;
+  final TabController? tabController;
   final ValueChanged<int>? onChanged;
   final int initialIndex;
-  final List<Widget>? children;
   final EdgeInsetsGeometry? padding;
 
   @override
@@ -30,17 +30,15 @@ class _SlidingSegmentedControlState extends State<SlidingSegmentedControl>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-      length: widget.segments.length,
-      vsync: this,
-      initialIndex: widget.initialIndex,
-    );
-
-    _tabController.addListener(() {
-      if (!_tabController.indexIsChanging) {
-        widget.onChanged?.call(_tabController.index);
-      }
-    });
+    if (widget.tabController != null) {
+      _tabController = widget.tabController!;
+    } else {
+      _tabController = TabController(
+        length: widget.segments.length,
+        vsync: this,
+        initialIndex: widget.initialIndex,
+      );
+    }
   }
 
   @override
@@ -52,7 +50,7 @@ class _SlidingSegmentedControlState extends State<SlidingSegmentedControl>
   @override
   Widget build(BuildContext context) {
     final isScrollable = widget.segments.length > 3;
-    final tabBar = Container(
+    return Container(
       height: 50,
       width: double.infinity,
       margin: widget.padding,
@@ -74,6 +72,7 @@ class _SlidingSegmentedControlState extends State<SlidingSegmentedControl>
         ),
         indicatorSize: TabBarIndicatorSize.tab,
         tabAlignment: isScrollable ? TabAlignment.start : TabAlignment.fill,
+        onTap: widget.onChanged,
         tabs: widget.segments.map((title) {
           return isScrollable
               ? Tab(
@@ -86,24 +85,5 @@ class _SlidingSegmentedControlState extends State<SlidingSegmentedControl>
         }).toList(),
       ),
     );
-
-    if (widget.children != null) {
-      return Column(
-        children: [
-          tabBar,
-          Expanded(
-            child: Padding(
-              padding: widget.padding ?? EdgeInsets.zero,
-              child: TabBarView(
-                controller: _tabController,
-                children: widget.children!,
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
-    return tabBar;
   }
 }

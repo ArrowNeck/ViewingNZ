@@ -102,7 +102,7 @@ class AgentCard extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   label: Text("Call"),
-                  icon: SvgIcon.white(SolarIcons.phoneRounded, size: 24),
+                  icon: SvgIcon.white(SolarIcons.phoneRounded),
                 ),
               ),
               const Gap(12),
@@ -110,7 +110,7 @@ class AgentCard extends StatelessWidget {
                 child: ElevatedButton.icon(
                   onPressed: () {},
                   label: Text("Email"),
-                  icon: SvgIcon.white(SolarIcons.letter, size: 24),
+                  icon: SvgIcon.white(SolarIcons.letter),
                 ),
               ),
             ],
@@ -119,7 +119,7 @@ class AgentCard extends StatelessWidget {
           ElevatedButton.icon(
             onPressed: () {},
             label: Text("Chat"),
-            icon: SvgIcon.white(SolarIcons.chatRoundLine, size: 24),
+            icon: SvgIcon.white(SolarIcons.chatRoundLine),
             style: ButtonStyle(
               minimumSize: WidgetStatePropertyAll(Size(double.maxFinite, 48)),
             ),
