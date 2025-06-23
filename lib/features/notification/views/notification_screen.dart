@@ -24,7 +24,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 child: ListView.separated(
                   itemCount: 4,
                   itemBuilder: (_, index) => NotificationCard(),
-                  separatorBuilder: (_, __) =>
+                  separatorBuilder: (_, _) =>
                       Divider(height: 0, color: AppColors.gray300),
                 ),
               ),

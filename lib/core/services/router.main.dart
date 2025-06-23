@@ -23,7 +23,7 @@ final router = GoRouter(
   },
   routes: [
     // Root/Auth routes
-    GoRoute(path: '/', builder: (_, __) => const SignInScreen()),
+    GoRoute(path: '/', builder: (_, _) => const SignInScreen()),
     GoRoute(
       path: Routes.login,
       pageBuilder: (context, state) =>
@@ -218,7 +218,7 @@ final router = GoRouter(
 
         return buildTransitionPage(
           key: state.pageKey,
-          child: FullScreenImageView(currentIndex: index, images: images),
+          child: FullScreenImageView(initialIndex: index, images: images),
         );
       },
     ),

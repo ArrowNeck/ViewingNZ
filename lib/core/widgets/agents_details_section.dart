@@ -17,7 +17,7 @@ class AgentsDetailsSection extends StatelessWidget {
         shrinkWrap: true,
         itemCount: agents.length,
         itemBuilder: (_, index) => AgentCard(agent: agents[index]),
-        separatorBuilder: (_, __) => Gap(16),
+        separatorBuilder: (_, _) => Gap(16),
       ),
     );
   }

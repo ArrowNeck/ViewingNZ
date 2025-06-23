@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:viewing_nz/core/extensions/formatting_extension.dart';
 import 'package:viewing_nz/core/res/icons.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/utils/validators.dart';
+import 'package:viewing_nz/core/widgets/calendar_view.dart';
 import 'package:viewing_nz/core/widgets/confirmation_popup.dart';
 import 'package:viewing_nz/core/widgets/input_field.dart';
 import 'package:viewing_nz/core/widgets/label_wrapper.dart';
@@ -21,12 +25,30 @@ class RequestViewingScreen extends StatefulWidget {
 
 class _RequestViewingScreenState extends State<RequestViewingScreen> {
   final _formKey = GlobalKey<FormState>();
-  ValueNotifier<bool> isCustomInputSelect = ValueNotifier(false);
-  String? selectedDate;
-  String? selectedTime;
+  final ValueNotifier<bool> _isCustomInputSelect = ValueNotifier(false);
+  final ValueNotifier<String?> _selectedDate = ValueNotifier(null);
+  final ValueNotifier<String?> _selectedTime = ValueNotifier(null);
 
   void _changeCustomDataTimeInput(bool value) {
-    isCustomInputSelect.value = value;
+    _isCustomInputSelect.value = value;
+  }
+
+  @override
+  void dispose() {
+    _isCustomInputSelect.dispose();
+    _selectedDate.dispose();
+    _selectedTime.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickTime(BuildContext context) async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime.value?.toTimeOfDay() ?? TimeOfDay.now(),
+    );
+    if (picked != null) {
+      _selectedTime.value = picked.formatAmPm();
+    }
   }
 
   @override
@@ -79,8 +101,8 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                     ),
                   ),
                   ValueListenableBuilder(
-                    valueListenable: isCustomInputSelect,
-                    builder: (_, state, __) {
+                    valueListenable: _isCustomInputSelect,
+                    builder: (_, state, _) {
                       return state
                           ? Column(
                               children: [
@@ -88,8 +110,17 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                                 LabelWrapper(
                                   label: 'Preffered Date',
                                   child: _prefferedWidget(
-                                    () {},
-                                    selectedDate ?? "Select date",
+                                    () => CoreUtils.heroDialog(
+                                      CalendarView(
+                                        title: "Preffered Date",
+                                        onDone: (pickedDate) {
+                                          _selectedDate.value = DateFormat(
+                                            "dd-MMM-yyyy",
+                                          ).format(pickedDate);
+                                        },
+                                      ),
+                                    ),
+                                    _selectedDate,
                                     SolarIcons.calendar,
                                   ),
                                 ),
@@ -98,8 +129,11 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                                 LabelWrapper(
                                   label: 'Preffered Time',
                                   child: _prefferedWidget(
-                                    () {},
-                                    selectedTime ?? "Select time",
+                                    () {
+                                      _pickTime(context);
+                                    },
+                                    _selectedTime,
+                                    isDate: false,
                                     SolarIcons.clockCircle,
                                   ),
                                 ),
@@ -126,7 +160,10 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
                         message: "Are you sure want to initiate the viewing?",
                         leftBtnText: "No",
                         rightBtnText: "Yes, Initiate",
-                        onRightTap: () {},
+                        onRightTap: () {
+                          context.pop();
+                          CoreUtils.toastSuccess("The viewing was initiated.");
+                        },
                       ),
                     ),
                     text: "Initiate Request",
@@ -141,7 +178,12 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
     );
   }
 
-  _prefferedWidget(VoidCallback onTap, String value, SvgIconData icon) {
+  GestureDetector _prefferedWidget(
+    VoidCallback onTap,
+    ValueNotifier<String?> notifier,
+    SvgIconData icon, {
+    bool isDate = true,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -155,9 +197,16 @@ class _RequestViewingScreenState extends State<RequestViewingScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Text(
-                value,
-                style: context.bodyMedium.copyWith(color: AppColors.gray800),
+              child: ValueListenableBuilder(
+                valueListenable: notifier,
+                builder: (context, value, child) {
+                  return Text(
+                    value ?? "Select ${isDate ? "Date" : "Time"}",
+                    style: context.bodyMedium.copyWith(
+                      color: AppColors.gray800,
+                    ),
+                  );
+                },
               ),
             ),
             const Gap(8),

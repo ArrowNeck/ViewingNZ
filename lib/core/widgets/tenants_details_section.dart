@@ -32,7 +32,7 @@ class TenantsDetailsSection extends StatelessWidget {
     );
   }
 
-  _tenantsNotes(BuildContext context, String note) {
+  Padding _tenantsNotes(BuildContext context, String note) {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: Text(

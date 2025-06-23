@@ -35,7 +35,10 @@ class PriceUpdatesSection extends StatelessWidget {
     );
   }
 
-  _priceCard(BuildContext context, {required PriceUpdate priceUpdate}) {
+  Container _priceCard(
+    BuildContext context, {
+    required PriceUpdate priceUpdate,
+  }) {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsets.all(16),

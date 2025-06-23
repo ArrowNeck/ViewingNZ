@@ -18,6 +18,23 @@ extension TimeFormattingExtension on double {
   }
 }
 
+extension TimeOfDayFormatter on TimeOfDay {
+  String formatAmPm({bool lowercase = true}) {
+    final now = DateTime.now();
+    final dateTime = DateTime(now.year, now.month, now.day, hour, minute);
+
+    String formatted = DateFormat('hh:mm a').format(dateTime);
+    return lowercase ? formatted.toLowerCase() : formatted;
+  }
+}
+
+extension TimeOfDayParsing on String {
+  TimeOfDay toTimeOfDay({String pattern = 'hh:mm a'}) {
+    final dateTime = DateFormat(pattern).parse(toUpperCase());
+    return TimeOfDay(hour: dateTime.hour, minute: dateTime.minute);
+  }
+}
+
 extension CompactCurrencyFormatter on num {
   String toCompactCurrency({String symbol = '\$'}) {
     final formatter = NumberFormat.compactCurrency(

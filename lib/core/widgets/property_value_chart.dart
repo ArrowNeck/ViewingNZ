@@ -199,7 +199,7 @@ class _PropertyValueChartState extends State<PropertyValueChart> {
     );
   }
 
-  _buildLegendItem({required Color color, required String label}) {
+  Row _buildLegendItem({required Color color, required String label}) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

@@ -7,8 +7,21 @@ import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/utils/core_utils.dart';
 import 'package:viewing_nz/core/widgets/request_filter.dart';
 
-class ViewingHeader extends StatelessWidget {
+class ViewingHeader extends StatefulWidget {
   const ViewingHeader({super.key});
+
+  @override
+  State<ViewingHeader> createState() => _ViewingHeaderState();
+}
+
+class _ViewingHeaderState extends State<ViewingHeader> {
+  final ValueNotifier<bool> _isUpComing = ValueNotifier(true);
+
+  @override
+  void dispose() {
+    _isUpComing.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +39,10 @@ class ViewingHeader extends StatelessWidget {
                 ),
                 color: Colors.black.withAlpha(200),
                 itemBuilder: (context) => [
-                  PopupMenuItem<String>(
-                    child: ListTile(
-                      visualDensity: VisualDensity.compact,
-                      leading: SvgIcon(
-                        SolarIcons.gallery,
-                        color: AppColors.white,
-                      ),
-                      title: Text(
-                        "Up Coming Viewings",
-                        style: context.titleMedium.copyWith(
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
+                  _buildMenuItem(
+                    "Up Coming Viewings",
+                    SolarIcons.gallery,
+                    () => _isUpComing.value = true,
                   ),
                   PopupMenuDivider(
                     color: AppColors.gray600,
@@ -47,26 +50,24 @@ class ViewingHeader extends StatelessWidget {
                     endIndent: 16,
                     thickness: 1,
                   ),
-                  PopupMenuItem<String>(
-                    child: ListTile(
-                      visualDensity: VisualDensity.compact,
-                      leading: SvgIcon(SolarIcons.user, color: AppColors.white),
-                      title: Text(
-                        "Past Viewings",
-                        style: context.bodyLarge.copyWith(
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ),
+                  _buildMenuItem(
+                    "Past Viewings",
+                    SolarIcons.user,
+                    () => _isUpComing.value = false,
                   ),
                 ],
                 child: Row(
                   children: [
-                    Text(
-                      "Up Coming Viewings",
-                      style: context.bodyLarge.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                    ValueListenableBuilder(
+                      valueListenable: _isUpComing,
+                      builder: (context, value, child) {
+                        return Text(
+                          value ? "Up Coming Viewings" : "Past Viewings",
+                          style: context.bodyLarge.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
+                      },
                     ),
                     Gap(8),
                     CircleAvatar(
@@ -93,6 +94,24 @@ class ViewingHeader extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  PopupMenuItem<String> _buildMenuItem(
+    String title,
+    SvgIconData icon,
+    VoidCallback onTap,
+  ) {
+    return PopupMenuItem<String>(
+      onTap: onTap,
+      child: ListTile(
+        leading: SvgIcon(icon, color: AppColors.white),
+        title: Text(
+          title,
+          style: context.bodyLarge.copyWith(color: AppColors.white),
+        ),
+        visualDensity: VisualDensity.compact,
       ),
     );
   }

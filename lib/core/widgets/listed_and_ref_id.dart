@@ -65,7 +65,7 @@ class ListedAndRefId extends StatelessWidget {
     );
   }
 
-  _richText(BuildContext context, String label, String value) {
+  RichText _richText(BuildContext context, String label, String value) {
     return RichText(
       text: TextSpan(
         text: label,

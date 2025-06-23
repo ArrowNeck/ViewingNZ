@@ -56,36 +56,26 @@ class _ReportPropertyPopupState extends State<ReportPropertyPopup> {
       color: Colors.transparent,
       child: SafeArea(
         child: Center(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return SlideTransition(
-                position:
-                    Tween<Offset>(
-                      begin: const Offset(1.0, 0.0),
-                      end: Offset.zero,
-                    ).animate(
-                      CurvedAnimation(
-                        parent: animation,
-                        curve: Curves.easeInOut,
-                      ),
-                    ),
-                child: child,
+          child: ValueListenableBuilder(
+            valueListenable: popupState,
+            builder: (_, state, _) {
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(scale: animation, child: child);
+                },
+                child: state == PopupState.reportProperty
+                    ? _buildReportPropertyPopup()
+                    : _buildConfirmationPopup(),
               );
             },
-            child: ValueListenableBuilder(
-              valueListenable: popupState,
-              builder: (_, state, __) => state == PopupState.reportProperty
-                  ? _buildReportPropertyPopup()
-                  : _buildConfirmationPopup(),
-            ),
           ),
         ),
       ),
     );
   }
 
-  _buildConfirmationPopup() {
+  ConfirmationPopup _buildConfirmationPopup() {
     return ConfirmationPopup(
       title: "Confirm the Report",
       message: "Are you sure want to report the property?",
@@ -97,7 +87,7 @@ class _ReportPropertyPopupState extends State<ReportPropertyPopup> {
     );
   }
 
-  _buildReportPropertyPopup() {
+  Container _buildReportPropertyPopup() {
     return Container(
       width: context.screenWidth * .9,
       padding: EdgeInsets.all(16),

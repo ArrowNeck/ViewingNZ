@@ -52,36 +52,26 @@ class _ReportPropertyPopupState extends State<RateAgentPopup> {
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Center(
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return SlideTransition(
-                position:
-                    Tween<Offset>(
-                      begin: const Offset(1.0, 0.0),
-                      end: Offset.zero,
-                    ).animate(
-                      CurvedAnimation(
-                        parent: animation,
-                        curve: Curves.easeInOut,
-                      ),
-                    ),
-                child: child,
+          child: ValueListenableBuilder(
+            valueListenable: popupState,
+            builder: (_, state, _) {
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return ScaleTransition(scale: animation, child: child);
+                },
+                child: state == PopupState.rate
+                    ? _buildRatePopup()
+                    : _buildConfirmationPopup(),
               );
             },
-            child: ValueListenableBuilder(
-              valueListenable: popupState,
-              builder: (_, state, __) => state == PopupState.rate
-                  ? _buildRatePopup()
-                  : _buildConfirmationPopup(),
-            ),
           ),
         ),
       ),
     );
   }
 
-  _buildConfirmationPopup() {
+  ConfirmationPopup _buildConfirmationPopup() {
     return ConfirmationPopup(
       title: "Confirm the Rating",
       message: "Are you sure want to rate the agent?",
@@ -93,7 +83,7 @@ class _ReportPropertyPopupState extends State<RateAgentPopup> {
     );
   }
 
-  _buildRatePopup() {
+  Container _buildRatePopup() {
     return Container(
       width: context.screenWidth * .9,
       padding: EdgeInsets.all(16),

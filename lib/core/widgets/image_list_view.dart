@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:viewing_nz/core/extensions/media_query_extension.dart';
 import 'package:viewing_nz/core/extensions/theme_extension.dart';
 import 'package:viewing_nz/core/services/routes.dart';
 import 'package:viewing_nz/core/theme/app_colors.dart';
@@ -31,21 +32,21 @@ class _ImageListViewState extends State<ImageListView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ImagePreloader.preloadImages(widget.images, context);
-      Future.microtask(() => scrollTo(widget.initialIndex));
+      Future.microtask(
+        () => _itemScrollController.jumpTo(
+          index: widget.initialIndex,
+          alignment: .4,
+        ),
+      );
     });
   }
-
-  void scrollTo(int index) => _itemScrollController.scrollTo(
-    index: index,
-    duration: Duration(milliseconds: 1000),
-    alignment: .3,
-  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.pureBlack,
       extendBodyBehindAppBar: true,
+      extendBody: false,
       appBar: AppBar(
         backgroundColor: AppColors.pureBlack.withAlpha(128),
         foregroundColor: AppColors.white,
@@ -70,13 +71,16 @@ class _ImageListViewState extends State<ImageListView> {
         itemCount: widget.images.length,
         itemBuilder: (_, index) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: EdgeInsets.only(
+              bottom: 8.0,
+              top: index == 0 ? context.topPadding + kToolbarHeight : 0,
+            ),
             child: GestureDetector(
               onTap: () =>
                   context.push(Routes.imageFullScreen(index, widget.images)),
               child: Hero(
                 tag: 'list_image_$index',
-                // transitionOnUserGestures: true,
+                transitionOnUserGestures: true,
                 child: AspectRatio(
                   aspectRatio: 1.5,
                   child: CachedImage(url: widget.images[index]),

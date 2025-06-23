@@ -28,13 +28,23 @@ class AmenityDisplay extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SvgIcon(icon, color: AppColors.gray800),
-        if (qty != null) ...[const Gap(6), Text('$qty', style: style)],
+        if (qty != null) ...[
+          const Gap(6),
+          AutoSizeText(
+            '$qty',
+            style: style,
+            minFontSize: 12,
+            maxFontSize: 24,
+            group: GlobalKeys.amenityDisplayGroup,
+          ),
+        ],
         if (label != null) ...[
           const Gap(6),
           AutoSizeText(
             "$label",
             style: style,
-            minFontSize: 10,
+            minFontSize: 12,
+            maxFontSize: 24,
             group: GlobalKeys.amenityDisplayGroup,
           ),
         ],

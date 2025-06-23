@@ -35,7 +35,7 @@ class OpenHomeTimesSection extends StatelessWidget {
     );
   }
 
-  _openTimeCard(BuildContext context, {required OpenTime openTime}) {
+  Container _openTimeCard(BuildContext context, {required OpenTime openTime}) {
     return Container(
       width: double.maxFinite,
       padding: EdgeInsets.all(16),

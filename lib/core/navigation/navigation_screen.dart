@@ -52,7 +52,7 @@ class NavigationScreen extends StatelessWidget {
     );
   }
 
-  _buildBarItem(int index, int currentIndex, SvgIconData icon) {
+  Widget _buildBarItem(int index, int currentIndex, SvgIconData icon) {
     final color = index == currentIndex ? AppColors.primary : AppColors.gray700;
     if (index != 3) {
       return SvgIcon(icon, color: color);
