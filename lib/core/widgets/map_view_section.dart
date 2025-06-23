@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:viewing_nz/core/res/icons.dart';
-import 'package:viewing_nz/core/theme/app_colors.dart';
 import 'package:viewing_nz/core/widgets/icon_buttons.dart';
 import 'package:viewing_nz/core/widgets/section_label.dart';
 
@@ -13,13 +12,55 @@ class MapViewSection extends StatefulWidget {
 }
 
 class _MapViewSectionState extends State<MapViewSection> {
-  final LatLng location = LatLng(-45.031162, 168.662643);
+  GoogleMapController? mapController;
+  static const LatLng location = LatLng(-36.8485, 174.7633);
+
+  static const CameraPosition _position = CameraPosition(
+    target: location,
+    zoom: 12.0,
+  );
+
+  Set<Marker> _markers = {};
+  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCustomMarker();
+  }
+
+  Future<void> _loadCustomMarker() async {
+    try {
+      markerIcon = await BitmapDescriptor.asset(
+        ImageConfiguration(size: Size(30, 36)),
+        'assets/images/map_marker.png',
+      );
+    } catch (e) {
+      debugPrint('Error loading custom marker: $e');
+      markerIcon = BitmapDescriptor.defaultMarker;
+    }
+
+    setState(() {
+      _markers = {
+        Marker(
+          markerId: MarkerId('auckland'),
+          position: location,
+          icon: markerIcon,
+        ),
+      };
+    });
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsetsGeometry.only(top: 40, bottom: 16),
+          padding: EdgeInsets.only(top: 40, bottom: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -36,19 +77,20 @@ class _MapViewSectionState extends State<MapViewSection> {
           borderRadius: BorderRadius.circular(4),
           child: AspectRatio(
             aspectRatio: .9,
-            child: ColoredBox(color: AppColors.gray50),
-            // GoogleMap(
-            //   initialCameraPosition: CameraPosition(target: location, zoom: 14),
-            //   markers: {
-            //     Marker(
-            //       markerId: MarkerId('property_location'),
-            //       position: location,
-            //     ),
-            //   },
-            //   onMapCreated: (GoogleMapController controller) {
-            //     // Optional controller logic
-            //   },
-            // ),
+            child: GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: _position,
+              markers: _markers,
+              mapType: MapType.normal,
+              scrollGesturesEnabled: true,
+              zoomGesturesEnabled: true,
+              rotateGesturesEnabled: true,
+              tiltGesturesEnabled: true,
+              compassEnabled: true,
+              zoomControlsEnabled: false,
+              myLocationButtonEnabled: false,
+              mapToolbarEnabled: false,
+            ),
           ),
         ),
       ],
