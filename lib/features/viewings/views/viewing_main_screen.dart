@@ -19,6 +19,7 @@ class _ViewingMainScreenState extends State<ViewingMainScreen>
     "Viewings",
     "Saved Properties",
     "Saved Search",
+    "Manage Notifications",
     "My Profile",
   ];
 

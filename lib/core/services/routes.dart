@@ -14,6 +14,7 @@ class Routes {
   static const viewings = '/viewings';
   static const savedProperties = '/saved-properties';
   static const savedSearch = '/saved-search';
+  static const manageNotification = '/manage-notification';
   static const profile = '/profile';
 
   // Standalone routes

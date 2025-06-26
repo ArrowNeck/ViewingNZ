@@ -13,6 +13,7 @@ import 'package:viewing_nz/features/chat/views/chat_screen.dart';
 import 'package:viewing_nz/features/chat/views/single_chat_screen_ui.dart';
 import 'package:viewing_nz/features/home/views/home_screen.dart';
 import 'package:viewing_nz/features/home/widgets/home_advanced_filter.dart';
+import 'package:viewing_nz/features/notification/views/manage_notification_screen.dart';
 import 'package:viewing_nz/features/profile/views/my_profile_screen.dart';
 import 'package:viewing_nz/features/saved_search/views/saved_search_screen.dart';
 import 'package:viewing_nz/features/viewings/views/request_viewing_screen.dart';

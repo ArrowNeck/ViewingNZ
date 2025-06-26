@@ -116,7 +116,20 @@ final router = GoRouter(
                   ],
                 ),
 
-                // Nested Branch 3: Profile
+                // Nested Branch 3: Manage Notification
+                StatefulShellBranch(
+                  routes: [
+                    GoRoute(
+                      path: Routes.manageNotification,
+                      pageBuilder: (context, state) => buildTransitionPage(
+                        key: state.pageKey,
+                        child: const ManageNotificationScreen(),
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Nested Branch 4: Profile
                 StatefulShellBranch(
                   routes: [
                     GoRoute(
